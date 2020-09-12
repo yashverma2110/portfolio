@@ -1,26 +1,84 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Particles from "react-particles-js";
+import { init } from "ityped";
+import { Heading } from "./Components/Details/MyData";
+import { Skills } from "./Components/Skills";
+import { Experience } from "./Components/Experience";
+import { Contact } from "./Components/ContactMe";
+import { Projects } from "./Components/Projects";
 
 function App() {
+  const tabs = ["Skills", "Experience", "Projects", "Contact"];
+  const [currtab, setCurrTab] = useState(0);
+
+  useEffect(() => {
+    init(document.getElementById("ityped"), {
+      showCursor: true,
+      strings: ["Frontend", "Backend", "Fullstack"],
+    });
+  }, []);
+
+  const slides = {
+    transition: "transform 0.4s",
+    transform: `translateX(-${currtab * 100}%)`,
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Particles className="particles" params={options} />
+      <Heading />
+      <div className="fl-col-ce">
+        <div className="nav">
+          {tabs.map((tab, index) => (
+            <span
+              key={index}
+              className={`${currtab === index ? "selected" : ""}`}
+              onClick={() => setCurrTab(index)}
+            >
+              {tab}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="fl data-display">
+        <div className="slide" style={{ ...slides }}>
+          <Skills />
+        </div>
+        <div className="slide" style={{ ...slides }}>
+          <Experience />
+        </div>
+        <div className="slide" style={{ ...slides }}>
+          <Projects />
+        </div>
+        <div className="slide" style={{ ...slides }}>
+          <Contact />
+        </div>
+      </div>
     </div>
   );
 }
+
+const options = {
+  particles: {
+    number: {
+      value: 50,
+      density: {
+        enable: true,
+        value_area: 395,
+      },
+    },
+    line_linked: {
+      enable: false,
+    },
+    color: "#000000",
+    move: {
+      speed: 1,
+    },
+    size: {
+      value: 2,
+    },
+  },
+};
 
 export default App;

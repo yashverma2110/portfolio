@@ -1,38 +1,129 @@
-.App {
-  text-align: center;
+body {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  scrollbar-width: none;
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*::-webkit-scrollbar {
+  display: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.title-txt {
+  font-size: 1.5em;
+}
+
+.fl-col-ce {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 100%;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 0px 5px -1px rgba(138, 136, 138, 1);
+  -moz-box-shadow: 0px 0px 5px -1px rgba(138, 136, 138, 1);
+  box-shadow: 0px 0px 5px -1px rgb(114, 102, 114);
+  border-radius: 8px;
+}
+
+.fl {
+  display: flex;
+}
+
+.fl-co {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-display {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.card {
+  margin: 1rem 0rem;
+  padding: 1rem;
+  width: 75%;
+  border-radius: 8px;
+  height: fit-content;
+  -webkit-box-shadow: 0px 0px 5px -1px rgba(138, 136, 138, 1);
+  -moz-box-shadow: 0px 0px 5px -1px rgba(138, 136, 138, 1);
+  box-shadow: 0px 0px 5px -1px rgb(114, 102, 114);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-title {
+  font-size: 1.4em;
+  letter-spacing: 1px;
+}
+
+.nav {
+  margin: 1rem 0rem;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.nav > span {
+  height: 100%;
+  padding: 5px 10px;
+  opacity: 0.8;
+}
+
+.selected {
+  -webkit-box-shadow: inset 0px 0px 5px -1px rgba(138, 136, 138, 1);
+  -moz-box-shadow: inset 0px 0px 5px -1px rgba(138, 136, 138, 1);
+  box-shadow: inset 0px 0px 5px -1px rgba(138, 136, 138, 1);
+}
+
+/* ityped */
+.ityped-cursor {
+  font-size: 1.2em;
+  font-weight: 900;
+  opacity: 1;
+  -webkit-animation: blink 0.4s infinite;
+  -moz-animation: blink 0.4s infinite;
+  animation: blink 0.4s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  100% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@-webkit-keyframes blink {
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes blink {
+  100% {
+    opacity: 0;
   }
 }

@@ -1,0 +1,25 @@
+.desc-container {
+  width: 100%;
+  justify-content: space-between;
+  padding: 2rem 0rem;
+}
+
+#ityped {
+  font-weight: 900;
+}
+
+.intro {
+  margin: 1rem 0rem;
+}
+
+.my-img-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.my-img-container > img {
+  max-height: 200px;
+  transform: translateX(-40px);
+}

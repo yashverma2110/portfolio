@@ -1,0 +1,35 @@
+.sk-list {
+  list-style-type: none;
+  padding: 0px;
+  width: 100%;
+}
+
+.sk-list > li {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.bar-co {
+  width: 100%;
+  display: flex;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+}
+
+.bar {
+  border-radius: 8px;
+  background: #8360c3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2ebf91,
+    #8360c3
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2ebf91,
+    #8360c3
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

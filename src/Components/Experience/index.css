@@ -1,0 +1,47 @@
+.exp-item {
+  margin: 20px 0px;
+  padding: 10px;
+}
+
+.logo {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.logo > img {
+  height: 50px;
+}
+
+.exp-det {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.3em;
+  letter-spacing: 1px;
+}
+
+.name {
+  font-size: 1.1em;
+}
+
+.type {
+  font-size: 0.9em;
+}
+
+.duration {
+  letter-spacing: 1px;
+}
+
+.res-list {
+  list-style-type: decimal;
+}
+
+.res-list > li {
+  margin-top: 5px;
+}
