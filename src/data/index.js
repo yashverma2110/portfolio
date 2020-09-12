@@ -15,7 +15,7 @@ export const experienceData = [
     importantLinks: [
       {
         title: "link",
-        link: "dev.careerchat.me",
+        link: "https://dev.careerchat.me/",
       },
       {
         title: "linkedin",
