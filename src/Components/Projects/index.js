@@ -22,12 +22,10 @@ export const Projects = () => {
           </div>
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 3fr",
+              display: "flex",
               marginTop: "10px",
             }}
           >
-            <div></div>
             <div>
               {porject.importantLinks.map((link, i) => (
                 <a

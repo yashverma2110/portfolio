@@ -8,6 +8,7 @@
   height: fit-content;
   padding: 5px;
   border-radius: 8px;
+  margin-right: 10px;
 }
 
 .logo > img {
@@ -16,8 +17,7 @@
 
 .exp-det {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
 }
 
 .title {

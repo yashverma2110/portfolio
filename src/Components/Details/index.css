@@ -1,15 +1,17 @@
 .desc-container {
   width: 100%;
   justify-content: space-between;
+  font-size: 1.1em;
   padding: 2rem 0rem;
 }
 
 #ityped {
   font-weight: 900;
+  font-size: 1.1em;
 }
 
 .intro {
-  margin: 1rem 0rem;
+  margin: 0.5rem 0rem;
 }
 
 .my-img-container {

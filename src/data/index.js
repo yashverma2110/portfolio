@@ -121,4 +121,8 @@ export const icons = {
     "https://res.cloudinary.com/dxu5kynfp/image/upload/v1599916885/Portfolio/icons8-github-96_sedciu.png",
   linkedin:
     "https://res.cloudinary.com/dxu5kynfp/image/upload/v1599917533/Portfolio/icons8-linkedin-144_gfob9b.png",
+  instagram:
+    "https://res.cloudinary.com/dxu5kynfp/image/upload/v1599921098/Portfolio/icons8-instagram-96_gp9arm.png",
+  gmail:
+    "https://res.cloudinary.com/dxu5kynfp/image/upload/v1599921327/Portfolio/icons8-gmail-login-80_ozlarl.png",
 };
