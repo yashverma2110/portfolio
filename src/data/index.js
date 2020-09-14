@@ -125,4 +125,10 @@ export const icons = {
     "https://res.cloudinary.com/dxu5kynfp/image/upload/v1599921098/Portfolio/icons8-instagram-96_gp9arm.png",
   gmail:
     "https://res.cloudinary.com/dxu5kynfp/image/upload/v1599921327/Portfolio/icons8-gmail-login-80_ozlarl.png",
+  loading:
+    "https://res.cloudinary.com/dxu5kynfp/image/upload/v1600108343/Portfolio/Dual_Ball-1s-200px_gyjow9.gif",
+  tick:
+    "https://res.cloudinary.com/dxu5kynfp/image/upload/v1600108018/Portfolio/icons8-tick-box-240_e479yo.png",
+  cross:
+    "https://res.cloudinary.com/dxu5kynfp/image/upload/v1600107709/Portfolio/icons8-cancel-96_lvb1pf.png",
 };
