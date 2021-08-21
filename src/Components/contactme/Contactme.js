@@ -1,126 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./contact.css";
-import * as emailjs from "emailjs-com";
+import { useForm, ValidationError } from "@formspree/react";
 import { icons } from "../../data";
 
 export const Contact = () => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    title: "",
-    body: "",
-  });
-  const [errors, setErrors] = useState([false, false, false, false]);
   const [message, setMessage] = useState(undefined);
+  const [state, handleSubmit] = useForm("mpzkoonq");
 
-  const handleChange = (e) => {
-    let temp = { ...form };
-    temp[e.target.name] = e.target.value;
-    setForm({ ...temp });
-  };
-
-  const resetForm = () => {
-    setForm({
-      name: "",
-      email: "",
-      title: "",
-      body: "",
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { name, email, title, body } = form;
-
-    let err = [
-      email.trim() === "",
-      name.trim() === "",
-      title.trim() === "",
-      body.trim() === "",
-    ];
-
-    setErrors([...err]);
-
-    if (!errors[0] && !errors[1] && !errors[2] && !errors[3]) {
+  useEffect(() => {
+    if (state.submitting) {
       setMessage("l");
-      let templateParams = {
-        from_name: email,
-        to_name: "yash.silver2110@gmail.com",
-        subject: title,
-        message: body,
-      };
-
-      emailjs
-        .send(
-          "gmail1236",
-          "template_69d3hkr",
-          templateParams,
-          "user_T7SSPNH2JWO1N5lisrbaM"
-        )
-        .then((res) => {
-          if (res.status === 200) setMessage("r");
-          else setMessage("w");
-
-          setTimeout(() => {
-            setMessage(undefined);
-            resetForm();
-          }, 3000);
-        })
-        .catch((err) => {
-          if (err) setMessage("w");
-          setTimeout(() => {
-            setMessage(undefined);
-            resetForm();
-          }, 3000);
-        });
     }
-  };
+
+    if (state.succeeded) {
+      setMessage("r");
+    }
+
+    if (state.errors.length > 0) {
+      setMessage("e");
+    }
+  }, [state]);
+
+  useEffect(() => {
+    if (!message) {
+      setTimeout(() => {
+        setMessage(undefined);
+      }, 2000);
+    }
+  }, [message]);
 
   return (
     <div className="card">
       <span className="card-title">Contact Me</span>
-      <form className="shadow form">
+      <form className="shadow form" onSubmit={handleSubmit}>
         <label>
           Email<span style={{ color: "red" }}>*</span>
         </label>
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          style={{ borderColor: errors[0] ? "red" : "rgba(0,0,0,0.5)" }}
-        />
+        <input id="email" type="email" name="email" />
+        <ValidationError prefix="Email" field="email" errors={state.errors} />
         <label>
           Name<span style={{ color: "red" }}>*</span>
         </label>
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          style={{ borderColor: errors[1] ? "red" : "rgba(0,0,0,0.5)" }}
-        />
+        <input id="name" type="text" name="name" required />
+        <ValidationError prefix="Name" field="name" errors={state.errors} />
         <label>
           Title<span style={{ color: "red" }}>*</span>
         </label>
-        <input
-          type="text"
-          name="title"
-          value={form.title}
-          onChange={handleChange}
-          style={{ borderColor: errors[2] ? "red" : "rgba(0,0,0,0.5)" }}
-        />
+        <input type="text" name="title" required />
         <label>
           Body<span style={{ color: "red" }}>*</span>
         </label>
-        <textarea
-          rows="4"
-          name="body"
-          value={form.body}
-          onChange={handleChange}
-          style={{ borderColor: errors[3] ? "red" : "rgba(0,0,0,0.5)" }}
+        <textarea rows="4" id="message" name="message" required />
+        <ValidationError
+          prefix="Message"
+          field="message"
+          errors={state.errors}
         />
-        <button className="smt-btn" onClick={handleSubmit}>
+        <button type="submit" className="smt-btn" disabled={state.submitting}>
           Send
           {message !== undefined && (
             <div style={{ position: "absolute", right: "10px", top: "5px" }}>
