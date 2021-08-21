@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./experience.css";
 import { experienceData, icons } from "../../data";
 
 export const Experience = () => {

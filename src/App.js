@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Particles from "react-particles-js";
 import { init } from "ityped";
-import { Heading } from "./Components/Details/MyData";
-import { Skills } from "./Components/Skills";
-import { Experience } from "./Components/Experience";
-import { Contact } from "./Components/ContactMe";
-import { Projects } from "./Components/Projects";
+import { Heading } from "./components/details/MyData";
+import { Skills } from "./components/skills";
+import { Experience } from "./components/experience/Experience";
+import { Contact } from "./components/contactme";
+import { Projects } from "./components/projects";
 
 function App() {
   const tabs = ["Skills", "Experience", "Projects", "Contact"];

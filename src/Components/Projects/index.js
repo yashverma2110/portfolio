@@ -5,7 +5,7 @@ import { projectData, icons } from "../../data";
 export const Projects = () => {
   return (
     <div className="card">
-      <span className="card-title">Experience</span>
+      <span className="card-title">Projects</span>
       {projectData.map((porject, index) => (
         <div key={index} className=" shadow exp-item">
           <div className="exp-det">
