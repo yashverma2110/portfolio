@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./contact.css";
 import * as emailjs from "emailjs-com";
 import { icons } from "../../data";
 
@@ -40,8 +40,6 @@ export const Contact = () => {
     ];
 
     setErrors([...err]);
-
-    console.log(err);
 
     if (!errors[0] && !errors[1] && !errors[2] && !errors[3]) {
       setMessage("l");

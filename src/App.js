@@ -5,8 +5,8 @@ import { init } from "ityped";
 import { Heading } from "./components/details/MyData";
 import { Skills } from "./components/skills";
 import { Experience } from "./components/experience/Experience";
-import { Contact } from "./components/contactme";
-import { Projects } from "./components/projects";
+import { Contact } from "./components/contactme/Contactme";
+import { Projects } from "./components/projects/Projects";
 
 function App() {
   const tabs = ["Skills", "Experience", "Projects", "Contact"];
