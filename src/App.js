@@ -3,10 +3,10 @@ import "./App.css";
 import Particles from "react-particles-js";
 import { init } from "ityped";
 import { Heading } from "./components/details/MyData";
-import { Skills } from "./components/skills";
 import { Experience } from "./components/experience/Experience";
 import { Contact } from "./components/contactme/Contactme";
 import { Projects } from "./components/projects/Projects";
+import { Skills } from "./components/skills/Skills";
 
 function App() {
   const tabs = ["Skills", "Experience", "Projects", "Contact"];

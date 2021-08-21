@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./skills.css";
 
 export const Skills = () => {
   const bar = (width) => (
