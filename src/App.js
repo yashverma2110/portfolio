@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import "./App.css";
 import Particles from "react-particles-js";
 import { init } from "ityped";
@@ -43,7 +43,9 @@ function App() {
       </div>
       <div className="fl data-display">
         <div className="slide" style={{ ...slides }}>
-          <Skills />
+          <Suspense fallback={<div>Loading..</div>}>
+            <Skills />
+          </Suspense>
         </div>
         <div className="slide" style={{ ...slides }}>
           <Experience />

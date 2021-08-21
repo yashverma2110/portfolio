@@ -3,6 +3,16 @@ import conwoLogo from "./images/conwo.jpeg";
 import advenioLogo from "./images/advenio.png";
 import mckinleyRiceLogo from "./images/mandrice.jpeg";
 import drawpiLogo from "./images/drawpi.jpeg";
+//skills logo
+import jsLogo from "./images/js.png";
+import tsLogo from "./images/typescript.png";
+import reactLogo from "./images/reactjs.png";
+import vueLogo from "./images/vue.png";
+import nodeLogo from "./images/node.png";
+import sqlLogo from "./images/sql.png";
+import postgresLogo from "./images/postgres.png";
+import mongodbLogo from "./images/mongodb.png";
+import awsLogo from "./images/aws.png";
 
 export const experienceData = [
   {
@@ -182,3 +192,51 @@ export const icons = {
   cross:
     "https://res.cloudinary.com/dxu5kynfp/image/upload/v1600107709/Portfolio/icons8-cancel-96_lvb1pf.png",
 };
+
+export const skills = [
+  {
+    name: "JavaScript",
+    logo: jsLogo,
+    rotation: 0.01,
+  },
+  {
+    name: "TypeScript",
+    logo: tsLogo,
+    rotation: -0.01,
+  },
+  {
+    name: "React.js",
+    logo: reactLogo,
+    rotation: 0.015,
+  },
+  {
+    name: "Vue.js",
+    logo: vueLogo,
+    rotation: -0.02,
+  },
+  {
+    name: "Node.js",
+    logo: nodeLogo,
+    rotation: 0.02,
+  },
+  {
+    name: "MongoDB",
+    logo: mongodbLogo,
+    rotation: -0.022,
+  },
+  {
+    name: "SQL",
+    logo: sqlLogo,
+    rotation: 0.03,
+  },
+  {
+    name: "Postgres",
+    logo: postgresLogo,
+    rotation: -0.028,
+  },
+  {
+    name: "AWS",
+    logo: awsLogo,
+    rotation: 0.26,
+  },
+];
