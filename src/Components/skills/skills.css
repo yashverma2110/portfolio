@@ -2,3 +2,9 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+@media only screen and (min-width: 600px) {
+  .skills-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

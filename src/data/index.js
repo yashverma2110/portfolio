@@ -237,6 +237,6 @@ export const skills = [
   {
     name: "AWS",
     logo: awsLogo,
-    rotation: 0.26,
+    rotation: 0.026,
   },
 ];
