@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://itsyashverma.com
+
+# Sitemaps
+Sitemap: https://itsyashverma.com/sitemap.xml
