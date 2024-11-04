@@ -4,7 +4,8 @@ import Button from "./components/ui/Button";
 import Link from "next/link";
 import { Suspense } from "react";
 import TechStackGrid from "@/app/components/TechStackGrid";
-import ExperienceFold from "./components/ExperienceFold";
+import ExperienceFold from "@/app/components/ExperienceFold";
+import ProjectsFold from "@/app/components/ProjectsFold";
 
 export default function Home() {
   return (
@@ -45,7 +46,7 @@ export default function Home() {
       </section>
 
       <section id="projects" className="p-4 h-screen">
-        Projects
+        <ProjectsFold />
       </section>
 
       <section id="contact" className="p-4 h-screen bg-slate-800 bg-opacity-70">
