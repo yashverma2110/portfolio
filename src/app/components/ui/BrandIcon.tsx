@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaTwitter, FaMediumM } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaMediumM, FaEnvelope } from "react-icons/fa";
 
 interface BrandIconProps {
-  brand: "linkedin" | "github" | "twitter" | "medium";
+  brand: "linkedin" | "github" | "twitter" | "medium" | "email";
   link?: string;
   size?: number;
 }
@@ -14,6 +14,7 @@ export default function BrandIcon({ brand, link, size = 24 }: BrandIconProps) {
       case "github": return <FaGithub size={size} />;
       case "twitter": return <FaTwitter size={size} />;
       case "medium": return <FaMediumM size={size} />;
+      case "email": return <FaEnvelope size={size} />;
     }
   }
 

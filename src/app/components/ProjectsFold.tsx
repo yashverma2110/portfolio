@@ -5,7 +5,7 @@ import Button from "@/app/components/ui/Button";
 
 export default function ProjectsFold() {
   return (
-    <div className="py-16">
+    <div className="py-20">
       <h2 className="text-2xl mb-6 font-bold text-neutral-500">Projects</h2>
       <div>
         {PROJECTS.map((project) => (

@@ -4,7 +4,7 @@ import Card from "@/app/components/ui/Card";
 
 export default function ExperienceFold() {
   return (
-    <div className="flex flex-col gap-2 py-16">
+    <div className="flex flex-col gap-2 py-20">
       <h2 className="text-2xl font-bold text-neutral-500">Experience</h2>
       {EXPERIENCE.map((experience) => (
         <div key={experience.company} className="text-white">

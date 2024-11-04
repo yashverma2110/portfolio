@@ -6,6 +6,8 @@ import { Suspense } from "react";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ExperienceFold from "@/app/components/ExperienceFold";
 import ProjectsFold from "@/app/components/ProjectsFold";
+import CONTACT from "@/app/config/contact";
+import ContactFold from "@/app/components/ContactFold";
 
 export default function Home() {
   return (
@@ -22,10 +24,11 @@ export default function Home() {
             <br />
             I&apos;m <span className="text-blue-500">Yash Verma</span>
             <div className="flex gap-2 mt-2">
-              <BrandIcon brand="linkedin" />
-              <BrandIcon brand="github" />
-              <BrandIcon brand="twitter" />
-              <BrandIcon brand="medium" />
+              <BrandIcon brand="linkedin" link={CONTACT.linkedin} />
+              <BrandIcon brand="github" link={CONTACT.github} />
+              <BrandIcon brand="twitter" link={CONTACT.twitter} />
+              <BrandIcon brand="medium" link={CONTACT.medium} />
+              <BrandIcon brand="email" link={`mailto:${CONTACT.email}`} />
             </div>
           </h1>
           <hr className="my-4 border-slate-700" />
@@ -50,7 +53,7 @@ export default function Home() {
       </section>
 
       <section id="contact" className="p-4 h-screen bg-slate-800 bg-opacity-70">
-        Contact Me
+        <ContactFold /> 
       </section>
 
       <section className="shooting-stars">
