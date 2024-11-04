@@ -3,26 +3,26 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type Section = "experience" | "projects" | "contact";
+type Section = "home" | "experience" | "projects" | "contact";
 
-export default function Header() {
+export default function Header({ className }: { className?: string }) {
   const [activeSection, setActiveSection] = useState<Section | "">("");
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections: Section[] = ["experience", "projects", "contact"];
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const sections: Section[] = ["home", "experience", "projects", "contact"];
+      const scrollPosition = window.scrollY;
       let isInSection = false;
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
-          const { top } = element.getBoundingClientRect();
+          const { top, height } = element.getBoundingClientRect();
           const elementPosition = window.scrollY + top;
           const progress = window.scrollY / (window.innerHeight * sections.length);
           setProgress(progress);
 
-          if (scrollPosition >= elementPosition && scrollPosition <= elementPosition + element.offsetHeight) {
+          if (scrollPosition >= elementPosition && scrollPosition <= elementPosition + height) {
             setActiveSection(section);
             isInSection = true;
             break;
@@ -45,10 +45,13 @@ export default function Header() {
   return (
     <header
       id="app-header"
-      className="sticky overflow-hidden top-4 m-4 flex flex-col bg-slate-700 border border-slate-600 rounded-2xl glass-shadow"
+      className={`sticky overflow-hidden top-4 m-4 flex flex-col bg-slate-700 border border-slate-600 rounded-3xl glass-shadow ${className}`}
     >
       <div className="absolute z-0 top-0 left-0 w-full h-full bg-blue-500" style={{ width: `${progress * 100}%` }}></div>
       <div className="z-10 flex justify-evenly items-center w-full">
+        <Link href="#home" className={getLinkClassName("home")}>
+          Home
+        </Link>
         <Link href="#experience" className={getLinkClassName("experience")}>
           Experience
         </Link>
