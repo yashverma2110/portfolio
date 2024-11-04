@@ -36,7 +36,7 @@ export default function Home() {
           </h1>
           <hr className="my-4 border-slate-700" />
           <p className="text-white max-w-xl transition-transform animate-in fade-in duration-1000 md:text-2xl">
-            I&apos;m a <span className="text-blue-500">full-stack software engineer</span> with <span className="text-blue-500">{getTotalYears()} years of experience</span> & a passion for building
+            I&apos;m a <span className="text-blue-500">full-stack software engineer</span> with <span className="text-blue-500">{getTotalYears()} of experience</span> & a passion for building
             products that are both functional and beautiful.
           </p>
 
