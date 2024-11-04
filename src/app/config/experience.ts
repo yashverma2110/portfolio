@@ -3,8 +3,10 @@ import { IExperience } from "@/app/types/experience";
 const EXPERIENCE: IExperience[] = [
   {
     company: "Quizizz Inc.",
-    role: "Software Development Engineer - L5",
-    duration: "August 2021 – Current",
+    role: "Senior Software Development Engineer",
+    startDate: "August 2021",
+    endDate: "Current",
+    current: true,
     responsibilities: [
       {
         title: "Implemented SSR and design system",
@@ -86,7 +88,8 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Conwo Solution Pvt. Ltd.",
     role: "Software Development Engineering Intern",
-    duration: "Jan 2021 – August 2021",
+    startDate: "Jan 2021",
+    endDate: "August 2021",
     responsibilities: [
       {
         title: "PWA Development",
@@ -113,7 +116,8 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Advenio Tecnosys Pvt. Ltd.",
     role: "Full Stack Developer Intern",
-    duration: "August 2020 – Jan 2021",
+    startDate: "August 2020",
+    endDate: "Jan 2021",
     responsibilities: [
       {
         title: "PWA Development",
@@ -135,7 +139,8 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Mckinley and Rice",
     role: "React Developer Intern",
-    duration: "August 2020 – October 2020",
+    startDate: "August 2020",
+    endDate: "October 2020",
     responsibilities: [
       {
         title: "Re-usable Components",
@@ -152,7 +157,8 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "DrawPI Inc.",
     role: "Web Developer Intern",
-    duration: "April 2020 – May 2020",
+    startDate: "April 2020",
+    endDate: "May 2020",
     responsibilities: [
       {
         title: "Analytics Dashboard Development",

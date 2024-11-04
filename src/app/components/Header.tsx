@@ -46,7 +46,7 @@ export default function Header({ className }: { className?: string }) {
   return (
     <header
       id="app-header"
-      className={`sticky overflow-hidden top-4 m-4 flex flex-col bg-slate-700 border border-slate-600 rounded-3xl glass-shadow ${className}`}
+      className={`sticky z-30 overflow-hidden top-4 m-4 flex flex-col bg-slate-700 border border-slate-600 rounded-3xl glass-shadow ${className}`}
     >
       <div className="absolute z-0 top-0 left-0 w-full h-full bg-blue-500" style={{ width: `${progress * 100}%` }}></div>
       <div className="z-10 flex justify-evenly items-center w-full">

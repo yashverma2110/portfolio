@@ -1,8 +1,24 @@
-import { FaBriefcase, FaClock } from "react-icons/fa";
+import { FaBriefcase, FaClock, FaCalendar } from "react-icons/fa";
 import EXPERIENCE from "@/app/config/experience";
 import Card from "@/app/components/ui/Card";
+import dayjs from "dayjs";
 
 export default function ExperienceFold() {
+  function getDuration(startDate: string, endDate: string) {
+    const years = dayjs(endDate).diff(dayjs(startDate), "years");
+    const months = dayjs(endDate).diff(dayjs(startDate), "months") - (12 * years);
+
+    if (years === 0) {
+      return `${months + 1} months`;
+    }
+
+    if (months <= 0) {
+      return `${years} years`;
+    }
+
+    return `${years} years ${months + 1} months`;
+  }
+
   return (
     <div className="flex flex-col gap-2 py-20">
       <h2 className="text-2xl font-bold text-neutral-500">Experience 💼</h2>
@@ -13,7 +29,10 @@ export default function ExperienceFold() {
             <FaBriefcase /> {experience.role}
           </h3>
           <p className="flex items-center gap-2 text-xs md:text-base">
-            <FaClock /> {experience.duration}
+            <FaCalendar /> {experience.startDate} - {experience.endDate}
+          </p>
+          <p className="flex items-center gap-2 text-xs md:text-sm">
+            <FaClock /> {getDuration(experience.startDate, experience.current ? dayjs().format("MMM YYYY") : experience.endDate)}
           </p>
 
           <h4 className="mt-4 text-neutral-400 text-sm md:text-lg font-bold">Responsibilities</h4>
