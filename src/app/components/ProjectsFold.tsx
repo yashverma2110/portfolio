@@ -6,7 +6,7 @@ import Button from "@/app/components/ui/Button";
 export default function ProjectsFold() {
   return (
     <div className="py-20">
-      <h2 className="text-2xl mb-6 font-bold text-neutral-500">Projects</h2>
+      <h2 className="text-2xl mb-6 font-bold text-neutral-500">Projects 🛠️</h2>
       <div>
         {PROJECTS.map((project) => (
           <div key={project.title} className="text-white">
@@ -23,7 +23,7 @@ export default function ProjectsFold() {
               ))}
             </ul>
             <Button className="mt-4" size="sm">
-              <Link href={project.link} target="_blank">Visit</Link>
+              <Link href={project.link} target="_blank">Visit website</Link>
             </Button>
           </div>
         ))}

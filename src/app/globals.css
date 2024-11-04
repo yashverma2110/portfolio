@@ -16,9 +16,7 @@ body {
 }
 
 .animate-wave {
-  animation-name: wave;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
+  animation: wave 1s infinite;
 }
 
 @keyframes wave {

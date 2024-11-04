@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import Header from "@/app/components/Header";
 import BrandIcon from "@/app/components/ui/BrandIcon";
 import Button from "./components/ui/Button";
 import Link from "next/link";
-import { Suspense } from "react";
+import Image from "next/image";
+import Coffee from "../../public/coffee.svg";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ExperienceFold from "@/app/components/ExperienceFold";
 import ProjectsFold from "@/app/components/ProjectsFold";
@@ -18,9 +20,9 @@ export default function Home() {
 
       <section id="home" className="px-4 h-[calc(100vh-96px)] flex flex-col justify-between">
         <>
-          <h1 className="animate-in fade-in duration-1000 text-white text-4xl font-bold">
+          <h1 className="animate-in fade-in duration-1000 text-white text-4xl md:text-5xl font-bold">
             {/* TODO: Animation not working */}
-            Hi! <span>👋</span>
+            Hi! <span className="animate-wave">👋</span>
             <br />
             I&apos;m <span className="text-blue-500">Yash Verma</span>
             <div className="flex gap-2 mt-2">
@@ -32,7 +34,7 @@ export default function Home() {
             </div>
           </h1>
           <hr className="my-4 border-slate-700" />
-          <p className="text-white transition-transform animate-in fade-in duration-1000 md:text-2xl">
+          <p className="text-white max-w-xl transition-transform animate-in fade-in duration-1000 md:text-2xl">
             I&apos;m a <span className="text-blue-500">full-stack software engineer</span> with a passion for building
             products that are both functional and beautiful.
           </p>
@@ -41,6 +43,8 @@ export default function Home() {
             <Link href="#contact">Get in touch</Link>
           </Button>
         </>
+
+        <Image src={Coffee} alt="Coffee" className="hidden md:block absolute top-[40vh] right-8 h-80 w-auto" />
         <TechStackGrid />
       </section>
 

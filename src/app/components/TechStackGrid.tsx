@@ -18,11 +18,11 @@ export default function TechStackGrid() {
 
   return (
     <section className="py-4 mt-auto">
-      <h3 className="text-neutral-400 font-extrabold text-lg mb-4 md:text-3xl">Tech Stack 📋</h3>
+      <h3 className="text-neutral-400 font-extrabold text-lg mb-4 md:text-2xl">Tech Stack 📋</h3>
       <div className="flex flex-wrap gap-x-4 md:gap-y-2">
         {techStack.map((tech) => (
           <div key={tech.name} className="flex text-neutral-400 font-extrabold items-center">
-            <p className="text-lg md:text-2xl">{tech.name}</p>
+            <p className="text-lg md:text-xl">{tech.name}</p>
           </div>
         ))}
       </div>

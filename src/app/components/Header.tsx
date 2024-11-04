@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaBriefcase, FaCodeBranch, FaEnvelope, FaHome } from "react-icons/fa";
 
 type Section = "home" | "experience" | "projects" | "contact";
 
@@ -39,7 +40,7 @@ export default function Header({ className }: { className?: string }) {
   }, []);
 
   function getLinkClassName(section: Section) {
-    return `text-white p-4 whitespace-nowrap font-semibold ${activeSection === section ? "" : ""}`;
+    return `flex items-center text-xs md:text-xl gap-2 text-white p-4 md:p-3 whitespace-nowrap font-semibold ${activeSection === section ? "" : ""}`;
   }
 
   return (
@@ -50,15 +51,19 @@ export default function Header({ className }: { className?: string }) {
       <div className="absolute z-0 top-0 left-0 w-full h-full bg-blue-500" style={{ width: `${progress * 100}%` }}></div>
       <div className="z-10 flex justify-evenly items-center w-full">
         <Link href="#home" className={getLinkClassName("home")}>
+          <FaHome className="hidden md:block" />  
           Home
         </Link>
         <Link href="#experience" className={getLinkClassName("experience")}>
+          <FaBriefcase className="hidden md:block" />
           Experience
         </Link>
         <Link href="#projects" className={getLinkClassName("projects")}>
+          <FaCodeBranch className="hidden md:block" />
           Projects
         </Link>
         <Link href="#contact" className={getLinkClassName("contact")}>
+          <FaEnvelope className="hidden md:block" />
           Contact
         </Link>
       </div>
