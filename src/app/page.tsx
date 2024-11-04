@@ -3,15 +3,17 @@ import BrandIcon from "@/app/components/ui/BrandIcon";
 import Button from "./components/ui/Button";
 import Link from "next/link";
 import { Suspense } from "react";
+import TechStackGrid from "@/app/components/TechStackGrid";
+import ExperienceFold from "./components/ExperienceFold";
 
 export default function Home() {
   return (
-    <>
+    <main>
       <Suspense fallback={<div className="h-15"></div>}>
         <Header />
       </Suspense>
 
-      <main className="px-4 h-screen">
+      <section id="home" className="px-4 h-[calc(100vh-58px)]">
         <h1 className="animate-in fade-in duration-1000 text-white text-4xl font-bold">
           {/* TODO: Animation not working */}
           Hi! <span>👋</span>
@@ -33,10 +35,12 @@ export default function Home() {
         <Button className="mt-4">
           <Link href="#contact">Get in touch</Link>
         </Button>
-      </main>
 
-      <section id="experience" className="p-4 h-screen">
-        Experience
+        <TechStackGrid />
+      </section>
+
+      <section id="experience" className="p-4">
+        <ExperienceFold />
       </section>
 
       <section id="projects" className="p-4 h-screen">
@@ -55,6 +59,6 @@ export default function Home() {
         <span className="shooting-star"></span>
         <span className="shooting-star"></span>
       </section>
-    </>
+    </main>
   );
 }
