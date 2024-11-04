@@ -2,20 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  overscroll-behavior: none;
+}
+
+.glass-shadow {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.animate-wave {
+  animation-name: wave;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes wave {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+/* shooting star effect */
+.shooting-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.shooting-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: animate-star 12s linear 4;
+}
+
+.shooting-star::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg, #fff, transparent);
+}
+
+@keyframes animate-star {
+  0% {
+    transform: rotate(315deg) translateX(0);
+    opacity: 0.3;
+  }
+
+  70% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: rotate(315deg) translateX(-1040px);
+    opacity: 0.3;
+  }
+}
+
+.shooting-star:nth-child(1) {
+  top: -10%;
+  right: -18px;
+  left: initial;
+  animation-delay: 5s;
+  animation-duration: 4s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 12%;
+  right: -20px;
+  left: initial;
+  animation-delay: 5s;
+  animation-duration: 4s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 18%;
+  right: -20px;
+  left: initial;
+  animation-delay: 1s;
+  animation-duration: 3s;
+}
+.shooting-star:nth-child(4) {
+  top: 23%;
+  right: -30px;
+  left: initial;
+  animation-delay: 6s;
+  animation-duration: 3.2s;
+}
+
+.shooting-star:nth-child(5) {
+  top: 50%;
+  right: -40px;
+  left: initial;
+  animation-delay: 8s;
+  animation-duration: 2.5s;
+}
+
+.shooting-star:nth-child(6) {
+  top: 70%;
+  right: -50px;
+  left: initial;
+  animation-delay: 0s;
+  animation-duration: 2s;
 }
