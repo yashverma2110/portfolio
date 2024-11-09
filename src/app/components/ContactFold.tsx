@@ -40,7 +40,7 @@ export default function ContactFold() {
       <h2 className="text-2xl font-bold text-neutral-500">Contact 📞</h2>
       <section className="w-full">
         <div data-tf-live="01JBW44150KCBMPE31QPC73Z0T"></div>
-        <Script src="//embed.typeform.com/next/embed.js" />
+        <Script src="//embed.typeform.com/next/embed.js" async />
       </section>
     </div>
   )
