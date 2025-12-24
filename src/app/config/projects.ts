@@ -14,6 +14,7 @@ const PROJECTS: IProject[] = [
     ],
     technologies: ["Chrome Extension API", "React", "Tailwind CSS", "TypeScript"],
     link: "https://chromewebstore.google.com/detail/barc/geaofdlkhololmpnbihingjkpfoiadoc",
+    tweetLink: "https://x.com/we_chat_tech/status/1982462514127331494",
   }
 ];
 

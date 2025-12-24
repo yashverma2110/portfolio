@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaLink } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import PROJECTS from "@/app/config/projects";
 import Button from "@/app/components/ui/Button";
 
@@ -41,12 +42,19 @@ export default function ProjectsFold() {
               ))}
             </ul>
 
-            <div className="mt-auto pt-6">
-              <Button size="sm" variant="secondary" className="w-full">
-                <Link href={project.link} target="_blank" className="flex items-center gap-2">
+            <div className="mt-auto pt-6 flex flex-col sm:flex-row gap-3">
+              <Button size="sm" variant="secondary" className="flex-1">
+                <Link href={project.link} target="_blank" className="flex items-center justify-center gap-2 w-full">
                   Visit Website <FaLink className="text-[10px]" />
                 </Link>
               </Button>
+              {project.tweetLink && (
+                <Button size="sm" variant="ghost" className="flex-1 border border-white/10">
+                  <Link href={project.tweetLink} target="_blank" className="flex items-center justify-center gap-2 w-full">
+                    <FaXTwitter className="text-sm" /> Release Post
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         ))}
