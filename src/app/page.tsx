@@ -31,9 +31,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            <Button size="lg">
-              <Link href="#contact">Get in touch</Link>
+          <div className="flex flex-col sm:flex-row items-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-fit">
+              <Link href="#contact" className="w-full text-center">Get in touch</Link>
             </Button>
             
             <div className="flex gap-3">

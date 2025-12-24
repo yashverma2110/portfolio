@@ -1,4 +1,4 @@
-export default function Button({ children, className, type = "button", size = "md", variant = "primary" }: { children: React.ReactNode, className?: string, type?: "button" | "submit" | "reset", size?: "sm" | "md" | "lg", variant?: "primary" | "secondary" | "ghost" }) {
+export default function Button({ children, className = "", type = "button", size = "md", variant = "primary" }: { children: React.ReactNode, className?: string, type?: "button" | "submit" | "reset", size?: "sm" | "md" | "lg", variant?: "primary" | "secondary" | "ghost" }) {
   function getSize() {
     if (size === "sm") return "px-4 py-1.5 text-sm";
     if (size === "md") return "px-6 py-2.5 text-base";
@@ -14,7 +14,7 @@ export default function Button({ children, className, type = "button", size = "m
   return (
     <button
       type={type}
-      className={`w-fit font-medium transition-all duration-300 rounded-full flex items-center justify-center gap-2 ${getSize()} ${variants[variant]} ${className}`}
+      className={`font-medium transition-all duration-300 rounded-full flex items-center justify-center gap-2 ${getSize()} ${variants[variant]} ${className}`}
     >{children}
     </button>
   );
