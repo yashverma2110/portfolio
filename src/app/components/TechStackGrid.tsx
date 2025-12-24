@@ -35,7 +35,7 @@ export default function TechStackGrid() {
               {category.items.map((tech) => (
                 <div 
                   key={tech} 
-                  className="px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/70 text-sm font-medium hover:text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300"
+                  className="px-4 py-1.5 rounded-full bg-white/[0.08] border border-white/[0.12] text-white/90 text-sm font-medium hover:text-white hover:bg-white/[0.12] hover:border-white/[0.2] transition-all duration-300"
                 >
                   {tech}
                 </div>
@@ -52,7 +52,7 @@ export default function TechStackGrid() {
           {awsServices.map((service) => (
             <div 
               key={service} 
-              className="px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-white/70 text-sm font-medium hover:text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300"
+              className="px-4 py-1.5 rounded-full bg-white/[0.08] border border-white/[0.12] text-white/90 text-sm font-medium hover:text-white hover:bg-white/[0.12] hover:border-white/[0.2] transition-all duration-300"
             >
               {service}
             </div>

@@ -28,9 +28,9 @@ const config: Config = {
           "100%": { transform: "rotate(0.0deg)" },
         },
         "animate-star": {
-          "0%": { transform: "rotate(315deg) translateX(0)", opacity: "0.3" },
-          "70%": { opacity: "0.3" },
-          "100%": { transform: "rotate(315deg) translateX(-1500px)", opacity: "0.3" },
+          "0%": { transform: "rotate(315deg) translateX(0)", opacity: "0.6" },
+          "70%": { opacity: "0.6" },
+          "100%": { transform: "rotate(315deg) translateX(-1500px)", opacity: "0.6" },
         },
       },
       backgroundImage: {

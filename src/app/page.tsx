@@ -80,8 +80,6 @@ export default function Home() {
           <span className="shooting-star"></span>
           <span className="shooting-star"></span>
           <span className="shooting-star"></span>
-          <span className="shooting-star"></span>
-          <span className="shooting-star"></span>
         </div>
       </div>
     </main>
