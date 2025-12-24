@@ -47,7 +47,7 @@ export default function NavigationBar({ className }: { className?: string }) {
   }
 
   return (
-    <div className="fixed bottom-6 sm:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <div className="fixed bottom-6 sm:bottom-auto sm:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav
         id="app-navigation"
         className={`pointer-events-auto flex items-stretch bg-black/50 backdrop-blur-2xl border border-white/10 rounded-full p-1.5 shadow-2xl ${className}`}

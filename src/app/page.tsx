@@ -46,7 +46,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className="px-6 min-h-screen flex flex-col justify-start snap-start snap-always pt-4 pb-20">
+      <section id="stack" className="px-6 min-h-screen flex flex-col justify-start md:justify-center snap-start snap-always pt-4 md:pt-0 pb-20 md:pb-0">
         <div className="max-w-6xl mx-auto w-full">
           <TechStackGrid />
         </div>
