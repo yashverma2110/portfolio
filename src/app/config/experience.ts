@@ -7,26 +7,54 @@ const EXPERIENCE: IExperience[] = [
     startDate: "August 2021",
     endDate: "Current",
     current: true,
+    achievements: [
+      "Top on-call engineer company-wide with fastest resolution times",
+      "Drove 10%+ improvement in weekly active teachers and 5% in registrations via SSR and performance initiatives",
+      "Built core revenue features (question types, lesson editor, gameplay) still driving platform growth",
+      "Enhanced system resilience with canary deployments, APM, RUM, and analytics instrumentation"
+    ],
     responsibilities: [
+      {
+        title: "Frontend Analytics Pipeline",
+        description: "Developed a new analytics pipeline using beacon API, Golang, and Kinesis for high RPM ingestion.",
+        metrics: ["Handled peak RPM of 300k with 99.99% SLA"],
+        technologies: ["Golang", "Kinesis", "Firehose", "SQS", "BigQuery"]
+      },
+      {
+        title: "Frontend Analytics Client",
+        description: "Built framework-agnostic analytics SDK with auto-instrumentation via design system, high-quality session tracking, and referrer capture.",
+        metrics: ["15% reduction in data loss", "Improved key funnel tracking for product initiatives by event auto capture", "Adopted across all microfrontends (React, Next, Nuxt, Vue)"],
+        technologies: ["TypeScript"]
+      },
       {
         title: "Implemented SSR and design system",
         description: "Implemented Server-Side Rendering (SSR) using NUXT and a design system that enhanced organic traffic.",
-        metrics: ["15% increase in user registration from organic traffic"]
+        metrics: ["15% increase in user registration from organic traffic"],
+        technologies: ["Vue", "Nuxt", "Tailwind"]
+      },
+      {
+        title: "SSG Pipeline for Static Pages",
+        description: "Built a static site generation pipeline serving pre-rendered HTML from S3, eliminating server hits for static content.",
+        metrics: ["12% improvement in TTFB", "31% improvement in LCP"],
+        technologies: ["Golang", "S3", "SQS", "Nuxt"]
       },
       {
         title: "Infra as Code for Canary Deployments",
         description: "Deployed frontend and backend infrastructure with Jenkins and AWS CodeDeploy, enhancing deployment reliability.",
-        metrics: ["Reduced P0 incidents by 83%"]
+        metrics: ["Reduced P0 incidents by 83%"],
+        technologies: ["CodeDeploy", "ECS", "Lambda"]
       },
       {
         title: "Optimized ECS Auto-scaling",
         description: "Implemented AWS capacity provider and ECS application auto-scaling, reducing costs.",
-        metrics: ["10% AWS cost reduction"]
+        metrics: ["10% AWS cost reduction"],
+        technologies: ["ECS"]
       },
       {
         title: "Website Performance Improvement",
         description: "Enhanced website performance through code splitting, vendor chunking, and consistent chunk hashing.",
-        metrics: ["63% reduction in p75 page load time", "Improved new user activation by 1%"]
+        metrics: ["63% reduction in p75 page load time", "Improved new user activation by 1%"],
+        technologies: ["Vue", "Vite"]
       },
       {
         title: "In-house Design System",
@@ -34,19 +62,16 @@ const EXPERIENCE: IExperience[] = [
         metrics: []
       },
       {
-        title: "Frontend Analytics Pipeline",
-        description: "Developed a new analytics pipeline using beacon API, Golang, and Kinesis for high RPM ingestion.",
-        metrics: ["Handled peak RPM of 100k with 99% SLA"]
-      },
-      {
         title: "Build Time Optimization",
         description: "Reduced build times by implementing ECR-based Docker image caching.",
-        metrics: ["15% reduction in build time"]
+        metrics: ["15% reduction in build time"],
+        technologies: ["ECR", "Docker"]
       },
       {
         title: "Migration to Modern Tools",
         description: "Led migration to Turborepo, Vite, and Pinia, improving developer experience.",
-        metrics: ["50% reduction in build time"]
+        metrics: ["50% reduction in build time"],
+        technologies: ["Turborepo", "Vite", "Docker", "Pinia", "Jenkins"]
       },
       {
         title: "Content Creation Features",
