@@ -10,7 +10,7 @@ export default function TechStackGrid() {
     },
     {
       name: "Databases",
-      items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Elasticsearch"],
+      items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Elasticsearch", "ChromaDB"],
     },
     {
       name: "Infrastructure",

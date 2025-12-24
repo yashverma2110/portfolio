@@ -8,12 +8,24 @@ const EXPERIENCE: IExperience[] = [
     endDate: "Current",
     current: true,
     achievements: [
-      "Top on-call engineer company-wide with fastest resolution times",
+      "Top on-call engineer company-wide with fastest resolution times and most number of tickets resolved",
       "Drove 10%+ improvement in weekly active teachers and 5% in registrations via SSR and performance initiatives",
       "Built core revenue features (question types, lesson editor, gameplay) still driving platform growth",
       "Enhanced system resilience with canary deployments, APM, RUM, and analytics instrumentation"
     ],
     responsibilities: [
+      {
+        title: "Data Analysis Platform (Waygent)",
+        description: "Built in-house analytics platform with Mixpanel-like session explorer, standardized A/B testing via feature flags with statistical analysis (p-value, t-test) and rollout health monitoring.",
+        metrics: ["2% improvement in registration funnels", "0.5% increase in game creation rate", "Reduced A/B test release delays from 2 weeks to 1 week"],
+        technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
+      },
+      {
+        title: "Data Analysis AI Agent (Waygent)",
+        description: "Built RAG-powered chat agent to answer analysis queries like DAU, A/B test results, CTRs, and impressions using natural language.",
+        metrics: [],
+        technologies: ["Python", "Agno", "BigQuery", "ChromaDB"]
+      },
       {
         title: "Frontend Analytics Pipeline",
         description: "Developed a new analytics pipeline using beacon API, Golang, and Kinesis for high RPM ingestion.",
