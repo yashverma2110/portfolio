@@ -17,7 +17,7 @@ export default function Home() {
         <NavigationBar />
       </Suspense>
 
-      <section id="home" className="px-6 min-h-screen flex flex-col justify-center max-w-6xl mx-auto pt-32 pb-32 snap-start snap-always">
+      <section id="home" className="px-6 min-h-screen flex flex-col justify-start md:justify-center max-w-6xl mx-auto pt-24 md:pt-32 pb-32 snap-start snap-always">
         <div className="flex flex-col items-start gap-8">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1]">
