@@ -1,6 +1,22 @@
-export default function Card({ children, className = "" }: { children: React.ReactNode, className?: string }) {
+type CardSize = "sm" | "md" | "lg";
+
+const sizeClasses: Record<CardSize, string> = {
+  sm: "rounded-2xl p-5",
+  md: "rounded-2xl md:rounded-[2.5rem] p-4 md:p-8",
+  lg: "rounded-[2.5rem] p-8",
+};
+
+export default function Card({ 
+  children, 
+  className = "", 
+  size = "lg" 
+}: { 
+  children: React.ReactNode; 
+  className?: string;
+  size?: CardSize;
+}) {
   return (
-    <div className={`rounded-[2.5rem] p-8 bg-[rgba(10,10,10,0.4)] backdrop-blur-[24px] saturate-[180%] border border-white/[0.08] shadow-[0_4px_24px_-1px_rgba(0,0,0,0.2),inset_0_1px_1px_0_rgba(255,255,255,0.05)] transition-all duration-700 hover:scale-[1.005] hover:bg-black/40 hover:border-white/20 ${className}`}>
+    <div className={`bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] transition-all duration-500 hover:bg-white/[0.04] hover:border-white/[0.12] ${sizeClasses[size]} ${className}`}>
       {children}
     </div>
   );

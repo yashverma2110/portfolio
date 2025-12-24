@@ -18,10 +18,10 @@ export default function ContactFold() {
         <div className="flex flex-col gap-3 md:gap-6">
           <Link 
             href={`mailto:${CONTACT.email}`} 
-            className="group flex items-center justify-between p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 gap-4"
+            className="group flex items-center justify-between p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-500 gap-4"
           >
             <div className="flex items-center gap-4 md:gap-6 min-w-0">
-              <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-white/5 text-white/70 group-hover:text-white transition-colors shrink-0">
+              <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-white/[0.03] text-white/70 group-hover:text-white transition-colors shrink-0">
                 <FaEnvelope size={20} className="md:hidden" />
                 <FaEnvelope size={28} className="hidden md:block" />
               </div>
@@ -36,10 +36,10 @@ export default function ContactFold() {
           <Link 
             href={CONTACT.linkedin} 
             target="_blank"
-            className="group flex items-center justify-between p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 gap-4"
+            className="group flex items-center justify-between p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-500 gap-4"
           >
             <div className="flex items-center gap-4 md:gap-6 min-w-0">
-              <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-white/5 text-white/70 group-hover:text-white transition-colors shrink-0">
+              <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-white/[0.03] text-white/70 group-hover:text-white transition-colors shrink-0">
                 <FaLinkedin size={20} className="md:hidden" />
                 <FaLinkedin size={28} className="hidden md:block" />
               </div>
@@ -54,10 +54,10 @@ export default function ContactFold() {
           <Link 
             href={CONTACT.twitter} 
             target="_blank"
-            className="group flex items-center justify-between p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 gap-4"
+            className="group flex items-center justify-between p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-500 gap-4"
           >
             <div className="flex items-center gap-4 md:gap-6 min-w-0">
-              <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-white/5 text-white/70 group-hover:text-white transition-colors shrink-0">
+              <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-white/[0.03] text-white/70 group-hover:text-white transition-colors shrink-0">
                 <FaTwitter size={20} className="md:hidden" />
                 <FaTwitter size={28} className="hidden md:block" />
               </div>

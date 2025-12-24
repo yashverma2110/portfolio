@@ -3,6 +3,7 @@ import { FaLink } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import PROJECTS from "@/app/config/projects";
 import Button from "@/app/components/ui/Button";
+import Card from "@/app/components/ui/Card";
 
 export default function ProjectsFold() {
   return (
@@ -14,7 +15,7 @@ export default function ProjectsFold() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
         {PROJECTS.map((project) => (
-          <div key={project.title} className="group relative flex flex-col gap-6 rounded-[2.5rem] p-8 bg-[rgba(10,10,10,0.4)] backdrop-blur-[24px] saturate-[180%] border border-white/[0.08] shadow-[0_4px_24px_-1px_rgba(0,0,0,0.2),inset_0_1px_1px_0_rgba(255,255,255,0.05)] transition-all duration-700 hover:scale-[1.005] hover:bg-black/40 hover:border-white/20 w-full overflow-hidden">
+          <Card key={project.title} className="group flex flex-col gap-6 w-full overflow-hidden">
             <div className="flex flex-col gap-2 min-w-0">
               <h3 className="text-2xl font-bold text-white tracking-tight truncate">{project.title}</h3>
               <div className="flex items-center text-sm font-medium text-white/60 gap-2 w-full">
@@ -35,7 +36,7 @@ export default function ProjectsFold() {
               {project.features.map((feature) => (
                 <li 
                   key={feature} 
-                  className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-medium text-white/70"
+                  className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-xs font-medium text-white/70"
                 >
                   {feature}
                 </li>
@@ -56,7 +57,7 @@ export default function ProjectsFold() {
                 </Button>
               )}
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

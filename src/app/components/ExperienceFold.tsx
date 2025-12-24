@@ -26,10 +26,10 @@ export default function ExperienceFold() {
 
       <div className="flex flex-col gap-12">
         {EXPERIENCE.map((experience) => (
-          <div key={experience.company} className="rounded-[2.5rem] bg-[rgba(10,10,10,0.4)] backdrop-blur-[24px] saturate-[180%] border border-white/[0.08] shadow-[0_4px_24px_-1px_rgba(0,0,0,0.2),inset_0_1px_1px_0_rgba(255,255,255,0.05)] transition-all duration-700 hover:scale-[1.005] hover:bg-black/40 hover:border-white/20 overflow-hidden">
+          <div key={experience.company} className="relative rounded-[2.5rem] bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] transition-all duration-500 hover:bg-white/[0.04] hover:border-white/[0.12] overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr,2fr] gap-0">
               {/* Left Side: Sidebar/Header in Card */}
-              <div className="p-8 lg:p-12 bg-white/[0.03] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between">
+              <div className="p-8 lg:p-12 bg-white/[0.01] border-b lg:border-b-0 lg:border-r border-white/[0.05] flex flex-col justify-between">
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-1">
                     <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight break-words">{experience.company}</h3>
@@ -49,17 +49,20 @@ export default function ExperienceFold() {
               {/* Right Side: Responsibilities Grid */}
               <div className="p-8 lg:p-12 flex flex-col gap-8">
                 <h4 className="text-sm font-bold uppercase tracking-widest text-white/40">Key Responsibilities</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {experience.responsibilities.map((responsibility) => (
-                    <div key={responsibility.title} className="flex flex-col gap-3 group">
-                      <h5 className="text-lg font-bold text-white/90 group-hover:text-white transition-colors">{responsibility.title}</h5>
-                      <p className="text-sm text-white/70 leading-relaxed group-hover:text-white transition-colors">{responsibility.description}</p>
+                    <div 
+                      key={responsibility.title} 
+                      className="group flex flex-col gap-3 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all duration-300"
+                    >
+                      <h5 className="text-base font-semibold text-white group-hover:text-white transition-colors">{responsibility.title}</h5>
+                      <p className="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">{responsibility.description}</p>
                       {responsibility.metrics.length > 0 && (
-                        <div className="mt-2 space-y-2">
+                        <div className="mt-auto pt-3 border-t border-white/[0.06] space-y-2">
                           {responsibility.metrics.map((metric) => (
-                            <div key={metric} className="flex items-start gap-3 text-xs text-white/60 group-hover:text-white transition-colors">
-                              <div className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-500/70 group-hover:bg-blue-500 transition-all" />
-                              <p className="leading-relaxed">{metric}</p>
+                            <div key={metric} className="flex items-start gap-2.5 text-xs text-blue-400/90 group-hover:text-blue-400 transition-colors">
+                              <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500/60 group-hover:bg-blue-500 transition-all" />
+                              <p className="leading-relaxed font-medium">{metric}</p>
                             </div>
                           ))}
                         </div>
