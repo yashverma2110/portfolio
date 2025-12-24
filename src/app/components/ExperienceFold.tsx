@@ -27,10 +27,10 @@ export default function ExperienceFold() {
 
       <div className="flex flex-col gap-20">
         {EXPERIENCE.map((experience) => (
-          <div key={experience.company} className="grid grid-cols-1 lg:grid-cols-[1fr,2fr] gap-8 lg:gap-16">
-            <div className="flex flex-col gap-2">
-              <h3 className="text-3xl font-bold text-white tracking-tight">{experience.company}</h3>
-              <p className="text-xl text-white/60 font-medium">{experience.role}</p>
+          <div key={experience.company} className="grid grid-cols-1 lg:grid-cols-[1fr,2fr] gap-8 lg:gap-16 w-full overflow-hidden">
+            <div className="flex flex-col gap-2 min-w-0">
+              <h3 className="text-3xl font-bold text-white tracking-tight break-words">{experience.company}</h3>
+              <p className="text-xl text-white/60 font-medium break-words">{experience.role}</p>
               <div className="flex flex-col gap-1 mt-2">
                 <p className="text-sm text-white/40 font-medium uppercase tracking-wider">
                   {experience.startDate} — {experience.endDate}

@@ -5,23 +5,23 @@ import Button from "@/app/components/ui/Button";
 
 export default function ProjectsFold() {
   return (
-    <div className="flex flex-col gap-12 py-10">
+    <div className="flex flex-col gap-12 py-10 w-full overflow-hidden">
       <div className="flex flex-col gap-4">
         <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">Projects</h2>
         <div className="h-1 w-12 bg-white/20 rounded-full" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
         {PROJECTS.map((project) => (
-          <div key={project.title} className="group relative flex flex-col gap-6 apple-card">
-            <div className="flex flex-col gap-2">
-              <h3 className="text-2xl font-bold text-white tracking-tight">{project.title}</h3>
-              <div className="flex items-center text-sm font-medium text-white/40 gap-2">
-                <FaLink className="text-xs" />
+          <div key={project.title} className="group relative flex flex-col gap-6 apple-card w-full overflow-hidden">
+            <div className="flex flex-col gap-2 min-w-0">
+              <h3 className="text-2xl font-bold text-white tracking-tight truncate">{project.title}</h3>
+              <div className="flex items-center text-sm font-medium text-white/40 gap-2 w-full">
+                <FaLink className="text-xs shrink-0" />
                 <Link 
                   href={project.link} 
                   target="_blank" 
-                  className="hover:text-white transition-colors duration-300"
+                  className="hover:text-white transition-colors duration-300 truncate min-w-0"
                 >
                   {project.link.replace(/^https?:\/\//, '')}
                 </Link>
