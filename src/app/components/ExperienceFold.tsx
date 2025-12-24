@@ -1,4 +1,3 @@
-import { FaBriefcase, FaClock, FaCalendar } from "react-icons/fa";
 import EXPERIENCE from "@/app/config/experience";
 import Card from "@/app/components/ui/Card";
 import dayjs from "dayjs";

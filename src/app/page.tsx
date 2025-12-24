@@ -3,8 +3,6 @@ import Header from "@/app/components/Header";
 import BrandIcon from "@/app/components/ui/BrandIcon";
 import Button from "./components/ui/Button";
 import Link from "next/link";
-import Image from "next/image";
-import Coffee from "../../public/coffee.svg";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ExperienceFold from "@/app/components/ExperienceFold";
 import ProjectsFold from "@/app/components/ProjectsFold";
