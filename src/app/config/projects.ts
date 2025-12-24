@@ -2,19 +2,18 @@ import { IProject } from "@/app/types/projects";
 
 const PROJECTS: IProject[] = [
   {
-    title: "Amaizely",
-    description: "A smart way for spaced repetition based learning with AI generation of flashcards",
+    title: "Barc",
+    description: "Arc browser-style tab management extension for Chrome, reimagining how users organize and navigate their tabs.",
     features: [
-      "AI-generation of flashcard decks using website links",
-      "AI-generation of flashcard decks using YouTube",
-      "Use PDFs to generate flashcard decks using AI",
-      "AI-generation of flashcard decks using custom text",
-      "Custom flashcard creation with rich text formatting tools",
-      "Revision of specific decks",
-      "Smart revision recommendations for spaced repetition",
+      "Pinned URLs to a beautiful grid for instant access",
+      "Powerful command palette for search at the speed of thought",
+      "Custom themes with Dark, Light, and custom import support",
+      "Smart tab management including renaming and duplicate detection",
+      "Keyboard-first navigation with intuitive shortcuts",
+      "Privacy-focused design with zero data collection",
     ],
-    technologies: ["Next.js", "Tailwind CSS", "Express", "MongoDB"],
-    link: "https://amaizely.com",
+    technologies: ["Chrome Extension API", "React", "Tailwind CSS", "TypeScript"],
+    link: "https://chromewebstore.google.com/detail/barc/geaofdlkhololmpnbihingjkpfoiadoc",
   }
 ];
 

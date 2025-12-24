@@ -7,7 +7,7 @@ interface BrandIconProps {
   size?: number;
 }
 
-export default function BrandIcon({ brand, link, size = 24 }: BrandIconProps) {
+export default function BrandIcon({ brand, link, size = 20 }: BrandIconProps) {
   function getIcon() {
     switch (brand) {
       case "linkedin": return <FaLinkedin size={size} />;
@@ -18,13 +18,19 @@ export default function BrandIcon({ brand, link, size = 24 }: BrandIconProps) {
     }
   }
 
+  const content = (
+    <div className="p-3 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300">
+      {getIcon()}
+    </div>
+  );
+
   if (link) {
     return (
       <Link href={link} target="_blank">
-        {getIcon()}
+        {content}
       </Link>
     );
   }
 
-  return getIcon();
+  return content;
 }

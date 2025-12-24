@@ -1,31 +1,23 @@
 export default function TechStackGrid() {
   const techStack = [
-    { name: "Javascript", icon: "" },
-    { name: "Typescript", icon: "" },
-    { name: "Tailwind CSS", icon: "" },
-    { name: "Next.js", icon: "" },
-    { name: "React", icon: "" },
-    { name: "Vue", icon: "" },
-    { name: "Nuxt", icon: "" },
-    { name: "Python", icon: "" },
-    { name: "Golang", icon: "" },
-    { name: "Docker", icon: "" },
-    { name: "Redis", icon: "" },
-    { name: "MongoDB", icon: "" },
-    { name: "MySQL", icon: "" },
-    { name: "AWS", icon: "" },
+    "JavaScript", "TypeScript", "Tailwind CSS", "Next.js", "React", "Vue", "Nuxt", 
+    "Python", "Golang", "PostgreSQL", "MongoDB", "MySQL", "Redis", "Elasticsearch",
+    "Docker", "Kubernetes", "AWS"
   ];
 
   return (
-    <section className="py-4 mt-auto">
-      <h3 className="text-neutral-400 font-extrabold text-lg mb-4 md:text-2xl">Tech Stack 📋</h3>
-      <div className="flex flex-wrap gap-x-4 md:gap-y-2">
+    <div className="flex flex-col gap-6">
+      <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">Tech Stack</h3>
+      <div className="flex flex-wrap gap-3">
         {techStack.map((tech) => (
-          <div key={tech.name} className="flex text-neutral-400 font-extrabold items-center">
-            <p className="text-lg md:text-xl">{tech.name}</p>
+          <div 
+            key={tech} 
+            className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+          >
+            {tech}
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

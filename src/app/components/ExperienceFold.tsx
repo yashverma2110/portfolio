@@ -20,45 +20,54 @@ export default function ExperienceFold() {
   }
 
   return (
-    <div className="flex flex-col gap-2 py-20">
-      <h2 className="text-2xl font-bold text-neutral-500">Experience 💼</h2>
-      {EXPERIENCE.map((experience) => (
-        <div key={experience.company} className="text-white">
-          <h2 className="text-base md:text-2xl font-bold">{experience.company}</h2>
-          <h3 className="flex items-center gap-2 text-blue-500 text-sm md:text-xl">
-            <FaBriefcase /> {experience.role}
-          </h3>
-          <p className="flex items-center gap-2 text-xs md:text-base">
-            <FaCalendar /> {experience.startDate} - {experience.endDate}
-          </p>
-          <p className="flex items-center gap-2 text-xs md:text-sm">
-            <FaClock /> {getDuration(experience.startDate, experience.current ? dayjs().format("MMM YYYY") : experience.endDate)}
-          </p>
+    <div className="flex flex-col gap-12 py-10">
+      <div className="flex flex-col gap-4">
+        <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">Experience</h2>
+        <div className="h-1 w-12 bg-white/20 rounded-full" />
+      </div>
 
-          <h4 className="mt-4 text-neutral-400 text-sm md:text-lg font-bold">Responsibilities</h4>
-          <div className="mt-4 flex gap-4 max-w-full overflow-x-auto rounded-lg">
-            {experience.responsibilities.map((responsibility) => (
-              <Card key={responsibility.title}>
-                <h5 className="text-sm md:text-lg font-bold">{responsibility.title}</h5>
-                <p className="text-xs md:text-base">{responsibility.description}</p>
-                {
-                  responsibility.metrics.length > 0 && (
-                    <>
-                      <p className="font-semibold mt-2 text-xs md:text-base text-neutral-400">Key improvements:</p>
-                      <ul className="list-disc list-inside text-xs md:text-base">
-                        {responsibility.metrics.map((metric) => (
-                          <li key={metric}>{metric}</li>
-                        ))}
-                      </ul>
-                    </>
-                  )
-                }
-              </Card>
-            ))}
+      <div className="flex flex-col gap-20">
+        {EXPERIENCE.map((experience) => (
+          <div key={experience.company} className="grid grid-cols-1 lg:grid-cols-[1fr,2fr] gap-8 lg:gap-16">
+            <div className="flex flex-col gap-2">
+              <h3 className="text-3xl font-bold text-white tracking-tight">{experience.company}</h3>
+              <p className="text-xl text-white/60 font-medium">{experience.role}</p>
+              <div className="flex flex-col gap-1 mt-2">
+                <p className="text-sm text-white/40 font-medium uppercase tracking-wider">
+                  {experience.startDate} — {experience.endDate}
+                </p>
+                <p className="text-sm text-white/40 font-medium">
+                  {getDuration(experience.startDate, experience.current ? dayjs().format("MMM YYYY") : experience.endDate)}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-8">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-white/30">Key Responsibilities</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {experience.responsibilities.map((responsibility) => (
+                  <Card key={responsibility.title} className="!p-6 !rounded-3xl">
+                    <h5 className="text-lg font-bold text-white mb-2">{responsibility.title}</h5>
+                    <p className="text-sm text-white/60 leading-relaxed mb-4">{responsibility.description}</p>
+                    {responsibility.metrics.length > 0 && (
+                      <div className="pt-4 border-t border-white/5">
+                        <ul className="space-y-2">
+                          {responsibility.metrics.map((metric) => (
+                            <li key={metric} className="text-xs text-white/40 flex items-start gap-2">
+                              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-500" />
+                              {metric}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </Card>
+                ))}
+              </div>
+            </div>
           </div>
-          <hr className="mt-8 border-slate-700" />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

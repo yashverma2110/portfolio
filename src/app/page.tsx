@@ -14,61 +14,76 @@ import { getTotalYears } from "./utils/experienceUtils";
 
 export default function Home() {
   return (
-    <main>
-      <Suspense fallback={<div className="h-15"></div>}>
+    <main className="relative">
+      <Suspense fallback={null}>
         <Header />
       </Suspense>
 
-      <section id="home" className="px-4 h-[calc(100vh-96px)] flex flex-col justify-between">
-        <>
-          <h1 className="animate-in fade-in duration-1000 text-white text-4xl md:text-5xl font-bold">
-            {/* TODO: Animation not working */}
-            Hi! <span className="animate-wave">👋</span>
-            <br />
-            I&apos;m <span className="text-blue-500">Yash Verma</span>
-            <div className="flex gap-2 mt-2">
+      <section id="home" className="px-6 min-h-screen flex flex-col justify-center max-w-6xl mx-auto pt-32 pb-20">
+        <div className="flex flex-col items-start gap-8">
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1]">
+              Hi! <span className="animate-wave">👋</span>
+              <br />
+              I&apos;m <span className="text-white">Yash Verma</span>
+            </h1>
+            
+            <p className="mt-8 text-white/60 max-w-2xl text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed">
+              I&apos;m a <span className="text-white">full-stack software engineer</span> with <span className="text-white">{getTotalYears()} of experience</span> crafting products that balance <span className="text-white">form and function</span>.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            <Button size="lg">
+              <Link href="#contact">Get in touch</Link>
+            </Button>
+            
+            <div className="flex gap-3">
               <BrandIcon brand="linkedin" link={CONTACT.linkedin} />
               <BrandIcon brand="github" link={CONTACT.github} />
               <BrandIcon brand="twitter" link={CONTACT.twitter} />
-              <BrandIcon brand="medium" link={CONTACT.medium} />
               <BrandIcon brand="email" link={`mailto:${CONTACT.email}`} />
             </div>
-          </h1>
-          <hr className="my-4 border-slate-700" />
-          <p className="text-white max-w-xl transition-transform animate-in fade-in duration-1000 md:text-2xl">
-            I&apos;m a <span className="text-blue-500">full-stack software engineer</span> with <span className="text-blue-500">{getTotalYears()} of experience</span> & a passion for building
-            products that are both functional and beautiful.
-          </p>
+          </div>
+        </div>
 
-          <Button className="mt-4">
-            <Link href="#contact">Get in touch</Link>
-          </Button>
-        </>
-
-        <Image src={Coffee} alt="Coffee" className="hidden md:block absolute top-[40vh] right-8 h-80 w-auto" />
-        <TechStackGrid />
+        <div className="mt-32 animate-in fade-in duration-1000 delay-500">
+          <TechStackGrid />
+        </div>
       </section>
 
-      <section id="experience" className="p-4 bg-slate-800 bg-opacity-70">
-        <ExperienceFold />
+      <section id="experience" className="px-6 py-32 bg-white/[0.02]">
+        <div className="max-w-6xl mx-auto">
+          <ExperienceFold />
+        </div>
       </section>
 
-      <section id="projects" className="p-4 h-screen">
-        <ProjectsFold />
+      <section id="projects" className="px-6 py-32">
+        <div className="max-w-6xl mx-auto">
+          <ProjectsFold />
+        </div>
       </section>
 
-      <section id="contact" className="p-4 h-screen bg-slate-800 bg-opacity-70">
-        <ContactFold /> 
+      <section id="contact" className="px-6 py-32 bg-white/[0.02]">
+        <div className="max-w-6xl mx-auto">
+          <ContactFold /> 
+        </div>
       </section>
 
-      <section className="shooting-stars">
-        <span className="shooting-star"></span>
-        <span className="shooting-star"></span>
-        <span className="shooting-star"></span>
-        <span className="shooting-star"></span>
-        <span className="shooting-star"></span>
-        <span className="shooting-star"></span>
-      </section>
+      {/* Decorative elements */}
+      <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 blur-[120px] rounded-full" />
+        
+        <div className="shooting-stars">
+          <span className="shooting-star"></span>
+          <span className="shooting-star"></span>
+          <span className="shooting-star"></span>
+          <span className="shooting-star"></span>
+          <span className="shooting-star"></span>
+          <span className="shooting-star"></span>
+        </div>
+      </div>
     </main>
   );
 }
