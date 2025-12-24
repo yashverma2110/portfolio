@@ -6,143 +6,32 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  @apply h-full overflow-hidden;
+}
+
 body {
+  @apply font-sans overscroll-none antialiased;
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  overscroll-behavior: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-dark {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-shadow {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.apple-card {
-  @apply rounded-[2.5rem] p-8 glass-dark transition-all duration-500 hover:scale-[1.01] hover:bg-black/40;
-}
-
-.animate-wave {
-  display: inline-block;
-  animation: wave 2s infinite;
-  transform-origin: 70% 70%;
-}
-
-@keyframes wave {
-  0% { transform: rotate( 0.0deg) }
-  10% { transform: rotate(14.0deg) }
-  20% { transform: rotate(-8.0deg) }
-  30% { transform: rotate(14.0deg) }
-  40% { transform: rotate(-4.0deg) }
-  50% { transform: rotate(10.0deg) }
-  60% { transform: rotate( 0.0deg) }
-  100% { transform: rotate( 0.0deg) }
-}
-
-/* shooting star effect */
+/* Base shooting star elements - keeping structural CSS here */
 .shooting-stars {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
+  @apply fixed top-0 left-0 -z-10 w-screen h-screen overflow-hidden;
 }
 
 .shooting-star {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1);
-  animation: animate-star 12s linear infinite;
+  @apply absolute top-1/2 left-1/2 w-1 h-1 bg-white rounded-full shadow-[0_0_0_4px_rgba(255,255,255,0.1),0_0_0_8px_rgba(255,255,255,0.1),0_0_20px_rgba(255,255,255,0.1)] animate-star-movement;
 }
 
 .shooting-star::before {
   content: '';
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 300px;
-  height: 1px;
-  background: linear-gradient(90deg, #fff, transparent);
+  @apply absolute top-1/2 -translate-y-1/2 w-[300px] h-[1px] bg-glass-gradient;
 }
 
-@keyframes animate-star {
-  0% {
-    transform: rotate(315deg) translateX(0);
-    opacity: 0.3;
-  }
-
-  70% {
-    opacity: 0.3;
-  }
-
-  100% {
-    transform: rotate(315deg) translateX(-1500px);
-    opacity: 0.3;
-  }
-}
-
-.shooting-star:nth-child(1) {
-  top: -10%;
-  right: -18px;
-  left: initial;
-  animation-delay: 5s;
-  animation-duration: 4s;
-}
-
-.shooting-star:nth-child(2) {
-  top: 12%;
-  right: -20px;
-  left: initial;
-  animation-delay: 5s;
-  animation-duration: 4s;
-}
-
-.shooting-star:nth-child(3) {
-  top: 18%;
-  right: -20px;
-  left: initial;
-  animation-delay: 1s;
-  animation-duration: 3s;
-}
-.shooting-star:nth-child(4) {
-  top: 23%;
-  right: -30px;
-  left: initial;
-  animation-delay: 6s;
-  animation-duration: 3.2s;
-}
-
-.shooting-star:nth-child(5) {
-  top: 50%;
-  right: -40px;
-  left: initial;
-  animation-delay: 8s;
-  animation-duration: 2.5s;
-}
-
-.shooting-star:nth-child(6) {
-  top: 70%;
-  right: -50px;
-  left: initial;
-  animation-delay: 0s;
-  animation-duration: 2s;
-}
+.shooting-star:nth-child(1) { @apply -top-[10%] -right-[18px] left-auto [animation-delay:5s] [animation-duration:4s]; }
+.shooting-star:nth-child(2) { @apply top-[12%] -right-[20px] left-auto [animation-delay:5s] [animation-duration:4s]; }
+.shooting-star:nth-child(3) { @apply top-[18%] -right-[20px] left-auto [animation-delay:1s] [animation-duration:3s]; }
+.shooting-star:nth-child(4) { @apply top-[23%] -right-[30px] left-auto [animation-delay:6s] [animation-duration:3.2s]; }
+.shooting-star:nth-child(5) { @apply top-[50%] -right-[40px] left-auto [animation-delay:8s] [animation-duration:2.5s]; }
+.shooting-star:nth-child(6) { @apply top-[70%] -right-[50px] left-auto [animation-delay:0s] [animation-duration:2s]; }

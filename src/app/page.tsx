@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Header from "@/app/components/Header";
+import NavigationBar from "@/app/components/NavigationBar";
 import BrandIcon from "@/app/components/ui/BrandIcon";
 import Button from "./components/ui/Button";
 import Link from "next/link";
@@ -12,22 +12,22 @@ import { getTotalYears } from "./utils/experienceUtils";
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
       <Suspense fallback={null}>
-        <Header />
+        <NavigationBar />
       </Suspense>
 
-      <section id="home" className="px-6 min-h-screen flex flex-col justify-center max-w-6xl mx-auto pt-32 pb-20">
+      <section id="home" className="px-6 min-h-screen flex flex-col justify-center max-w-6xl mx-auto pt-32 pb-32 snap-start snap-always">
         <div className="flex flex-col items-start gap-8">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1]">
-              Hi! <span className="animate-wave">👋</span>
+              Hi! <span className="inline-block animate-wave origin-[70%_70%]">👋</span>
               <br />
               I&apos;m <span className="text-white">Yash Verma</span>
             </h1>
             
-            <p className="mt-8 text-white/60 max-w-2xl text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed">
-              I&apos;m a <span className="text-white">full-stack software engineer</span> with <span className="text-white">{getTotalYears()} of experience</span> crafting products that balance <span className="text-white">form and function</span>.
+            <p className="mt-8 text-white/80 max-w-2xl text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed">
+              I&apos;m a <span className="text-white font-semibold">full-stack software engineer</span> with <span className="text-white font-semibold">{getTotalYears()} of experience</span> crafting products that balance <span className="text-white font-semibold">form and function</span>.
             </p>
           </div>
 
@@ -44,26 +44,28 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="mt-32 animate-in fade-in duration-1000 delay-500">
+      <section id="stack" className="px-6 min-h-screen flex flex-col justify-start snap-start snap-always pt-4 pb-20">
+        <div className="max-w-6xl mx-auto w-full">
           <TechStackGrid />
         </div>
       </section>
 
-      <section id="experience" className="px-6 py-32 bg-white/[0.02]">
-        <div className="max-w-6xl mx-auto">
+      <section id="experience" className="px-6 min-h-screen flex flex-col justify-start bg-white/[0.02] snap-start snap-always pt-4 pb-20">
+        <div className="max-w-6xl mx-auto w-full">
           <ExperienceFold />
         </div>
       </section>
 
-      <section id="projects" className="px-6 py-32">
-        <div className="max-w-6xl mx-auto">
+      <section id="projects" className="px-6 min-h-screen flex flex-col justify-start snap-start snap-always pt-4 pb-20">
+        <div className="max-w-6xl mx-auto w-full">
           <ProjectsFold />
         </div>
       </section>
 
-      <section id="contact" className="px-6 py-32 bg-white/[0.02]">
-        <div className="max-w-6xl mx-auto">
+      <section id="contact" className="px-6 min-h-screen flex flex-col justify-start bg-white/[0.02] snap-start snap-always pt-4 pb-20">
+        <div className="max-w-6xl mx-auto w-full">
           <ContactFold /> 
         </div>
       </section>
