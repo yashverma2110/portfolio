@@ -46,25 +46,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className="px-6 min-h-screen flex flex-col justify-start md:justify-center snap-start snap-always pt-4 md:pt-0 pb-20 md:pb-0">
+      <section id="stack" className="px-6 min-h-screen flex flex-col justify-start md:justify-center snap-start snap-always pt-4 md:pt-0 pb-28 md:pb-0">
         <div className="max-w-6xl mx-auto w-full">
           <TechStackGrid />
         </div>
       </section>
 
-      <section id="experience" className="px-6 min-h-screen flex flex-col justify-start bg-white/[0.02] snap-start snap-always pt-4 pb-20">
+      <section id="experience" className="px-6 min-h-screen flex flex-col justify-start bg-white/[0.02] snap-start snap-always pt-4 pb-28 md:pb-20">
         <div className="max-w-6xl mx-auto w-full">
           <ExperienceFold />
         </div>
       </section>
 
-      <section id="projects" className="px-6 min-h-screen flex flex-col justify-start snap-start snap-always pt-4 pb-20">
+      <section id="projects" className="px-6 min-h-screen flex flex-col justify-start snap-start snap-always pt-4 pb-28 md:pb-20">
         <div className="max-w-6xl mx-auto w-full">
           <ProjectsFold />
         </div>
       </section>
 
-      <section id="contact" className="px-6 min-h-screen flex flex-col justify-start bg-white/[0.02] snap-start snap-always pt-4 pb-20">
+      <section id="contact" className="px-6 min-h-screen flex flex-col justify-start bg-white/[0.02] snap-start snap-always pt-4 pb-28 md:pb-20">
         <div className="max-w-6xl mx-auto w-full">
           <ContactFold /> 
         </div>
