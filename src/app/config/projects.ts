@@ -2,6 +2,18 @@ import { IProject } from "@/app/types/projects";
 
 const PROJECTS: IProject[] = [
   {
+    title: "opencode-goalkit",
+    description: "opencode-goalkit is an OpenCode plugin, published on npm. It adds /goal and /grill.",
+    features: [
+      "/goal runs a task only after you approve the plan.",
+      "It saves a reusable skill, records handoffs, and checks the result in a separate pass.",
+      "It stops when the task should be done once, not as a loop.",
+      "/grill asks one question at a time and does not edit files."
+    ],
+    technologies: ["JavaScript", "OpenCode"],
+    link: "https://github.com/yashverma2110/opencode-goalkit",
+  },
+  {
     title: "Barc",
     description: "Barc is a Chrome extension for tabs. The layout follows the Arc browser.",
     features: [
