@@ -152,32 +152,29 @@ html, body {
   background: rgba(255,255,255,0.04);
 }
 .pill:hover { border-color: rgba(255, 230, 140, 0.7); }
-.metric { scroll-margin-top: 24px; border-radius: 8px; }
-.metric:target,
-.metric.hit {
-  background-color: rgba(255, 226, 120, 0.16);
-  background-image:
-    linear-gradient(to right, rgba(255, 214, 90, 0.28) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 214, 90, 0.28) 1px, transparent 1px);
-  background-size: 16px 16px;
-  color: #fff8dc;
-  padding: 4px 8px;
+.metric { scroll-margin-top: 24px; }
+.metric.hit,
+.metric:target {
+  color: #ffe9a0;
+  background: none;
 }
 .duty.in-view,
+.duty.in-view h4,
+.duty.in-view p,
+.duty.in-view li,
+.duty.in-view .tech,
+.duty:target,
+.duty:target h4,
+.duty:target p,
+.duty:target li,
 #projects article.post.in-view,
+#projects article.post.in-view h3,
+#projects article.post.in-view p,
+#projects article.post.in-view li,
 #stack.in-view,
 #contact.in-view,
-.duty:target,
-.duty:has(.metric:target),
-.duty:has(.metric.hit) {
-  border-radius: 12px;
-  outline: 1px solid rgba(255, 220, 120, 0.45);
-  background-color: rgba(255, 226, 120, 0.08);
-  background-image:
-    linear-gradient(to right, rgba(255, 214, 90, 0.16) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 214, 90, 0.16) 1px, transparent 1px);
-  background-size: 24px 24px;
-  padding: 12px;
+#contact.in-view a {
+  color: #ffe9a0;
 }
 
 .crumbs ol {
@@ -197,12 +194,5 @@ html, body {
 .impact-group h4 { font-size: 14px; color: #d5dde6; letter-spacing: 0.04em; }
 
 .years-mark {
-  background-color: rgba(255, 226, 120, 0.16);
-  background-image:
-    linear-gradient(to right, rgba(255, 214, 90, 0.28) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 214, 90, 0.28) 1px, transparent 1px);
-  background-size: 16px 16px;
-  color: #fff8dc;
-  border-radius: 8px;
-  padding: 2px 8px;
+  color: #ffe9a0;
 }
