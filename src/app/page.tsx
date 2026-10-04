@@ -2,6 +2,7 @@ import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
 import TechStackGrid from "@/app/components/TechStackGrid";
+import ViewportHighlight from "@/app/components/ViewportHighlight";
 import { getTotalYears } from "./utils/experienceUtils";
 
 function companyName(company: string) {
@@ -9,17 +10,102 @@ function companyName(company: string) {
   return company;
 }
 
+type Impact = { id: string; label: string; text: string };
+
+function topicOf(value: string) {
+  const topic = value.replace(/^(The|A|An)\s+/i, "").trim();
+  return topic.replace(/^([A-Z])([a-z])/, (_, first: string, second: string) => first.toLowerCase() + second);
+}
+
+function labelsFor(text: string) {
+  const labels: string[] = [];
+  for (const sentence of text.split(/(?<=\.)\s+/)) {
+    const more = sentence.match(/^(?:The |A |An )?(.+?) increased by more than ([\d,.]+)%/i);
+    if (more) {
+      labels.push(`${more[2].replace(/,/g, "")}%+ ${topicOf(more[1])}`);
+      continue;
+    }
+    const increased = sentence.match(/^(?:The |A |An )?(.+?) increased by ([\d,.]+)%/i);
+    if (increased) {
+      labels.push(`${increased[2]}% ${topicOf(increased[1])}`);
+      continue;
+    }
+    const decreased = sentence.match(/^(?:The |A |An )?(.+?) decreased by ([\d,.]+)%/i);
+    if (decreased) {
+      labels.push(`${decreased[2]}% less ${topicOf(decreased[1])}`);
+      continue;
+    }
+    const improved = sentence.match(/^(?:The |A |An )?(.+?) improved by ([\d,.]+)%/i);
+    if (improved) {
+      labels.push(`${improved[2]}% ${topicOf(improved[1])}`);
+      continue;
+    }
+    const weeks = sentence.match(/from (\d+) weeks to (\d+) week/i);
+    if (weeks) {
+      labels.push(`${weeks[1]} weeks → ${weeks[2]} week`);
+      continue;
+    }
+    const peak = sentence.match(/was ([\d,.]+)k/i);
+    if (peak) {
+      labels.push(`${peak[1]}k peak rate`);
+      continue;
+    }
+    const level = sentence.match(/was ([\d.]+)%/i);
+    if (level) {
+      labels.push(`${level[1]}% service level`);
+      continue;
+    }
+    const rows = sentence.match(/more than ([\d,]+) rows/i);
+    if (rows) {
+      labels.push(`${Math.round(Number(rows[1].replace(/,/g, "")) / 1000)}k+ rows`);
+      continue;
+    }
+    const share = sentence.match(/^([\d.]+)% of (.+?) came/i);
+    if (share) {
+      labels.push(`${share[1]}% ${share[2]}`);
+    }
+  }
+  return labels;
+}
+
+function collectImpact(): Impact[] {
+  const items: Impact[] = [];
+  EXPERIENCE.forEach((job, jobIndex) => {
+    job.achievements?.forEach((item, index) => {
+      const id = `impact-${jobIndex}-a-${index}`;
+      labelsFor(item).forEach((label) => items.push({ id, label, text: item }));
+    });
+    job.responsibilities.forEach((duty, dutyIndex) => {
+      duty.metrics.forEach((metric, index) => {
+        const id = `impact-${jobIndex}-${dutyIndex}-m-${index}`;
+        labelsFor(metric).forEach((label) => items.push({ id, label, text: metric }));
+      });
+      if (duty.metrics.every((metric) => labelsFor(metric).length === 0)) {
+        const id = `impact-${jobIndex}-${dutyIndex}-d`;
+        labelsFor(duty.description).forEach((label) => items.push({ id, label, text: duty.description }));
+      }
+    });
+  });
+  return items;
+}
+
+function targetId(text: string, id: string) {
+  return labelsFor(text).length > 0 ? id : undefined;
+}
+
 export default function Home() {
   const years = getTotalYears();
+  const impact = collectImpact();
   return (
     <main className="blog-page">
       <div className="math-grid" aria-hidden="true" />
+      <ViewportHighlight />
       <div className="blog-wrap">
         <header className="blog-header">
           <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
           <p>
-            Full-stack software engineer with {years} of experience. I build products that hold up in production, from analytics and rendering to the infrastructure they run on.
+            I am a software engineer with {years} of experience. I build production software. The work includes analytics, rendered pages, and infrastructure.
           </p>
           <nav aria-label="Page">
             <a href="#experience">Experience</a>
@@ -31,26 +117,45 @@ export default function Home() {
 
         <section id="experience" className="blog-section">
           <h2>Experience</h2>
-          {EXPERIENCE.map((job) => (
+          <div className="impact">
+            <h3>Impact</h3>
+            <p>Select a number. The page moves to that work. The block in view gets a light yellow grid.</p>
+            <div className="pills">
+              {impact.map((item) => (
+                <a key={`${item.id}-${item.label}`} className="pill" href={`#${item.id}`} title={item.text}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+          {EXPERIENCE.map((job, jobIndex) => (
             <article key={job.company} className="post">
               <p className="kicker">{job.startDate} — {job.endDate}</p>
               <h3>{companyName(job.company)}</h3>
               <p className="role">{job.role}</p>
               {job.achievements && job.achievements.length > 0 && (
                 <ul>
-                  {job.achievements.map((item) => (
-                    <li key={item}>{item}</li>
+                  {job.achievements.map((item, index) => (
+                    <li key={item} id={targetId(item, `impact-${jobIndex}-a-${index}`)} className={targetId(item, "x") ? "metric" : undefined}>
+                      {item}
+                    </li>
                   ))}
                 </ul>
               )}
-              {job.responsibilities.map((item) => (
-                <div key={item.title} className="duty">
+              {job.responsibilities.map((item, dutyIndex) => (
+                <div key={item.title} id={item.metrics.every((metric) => labelsFor(metric).length === 0) ? targetId(item.description, `impact-${jobIndex}-${dutyIndex}-d`) : undefined} className="duty">
                   <h4>{item.title}</h4>
                   <p>{item.description}</p>
                   {item.metrics.length > 0 && (
                     <ul>
-                      {item.metrics.map((metric) => (
-                        <li key={metric}>{metric}</li>
+                      {item.metrics.map((metric, index) => (
+                        <li
+                          key={metric}
+                          id={targetId(metric, `impact-${jobIndex}-${dutyIndex}-m-${index}`)}
+                          className={targetId(metric, "x") ? "metric" : undefined}
+                        >
+                          {metric}
+                        </li>
                       ))}
                     </ul>
                   )}

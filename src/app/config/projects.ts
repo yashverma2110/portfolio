@@ -3,14 +3,14 @@ import { IProject } from "@/app/types/projects";
 const PROJECTS: IProject[] = [
   {
     title: "Barc",
-    description: "Arc browser-style tab management extension for Chrome, reimagining how users organize and navigate their tabs.",
+    description: "Barc is a Chrome extension for tabs. The layout follows the Arc browser.",
     features: [
-      "Pinned URLs to a beautiful grid for instant access",
-      "Powerful command palette for search at the speed of thought",
-      "Custom themes with Dark, Light, and custom import support",
-      "Smart tab management including renaming and duplicate detection",
-      "Keyboard-first navigation with intuitive shortcuts",
-      "Privacy-focused design with zero data collection",
+      "The extension pins URLs on a grid for fast access.",
+      "A command palette searches the tabs.",
+      "You can select a dark theme, a light theme, or an imported theme.",
+      "You can rename a tab. The extension finds duplicate tabs.",
+      "You can operate the extension from the keyboard.",
+      "The extension does not collect user data."
     ],
     technologies: ["Chrome Extension API", "React", "Tailwind CSS", "TypeScript"],
     link: "https://chromewebstore.google.com/detail/barc/geaofdlkhololmpnbihingjkpfoiadoc",
