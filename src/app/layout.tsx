@@ -14,30 +14,30 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Yash Verma | Software Engineer",
-  description: "I am a full stack software engineer with a passion for building products, solving problems and implementing creative solutions at scale.",
-  keywords: "yash verma, software engineer, full stack, react, next.js, node.js, typescript, javascript, python, sql, nosql, mongodb, postgres, mysql, redis, docker, aws, cloud, devops, infrastructure, creativity, design, user experience, user interface, accessibility, security, testing, CI/CD",
+  title: "Yash Verma | Software and Product Engineer",
+  description: "Software engineer with 6+ years of experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.",
+  keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full stack, react, next.js, node.js, typescript, golang, aws",
   metadataBase: new URL("https://itsyashverma.com"),
   openGraph: {
     type: 'website',
     locale: "en_US",
     url: "https://itsyashverma.com",
-    title: "Yash Verma | Software Engineer",
-    description: "Full Stack Software Engineer with expertise in React, Node.js, and Cloud Technologies",
+    title: "Yash Verma | Software and Product Engineer",
+    description: "I ship product features and the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend engineer roles.",
     siteName: "Yash Verma Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Yash Verma - Software Engineer",
+        alt: "Yash Verma - Software and Product Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yash Verma | Software Engineer",
-    description: "Full Stack Software Engineer with expertise in React, Vue, Next, Nuxt, Node, Golang, Redis, MongoDB, PostgreSQL, MySQL, Docker, AWS",
+    title: "Yash Verma | Software and Product Engineer",
+    description: "I ship product features and the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend engineer roles.",
     creator: "@we_chat_tech",
     images: ["/og-image.png"],
   },

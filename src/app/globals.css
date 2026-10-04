@@ -8,11 +8,12 @@ html {
 
 html, body {
   height: auto;
-  overflow: auto;
+  min-height: 100%;
+  overflow: visible;
 }
 
 body {
-  @apply font-sans overscroll-none antialiased;
+  @apply font-sans antialiased;
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 

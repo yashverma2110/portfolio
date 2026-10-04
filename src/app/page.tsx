@@ -152,7 +152,7 @@ export default function Home() {
           <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
           <p>
-            I am a software engineer with <span className="years-mark">{years}</span> of experience. I build production software. The work includes analytics, rendered pages, and infrastructure.
+            I am a software engineer with <span className="years-mark">{years}</span> of experience. I ship product features and help plan the roadmap, and I build the analytics, page speed, and infrastructure that keep them running in production. I am open to software engineer, product engineer, backend engineer, and frontend engineer roles. I would love to contribute across all of them.
           </p>
           <nav aria-label="Page">
             <a href="#experience">Experience</a>
