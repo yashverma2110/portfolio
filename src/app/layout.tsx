@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { getTotalYears } from "./utils/experienceUtils";
+
+const years = getTotalYears();
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,33 +16,39 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const title = "Yash Verma | Software and Product Engineer";
+const description = `Software engineer with ${years} of full-time experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.`;
+const image = "https://itsyashverma.com/og-image.png";
+
 export const metadata: Metadata = {
-  title: "Yash Verma | Software Engineer",
-  description: "I am a full stack software engineer with a passion for building products, solving problems and implementing creative solutions at scale.",
-  keywords: "yash verma, software engineer, full stack, react, next.js, node.js, typescript, javascript, python, sql, nosql, mongodb, postgres, mysql, redis, docker, aws, cloud, devops, infrastructure, creativity, design, user experience, user interface, accessibility, security, testing, CI/CD",
+  title,
+  description,
+  keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full stack, react, next.js, node.js, typescript, golang, aws",
   metadataBase: new URL("https://itsyashverma.com"),
+  alternates: { canonical: "/" },
   openGraph: {
-    type: 'website',
+    type: "website",
     locale: "en_US",
     url: "https://itsyashverma.com",
-    title: "Yash Verma | Software Engineer",
-    description: "Full Stack Software Engineer with expertise in React, Node.js, and Cloud Technologies",
-    siteName: "Yash Verma Portfolio",
+    title,
+    description,
+    siteName: "Yash Verma",
     images: [
       {
-        url: "/og-image.png",
+        url: image,
         width: 1200,
         height: 630,
-        alt: "Yash Verma - Software Engineer",
+        alt: "Yash Verma, software and product engineer",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yash Verma | Software Engineer",
-    description: "Full Stack Software Engineer with expertise in React, Vue, Next, Nuxt, Node, Golang, Redis, MongoDB, PostgreSQL, MySQL, Docker, AWS",
+    title,
+    description,
     creator: "@we_chat_tech",
-    images: ["/og-image.png"],
+    images: [image],
   },
   robots: {
     index: true,

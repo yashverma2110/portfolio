@@ -8,117 +8,156 @@ const EXPERIENCE: IExperience[] = [
     endDate: "Current",
     current: true,
     achievements: [
-      "Top on-call engineer company-wide with fastest resolution times and most number of tickets resolved",
-      "Drove 10%+ improvement in weekly active teachers and 5% in registrations via SSR and performance initiatives",
-      "Built core revenue features (question types, lesson editor, gameplay) still driving platform growth",
-      "Enhanced system resilience with canary deployments, APM, RUM, and analytics instrumentation"
+      "I was the top on-call engineer in the company. I resolved tickets in the shortest time. I resolved the most tickets.",
+      "Weekly active teachers increased by more than 10%. Registrations increased by 5%. Server-side rendering and performance work caused these increases.",
+      "I built the question types, the lesson editor, and the gameplay. The platform still gets revenue from these features.",
+      "I added canary deployments, application performance monitoring, real user monitoring, and analytics. The system became more stable."
     ],
     responsibilities: [
       {
-        title: "Data Analysis Platform (Waygent)",
-        description: "Built in-house analytics platform with Mixpanel-like session explorer, standardized A/B testing via feature flags with statistical analysis (p-value, t-test) and rollout health monitoring.",
-        metrics: ["2% improvement in registration funnels", "0.5% increase in game creation rate", "Reduced A/B test release delays from 2 weeks to 1 week"],
+        title: "Search on Postgres",
+        description: "I moved the OpenSearch indexes to Postgres. Search uses full text search and pagination. Kafka and Debezium CDC keep the data current.",
+        metrics: ["This change saved $270k."],
+        technologies: ["Postgres", "Kafka", "Debezium", "OpenSearch"]
+      },
+      {
+        title: "Less data transfer",
+        description: "I reduced data transfer with zstd and gzip compression. I also added role-based projections.",
+        metrics: ["This change saved $100k."],
+        technologies: ["zstd", "gzip"]
+      },
+      {
+        title: "BigQuery streaming",
+        description: "I enabled the BigQuery streaming API. Better batch sizes and compression reduced the number of pods and the data transfer.",
+        metrics: ["This change saved $120k."],
+        technologies: ["BigQuery"]
+      },
+      {
+        title: "Data analysis platform",
+        description: "I built the Waygent analytics platform. It has a session explorer, standard A/B tests, and release-health checks.",
+        metrics: [
+          "Registration funnels increased by 2%.",
+          "The game creation rate increased by 0.5%.",
+          "A/B test release time decreased from 2 weeks to 1 week."
+        ],
         technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
       },
       {
-        title: "Data Analysis AI Agent (Waygent)",
-        description: "Built RAG-powered chat agent to answer analysis queries like DAU, A/B test results, CTRs, and impressions using natural language.",
+        title: "Analysis chat agent",
+        description: "I built a chat agent that answers analysis questions in normal language. The questions include daily active users, A/B test results, click rates, and impressions.",
         metrics: [],
         technologies: ["Python", "Agno", "BigQuery", "ChromaDB"]
       },
       {
-        title: "Frontend Analytics Pipeline",
-        description: "Developed a new analytics pipeline using beacon API, Golang, and Kinesis for high RPM ingestion.",
-        metrics: ["Handled peak RPM of 300k with 99.99% SLA"],
+        title: "Analytics pipeline",
+        description: "I built an analytics pipeline with the beacon API, Golang, and Kinesis. The pipeline accepts a high request rate.",
+        metrics: [
+          "The peak rate was 300k requests each minute.",
+          "The service level was 99.99%."
+        ],
         technologies: ["Golang", "Kinesis", "Firehose", "SQS", "BigQuery"]
       },
       {
-        title: "Frontend Analytics Client",
-        description: "Built framework-agnostic analytics SDK with auto-instrumentation via design system, high-quality session tracking, and referrer capture.",
-        metrics: ["15% reduction in data loss", "Improved key funnel tracking for product initiatives by event auto capture", "Adopted across all microfrontends (React, Next, Nuxt, Vue)"],
+        title: "Analytics client",
+        description: "I built an analytics SDK for React, Next, Nuxt, and Vue. The SDK records sessions and referrers. It also adds events from the design system.",
+        metrics: [
+          "Data loss decreased by 15%.",
+          "Automatic events made important funnels easier to track.",
+          "All microfrontends adopted the SDK."
+        ],
         technologies: ["TypeScript"]
       },
       {
-        title: "Implemented SSR and design system",
-        description: "Implemented Server-Side Rendering (SSR) using NUXT and a design system that enhanced organic traffic.",
-        metrics: ["15% increase in user registration from organic traffic"],
+        title: "Server-side rendering",
+        description: "I added server-side rendering with Nuxt and a design system. Organic traffic increased after this work.",
+        metrics: ["User registration from organic traffic increased by 15%."],
         technologies: ["Vue", "Nuxt", "Tailwind"]
       },
       {
-        title: "SSG Pipeline for Static Pages",
-        description: "Built a static site generation pipeline serving pre-rendered HTML from S3, eliminating server hits for static content.",
-        metrics: ["12% improvement in TTFB", "31% improvement in LCP"],
+        title: "Static page pipeline",
+        description: "I built a pipeline for static pages. The pipeline serves HTML from S3. Static pages do not call the server.",
+        metrics: [
+          "Time to first byte improved by 12%.",
+          "Largest contentful paint improved by 31%."
+        ],
         technologies: ["Golang", "S3", "SQS", "Nuxt"]
       },
       {
-        title: "Infra as Code for Canary Deployments",
-        description: "Deployed frontend and backend infrastructure with Jenkins and AWS CodeDeploy, enhancing deployment reliability.",
-        metrics: ["Reduced P0 incidents by 83%"],
+        title: "Canary deployments",
+        description: "I deployed the frontend and the backend with Jenkins and AWS CodeDeploy. Deployments became more reliable.",
+        metrics: ["P0 incidents decreased by 83%."],
         technologies: ["CodeDeploy", "ECS", "Lambda"]
       },
       {
-        title: "Optimized ECS Auto-scaling",
-        description: "Implemented AWS capacity provider and ECS application auto-scaling, reducing costs.",
-        metrics: ["10% AWS cost reduction"],
+        title: "ECS auto-scaling",
+        description: "I added an AWS capacity provider and ECS auto-scaling. This change decreased the AWS cost.",
+        metrics: ["AWS cost decreased by 10%."],
         technologies: ["ECS"]
       },
       {
-        title: "Website Performance Improvement",
-        description: "Enhanced website performance through code splitting, vendor chunking, and consistent chunk hashing.",
-        metrics: ["63% reduction in p75 page load time", "Improved new user activation by 1%"],
+        title: "Website performance",
+        description: "I decreased the page load time. I used code splitting, vendor chunks, and stable chunk hashes.",
+        metrics: [
+          "Page load time at p75 decreased by 63%.",
+          "New user activation increased by 1%."
+        ],
         technologies: ["Vue", "Vite"]
       },
       {
-        title: "In-house Design System",
-        description: "Built and integrated a reusable design system using Tailwind CSS.",
+        title: "Design system",
+        description: "I built a design system with Tailwind CSS. I added the design system to the product.",
         metrics: []
       },
       {
-        title: "Build Time Optimization",
-        description: "Reduced build times by implementing ECR-based Docker image caching.",
-        metrics: ["15% reduction in build time"],
+        title: "Build time",
+        description: "I decreased the build time. I used a Docker image cache in ECR.",
+        metrics: ["Build time decreased by 15%."],
         technologies: ["ECR", "Docker"]
       },
       {
-        title: "Migration to Modern Tools",
-        description: "Led migration to Turborepo, Vite, and Pinia, improving developer experience.",
-        metrics: ["50% reduction in build time"],
+        title: "Tool migration",
+        description: "I moved the product to Turborepo, Vite, and Pinia. The move made builds faster for developers.",
+        metrics: ["Build time decreased by 50%."],
         technologies: ["Turborepo", "Vite", "Docker", "Pinia", "Jenkins"]
       },
       {
-        title: "Content Creation Features",
-        description: "Developed multiple rich text editor features for content creation.",
+        title: "Content editor",
+        description: "I built rich-text features for the content editor.",
         metrics: []
       },
       {
-        title: "Re-architected Quiz and Lesson Editor",
-        description: "Redesigned editor for efficiency and reliability using Pub/Sub and Zod.",
-        metrics: ["98% reduction in bug reports"]
+        title: "Quiz and lesson editor",
+        description: "I built a new quiz editor and a new lesson editor with Pub/Sub and Zod. The editors became faster and more reliable.",
+        metrics: ["Bug reports decreased by 98%."]
       },
       {
-        title: "Introduced AI-powered Features",
-        description: "Implemented AI features like slide generation to increase engagement.",
-        metrics: ["2.3% increase in lesson user adoption"]
+        title: "AI features",
+        description: "I added AI features. One feature generates slides. Lesson use increased after these features.",
+        metrics: ["Lesson adoption increased by 2.3%."]
       },
       {
-        title: "Data Ingestion Pipeline",
-        description: "Built a pipeline to handle 500,000+ rows of unique standards data with Temporal.",
+        title: "Data ingestion pipeline",
+        description: "I built a data pipeline with Temporal. The pipeline ingests unique standards data.",
+        metrics: ["The pipeline processed more than 500,000 rows."],
+        technologies: ["Temporal"]
+      },
+      {
+        title: "Google Drive import",
+        description: "I added Google Drive import. The AI features use the imported media.",
+        metrics: ["56% of platform content came from this integration."]
+      },
+      {
+        title: "Subscription control",
+        description: "I added access control on the client for subscriptions.",
         metrics: []
       },
       {
-        title: "Google Drive Integration",
-        description: "Integrated Google Drive for importing various media for AI features.",
-        metrics: ["56% of all platform content created via integration"]
-      },
-      {
-        title: "Subscription Management",
-        description: "Implemented client-side access control for better subscription handling.",
-        metrics: []
-      },
-      {
-        title: "Revamped Search Results",
-        description: "Improved search performance and user interface, enhancing search success rates.",
-        metrics: ["23% improvement in p99 search response", "1.2% increase in search success rate"]
+        title: "Search results",
+        description: "I made search faster. I also changed the search interface. The search success rate increased.",
+        metrics: [
+          "Search response at p99 improved by 23%.",
+          "The search success rate increased by 1.2%."
+        ]
       }
     ]
   },
@@ -129,24 +168,27 @@ const EXPERIENCE: IExperience[] = [
     endDate: "August 2021",
     responsibilities: [
       {
-        title: "PWA Development",
-        description: "Developed a PWA using React, TypeScript, GraphQL, and Redux.",
+        title: "Progressive web app",
+        description: "I built a progressive web app with React, TypeScript, GraphQL, and Redux.",
         metrics: []
       },
       {
-        title: "Metadata-driven Components",
-        description: "Created components for data management using GraphQL, reducing time to production.",
+        title: "Metadata components",
+        description: "I built components from GraphQL metadata. These components decreased the time to production.",
         metrics: []
       },
       {
-        title: "Data Aggregation APIs",
-        description: "Implemented analytics APIs with Cube.js, PostgreSQL, and Node.js.",
+        title: "Analytics APIs",
+        description: "I built analytics APIs with Cube.js, PostgreSQL, and Node.js.",
         metrics: []
       },
       {
-        title: "Website Performance Optimization",
-        description: "Improved website performance through caching, pagination, and reduced network calls.",
-        metrics: ["60% improvement in website performance", "Improved Lighthouse score"]
+        title: "Website performance",
+        description: "I made the website faster. I used a cache, pagination, and fewer network calls.",
+        metrics: [
+          "Website performance increased by 60%.",
+          "The Lighthouse score increased."
+        ]
       }
     ]
   },
@@ -157,19 +199,19 @@ const EXPERIENCE: IExperience[] = [
     endDate: "Jan 2021",
     responsibilities: [
       {
-        title: "PWA Development",
-        description: "Developed a PWA with React, Node, and MySQL.",
+        title: "Progressive web app",
+        description: "I built a progressive web app with React, Node, and MySQL.",
         metrics: []
       },
       {
-        title: "Managed Cloud Infrastructure",
-        description: "Handled AWS EC2, RDS, and S3 for hosting, database, and storage management.",
+        title: "Cloud infrastructure",
+        description: "I operated AWS EC2, RDS, and S3. These services hosted the app, the database, and the files.",
         metrics: []
       },
       {
-        title: "Offline Usage Implementation",
-        description: "Enabled offline functionality using IndexedDB and live patient diagnosis with AWS services.",
-        metrics: ["40% increase in website performance based on Lighthouse scores"]
+        title: "Offline use",
+        description: "I added offline use with IndexedDB. I also added live patient diagnosis with AWS services.",
+        metrics: ["The Lighthouse score increased by 40%."]
       }
     ]
   },
@@ -180,13 +222,13 @@ const EXPERIENCE: IExperience[] = [
     endDate: "October 2020",
     responsibilities: [
       {
-        title: "Re-usable Components",
-        description: "Developed reusable components for a job portal chat feature.",
+        title: "Chat components",
+        description: "I built reusable components for the chat feature of a job portal.",
         metrics: []
       },
       {
-        title: "Unit Testing",
-        description: "Introduced unit testing using Cypress.",
+        title: "Unit tests",
+        description: "I added unit tests with Cypress.",
         metrics: []
       }
     ]
@@ -198,18 +240,18 @@ const EXPERIENCE: IExperience[] = [
     endDate: "May 2020",
     responsibilities: [
       {
-        title: "Analytics Dashboard Development",
-        description: "Built an analytics dashboard for user API performance using React.",
+        title: "Analytics dashboard",
+        description: "I built an analytics dashboard with React. The dashboard shows user API performance.",
         metrics: []
       },
       {
-        title: "API Integration",
-        description: "Integrated APIs for performance tracking.",
+        title: "API connection",
+        description: "I connected APIs that track performance.",
         metrics: []
       },
       {
-        title: "Payment Integration",
-        description: "Integrated payments using Stripe.",
+        title: "Payments",
+        description: "I added payments with Stripe.",
         metrics: []
       }
     ]
