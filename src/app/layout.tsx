@@ -16,33 +16,39 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const title = "Yash Verma | Software and Product Engineer";
+const description = `Software engineer with ${years} of full-time experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.`;
+const image = "https://itsyashverma.com/og-image.png";
+
 export const metadata: Metadata = {
-  title: "Yash Verma | Software and Product Engineer",
-  description: `Software engineer with ${years} of full-time experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.`,
+  title,
+  description,
   keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full stack, react, next.js, node.js, typescript, golang, aws",
   metadataBase: new URL("https://itsyashverma.com"),
+  alternates: { canonical: "/" },
   openGraph: {
-    type: 'website',
+    type: "website",
     locale: "en_US",
     url: "https://itsyashverma.com",
-    title: "Yash Verma | Software and Product Engineer",
-    description: "I ship product features and the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend engineer roles.",
-    siteName: "Yash Verma Portfolio",
+    title,
+    description,
+    siteName: "Yash Verma",
     images: [
       {
-        url: "/og-image.png",
+        url: image,
         width: 1200,
         height: 630,
-        alt: "Yash Verma - Software and Product Engineer",
+        alt: "Yash Verma, software and product engineer",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yash Verma | Software and Product Engineer",
-    description: "I ship product features and the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend engineer roles.",
+    title,
+    description,
     creator: "@we_chat_tech",
-    images: ["/og-image.png"],
+    images: [image],
   },
   robots: {
     index: true,
