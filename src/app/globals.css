@@ -134,7 +134,7 @@ html, body {
 .post .role { color: #d5dde6; margin-top: 6px; }
 .post ul { margin: 12px 0 0 18px; color: #c5ced8; }
 .post li { margin-top: 6px; line-height: 1.5; }
-.duty { margin-top: 18px; }
+.duty { margin-top: 18px; scroll-margin-top: 16px; }
 .duty h4 { font-size: 16px; color: #f4f1ea; }
 .tech { margin-top: 8px; color: #8aa0b8; font-size: 13px; }
 
@@ -153,7 +153,8 @@ html, body {
 }
 .pill:hover { border-color: rgba(255, 230, 140, 0.7); }
 .metric { scroll-margin-top: 24px; border-radius: 8px; }
-.metric:target {
+.metric:target,
+.metric.hit {
   background-color: rgba(255, 226, 120, 0.16);
   background-image:
     linear-gradient(to right, rgba(255, 214, 90, 0.28) 1px, transparent 1px),
@@ -167,7 +168,8 @@ html, body {
 #stack.in-view,
 #contact.in-view,
 .duty:target,
-.duty:has(.metric:target) {
+.duty:has(.metric:target),
+.duty:has(.metric.hit) {
   border-radius: 12px;
   outline: 1px solid rgba(255, 220, 120, 0.45);
   background-color: rgba(255, 226, 120, 0.08);
@@ -177,3 +179,19 @@ html, body {
   background-size: 24px 24px;
   padding: 12px;
 }
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  list-style: none;
+  margin: 16px 0 6px;
+  padding: 0;
+  font-size: 13px;
+  color: #8aa0b8;
+}
+.crumbs li { display: flex; align-items: center; }
+.crumbs li:not(:last-child)::after { content: "/"; margin: 0 8px; color: #8aa0b8; }
+.crumbs a { color: #f4f1ea; text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.impact-group h4 { font-size: 14px; color: #d5dde6; letter-spacing: 0.04em; }
