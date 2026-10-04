@@ -12,6 +12,8 @@ const PROJECTS: IProject[] = [
     ],
     technologies: ["JavaScript", "OpenCode"],
     link: "https://github.com/yashverma2110/opencode-goalkit",
+    github: "https://github.com/yashverma2110/opencode-goalkit",
+    tweetLink: "https://x.com/we_chat_tech/status/2070486313195978879",
   },
   {
     title: "Barc",
@@ -26,6 +28,7 @@ const PROJECTS: IProject[] = [
     ],
     technologies: ["Chrome Extension API", "React", "Tailwind CSS", "TypeScript"],
     link: "https://chromewebstore.google.com/detail/barc/geaofdlkhololmpnbihingjkpfoiadoc",
+    github: "https://github.com/yashverma2110/barc",
     tweetLink: "https://x.com/we_chat_tech/status/1982462514127331494",
   }
 ];
