@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { getTotalYears } from "./utils/experienceUtils";
+
+const years = getTotalYears();
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Yash Verma | Software and Product Engineer",
-  description: "Software engineer with 6+ years of experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.",
+  description: `Software engineer with ${years} of full-time experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.`,
   keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full stack, react, next.js, node.js, typescript, golang, aws",
   metadataBase: new URL("https://itsyashverma.com"),
   openGraph: {

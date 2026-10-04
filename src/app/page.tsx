@@ -3,6 +3,7 @@ import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
+import YearsMark from "@/app/components/YearsMark";
 import { getTotalYears } from "./utils/experienceUtils";
 
 function companyName(company: string) {
@@ -152,7 +153,7 @@ export default function Home() {
           <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
           <p>
-            I am a software engineer with <span className="years-mark">{years}</span> of experience. I ship product features and help plan the roadmap, and I build the analytics, page speed, and infrastructure that keep them running in production. I am open to software engineer, product engineer, backend engineer, and frontend engineer roles. I would love to contribute across all of them.
+            I am a software engineer with <YearsMark startDate="August 2021" initial={years} /> of full-time experience. I ship product features and help plan the roadmap, and I build the analytics, page speed, and infrastructure that keep them running in production. I am open to software engineer, product engineer, backend engineer, and frontend engineer roles. I would love to contribute across all of them.
           </p>
           <nav aria-label="Page">
             <a href="#experience">Experience</a>
