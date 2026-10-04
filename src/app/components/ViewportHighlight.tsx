@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 const SELECTOR = ".duty, #projects article.post, #stack, #contact";
 
-function scrollToSection(section: HTMLElement, root: HTMLElement) {
-  const top = root.scrollTop + section.getBoundingClientRect().top - root.getBoundingClientRect().top - 16;
-  root.scrollTo({ top, behavior: "smooth" });
+function scrollToSection(section: HTMLElement) {
+  const top = section.getBoundingClientRect().top + window.scrollY - 16;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
 }
 
 export default function ViewportHighlight() {
@@ -54,7 +54,7 @@ export default function ViewportHighlight() {
       event.preventDefault();
       history.pushState(null, "", `#${sectionId}`);
       markMetric(link.dataset.metric ?? null);
-      scrollToSection(section, root);
+      scrollToSection(section);
     };
 
     const onScroll = () => {
