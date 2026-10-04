@@ -3,6 +3,7 @@ import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
+import ScrollToTop from "@/app/components/ScrollToTop";
 import YearsMark from "@/app/components/YearsMark";
 import { getTotalYears } from "./utils/experienceUtils";
 
@@ -156,6 +157,7 @@ export default function Home() {
     <main className="blog-page">
       <div className="math-grid" aria-hidden="true" />
       <ViewportHighlight />
+      <ScrollToTop />
       <div className="blog-wrap">
         <header className="blog-header">
           <p className="eyebrow">Software engineer</p>
