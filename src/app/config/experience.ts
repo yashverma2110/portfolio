@@ -15,6 +15,24 @@ const EXPERIENCE: IExperience[] = [
     ],
     responsibilities: [
       {
+        title: "Search on Postgres",
+        description: "I moved the OpenSearch indexes to Postgres. Search uses full text search and pagination. Kafka and Debezium CDC keep the data current.",
+        metrics: ["This change saved $270k."],
+        technologies: ["Postgres", "Kafka", "Debezium", "OpenSearch"]
+      },
+      {
+        title: "Less data transfer",
+        description: "I reduced data transfer with zstd and gzip compression. I also added role-based projections.",
+        metrics: ["This change saved $100k."],
+        technologies: ["zstd", "gzip"]
+      },
+      {
+        title: "BigQuery streaming",
+        description: "I enabled the BigQuery streaming API. Better batch sizes and compression reduced the number of pods and the data transfer.",
+        metrics: ["This change saved $120k."],
+        technologies: ["BigQuery"]
+      },
+      {
         title: "Data analysis platform",
         description: "I built the Waygent analytics platform. It has a session explorer, standard A/B tests, and release-health checks.",
         metrics: [

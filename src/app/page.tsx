@@ -42,6 +42,9 @@ const PILL_COPY: Record<string, { label: string; category: PillCategory }> = {
   "83% less P0 incidents": { label: "83% fewer P0s", category: "Cost and reliability" },
   "15% less data loss": { label: "15% less data lost", category: "Cost and reliability" },
   "98% less bug reports": { label: "98% fewer bug reports", category: "Cost and reliability" },
+  "$270k saved": { label: "$270k saved on search", category: "Cost and reliability" },
+  "$100k saved": { label: "$100k less data transfer", category: "Cost and reliability" },
+  "$120k saved": { label: "$120k saved on BigQuery", category: "Cost and reliability" },
 };
 
 function topicOf(value: string) {
@@ -95,6 +98,11 @@ function labelsFor(text: string) {
     const share = sentence.match(/^([\d.]+)% of (.+?) came/i);
     if (share) {
       labels.push(`${share[1]}% ${share[2]}`);
+      continue;
+    }
+    const saved = sentence.match(/saved \$([\d,.]+)k/i);
+    if (saved) {
+      labels.push(`$${saved[1]}k saved`);
     }
   }
   return labels;
