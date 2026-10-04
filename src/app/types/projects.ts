@@ -4,5 +4,6 @@ export interface IProject {
   features: string[];
   technologies: string[];
   link: string;
+  github?: string;
   tweetLink?: string;
 }

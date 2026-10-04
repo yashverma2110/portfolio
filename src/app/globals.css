@@ -112,13 +112,13 @@ html, body {
   -webkit-backdrop-filter: blur(14px);
 }
 
-.blog-header nav, #contact nav {
+.blog-header nav, #contact nav, #projects nav {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 20px;
 }
-.blog-header nav a, #contact a {
+.blog-header nav a, #contact a, #projects nav a {
   color: #f4f1ea;
   text-decoration: underline;
   text-underline-offset: 3px;

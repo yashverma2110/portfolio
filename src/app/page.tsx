@@ -290,6 +290,19 @@ export default function Home() {
                 ))}
               </ul>
               <p className="tech">{project.technologies.join(" · ")}</p>
+              {(project.github ||
+                (project.link !== project.github &&
+                  project.link.startsWith("https://chromewebstore.google.com/")) ||
+                project.tweetLink) && (
+                <nav aria-label="Project links">
+                  {project.github && <a href={project.github}>GitHub</a>}
+                  {project.link !== project.github &&
+                    project.link.startsWith("https://chromewebstore.google.com/") && (
+                      <a href={project.link}>Chrome Web Store</a>
+                    )}
+                  {project.tweetLink && <a href={project.tweetLink}>X</a>}
+                </nav>
+              )}
             </article>
           ))}
         </section>
