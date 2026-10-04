@@ -1,63 +1,104 @@
 import CONTACT from "@/app/config/contact";
+import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
+import TechStackGrid from "@/app/components/TechStackGrid";
 import { getTotalYears } from "./utils/experienceUtils";
 
-const posts = [
-  {
-    kicker: "Experience",
-    title: "Quizizz (DBA Wayground)",
-    body: "Senior software engineer, August 2021 to now. Analytics platform, SSR, and canary deploys. 300k peak RPM, 83% fewer P0s, 63% faster p75 load, 10% lower AWS cost.",
-  },
-  {
-    kicker: "Projects",
-    title: PROJECTS[0].title,
-    body: PROJECTS[0].description + " Nothing collected leaves the browser.",
-    href: PROJECTS[0].link,
-  },
-  {
-    kicker: "Education",
-    title: "IIIT Una",
-    body: "Computer science.",
-  },
-  {
-    kicker: "Contact",
-    title: "Write to me",
-    body: CONTACT.email,
-    href: `mailto:${CONTACT.email}`,
-  },
-];
+function companyName(company: string) {
+  if (company.startsWith("Quizizz")) return "Quizizz (DBA Wayground)";
+  return company;
+}
 
 export default function Home() {
   const years = getTotalYears();
   return (
     <main className="blog-page">
       <div className="math-grid" aria-hidden="true" />
-      <article className="blog-wrap">
+      <div className="blog-wrap">
         <header className="blog-header">
+          <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
-          <p>Full-stack software engineer, {years}. Notes from the work, not a résumé wall.</p>
+          <p>
+            Full-stack software engineer with {years} of experience. I build products that hold up in production, from analytics and rendering to the infrastructure they run on.
+          </p>
+          <nav aria-label="Page">
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#stack">Stack</a>
+            <a href="#contact">Contact</a>
+          </nav>
         </header>
-        <div className="blog-list">
-          {posts.map((post) => {
-            const inner = (
-              <>
-                <p className="kicker">{post.kicker}</p>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
-              </>
-            );
-            return post.href ? (
-              <a key={post.title} className="post" href={post.href}>
-                {inner}
-              </a>
-            ) : (
-              <section key={post.title} className="post">
-                {inner}
-              </section>
-            );
-          })}
-        </div>
-      </article>
+
+        <section id="experience" className="blog-section">
+          <h2>Experience</h2>
+          {EXPERIENCE.map((job) => (
+            <article key={job.company} className="post">
+              <p className="kicker">{job.startDate} — {job.endDate}</p>
+              <h3>{companyName(job.company)}</h3>
+              <p className="role">{job.role}</p>
+              {job.achievements && job.achievements.length > 0 && (
+                <ul>
+                  {job.achievements.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+              {job.responsibilities.map((item) => (
+                <div key={item.title} className="duty">
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+                  {item.metrics.length > 0 && (
+                    <ul>
+                      {item.metrics.map((metric) => (
+                        <li key={metric}>{metric}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {item.technologies && item.technologies.length > 0 && (
+                    <p className="tech">{item.technologies.join(" · ")}</p>
+                  )}
+                </div>
+              ))}
+            </article>
+          ))}
+        </section>
+
+        <section id="projects" className="blog-section">
+          <h2>Projects</h2>
+          {PROJECTS.map((project) => (
+            <article key={project.title} className="post">
+              <h3>
+                <a href={project.link}>{project.title}</a>
+              </h3>
+              <p>{project.description}</p>
+              <ul>
+                {project.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+              <p className="tech">{project.technologies.join(" · ")}</p>
+            </article>
+          ))}
+        </section>
+
+        <section id="stack" className="blog-section post">
+          <h2>Stack</h2>
+          <TechStackGrid />
+        </section>
+
+        <section id="contact" className="blog-section post">
+          <h2>Contact</h2>
+          <p>
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+          </p>
+          <nav aria-label="Profiles">
+            <a href={CONTACT.linkedin}>LinkedIn</a>
+            <a href={CONTACT.github}>GitHub</a>
+            <a href={CONTACT.twitter}>X</a>
+            <a href={CONTACT.medium}>Medium</a>
+          </nav>
+        </section>
+      </div>
     </main>
   );
 }

@@ -111,3 +111,29 @@ html, body {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
+
+.blog-header nav, #contact nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+.blog-header nav a, #contact a {
+  color: #f4f1ea;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.eyebrow { letter-spacing: 0.14em; text-transform: uppercase; font-size: 12px; color: #8aa0b8; }
+.blog-section { margin-top: 56px; }
+.blog-section > h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+.blog-wrap { max-width: 820px; }
+.post .role { color: #d5dde6; margin-top: 6px; }
+.post ul { margin: 12px 0 0 18px; color: #c5ced8; }
+.post li { margin-top: 6px; line-height: 1.5; }
+.duty { margin-top: 18px; }
+.duty h4 { font-size: 16px; color: #f4f1ea; }
+.tech { margin-top: 8px; color: #8aa0b8; font-size: 13px; }
