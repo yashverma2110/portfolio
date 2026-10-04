@@ -11,6 +11,7 @@ function companyName(company: string) {
 }
 
 type Impact = { id: string; label: string; text: string };
+type ImpactGroup = { company: string; items: Impact[] };
 
 function topicOf(value: string) {
   const topic = value.replace(/^(The|A|An)\s+/i, "").trim();
@@ -68,9 +69,9 @@ function labelsFor(text: string) {
   return labels;
 }
 
-function collectImpact(): Impact[] {
-  const items: Impact[] = [];
-  EXPERIENCE.forEach((job, jobIndex) => {
+function collectImpact(): ImpactGroup[] {
+  return EXPERIENCE.flatMap((job, jobIndex) => {
+    const items: Impact[] = [];
     job.achievements?.forEach((item, index) => {
       const id = `impact-${jobIndex}-a-${index}`;
       labelsFor(item).forEach((label) => items.push({ id, label, text: item }));
@@ -85,8 +86,8 @@ function collectImpact(): Impact[] {
         labelsFor(duty.description).forEach((label) => items.push({ id, label, text: duty.description }));
       }
     });
+    return items.length > 0 ? [{ company: companyName(job.company), items }] : [];
   });
-  return items;
 }
 
 function targetId(text: string, id: string) {
@@ -95,7 +96,7 @@ function targetId(text: string, id: string) {
 
 export default function Home() {
   const years = getTotalYears();
-  const impact = collectImpact();
+  const impactGroups = collectImpact();
   return (
     <main className="blog-page">
       <div className="math-grid" aria-hidden="true" />
@@ -117,17 +118,19 @@ export default function Home() {
 
         <section id="experience" className="blog-section">
           <h2>Experience</h2>
-          <div className="impact">
-            <h3>Impact</h3>
-            <p>Select a number. The page moves to that work. The block in view gets a light yellow grid.</p>
-            <div className="pills">
-              {impact.map((item) => (
-                <a key={`${item.id}-${item.label}`} className="pill" href={`#${item.id}`} title={item.text}>
-                  {item.label}
-                </a>
-              ))}
+          {impactGroups.map((group) => (
+            <div key={group.company} className="impact">
+              <h3>My impact at {group.company}</h3>
+              <p>Click a number.</p>
+              <div className="pills">
+                {group.items.map((item) => (
+                  <a key={`${item.id}-${item.label}`} className="pill" href={`#${item.id}`} title={item.text}>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
           {EXPERIENCE.map((job, jobIndex) => (
             <article key={job.company} className="post">
               <p className="kicker">{job.startDate} — {job.endDate}</p>
