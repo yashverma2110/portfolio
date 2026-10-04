@@ -11,7 +11,7 @@ function scrollToSection(section: HTMLElement, root: HTMLElement) {
 
 export default function ViewportHighlight() {
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>(".blog-page");
+    const root = (document.scrollingElement as HTMLElement | null) ?? document.documentElement;
     if (!root) return;
 
     let frame = 0;
@@ -39,7 +39,7 @@ export default function ViewportHighlight() {
     };
 
     const markMetric = (metricId: string | null) => {
-      root.querySelectorAll(".metric.hit").forEach((node) => node.classList.remove("hit"));
+      document.querySelectorAll(".metric.hit").forEach((node) => node.classList.remove("hit"));
       if (!metricId) return;
       document.getElementById(metricId)?.classList.add("hit");
     };
@@ -63,13 +63,13 @@ export default function ViewportHighlight() {
     };
 
     update();
-    root.addEventListener("scroll", onScroll, { passive: true });
-    root.addEventListener("click", onPillClick);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("click", onPillClick);
     window.addEventListener("resize", onScroll);
     return () => {
       cancelAnimationFrame(frame);
-      root.removeEventListener("scroll", onScroll);
-      root.removeEventListener("click", onPillClick);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("click", onPillClick);
       window.removeEventListener("resize", onScroll);
     };
   }, []);

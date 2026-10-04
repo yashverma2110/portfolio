@@ -7,7 +7,8 @@ html {
 }
 
 html, body {
-  @apply h-full overflow-hidden;
+  height: auto;
+  overflow: auto;
 }
 
 body {
@@ -37,13 +38,11 @@ body {
 .blog-page {
   position: relative;
   min-height: 100vh;
-  overflow: auto;
+  overflow: visible;
   background: #0e1116;
   color: #f4f1ea;
 }
 html, body {
-  overflow: auto;
-  height: auto;
   background: #0e1116;
 }
 .math-grid {
