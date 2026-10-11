@@ -6,7 +6,7 @@ import ViewportHighlight from "@/app/components/ViewportHighlight";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import YearsMark from "@/app/components/YearsMark";
 import ProjectCarousel from "@/app/components/ProjectCarousel";
-import YouTubeFacade from "@/app/components/YouTubeFacade";
+import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
 
 function companyName(company: string) {
@@ -285,6 +285,9 @@ export default function Home() {
               <h3>
                 <a href={project.link}>{project.title}</a>
               </h3>
+              {project.media?.youtubeId && (
+                <YouTubeAutoplay id={project.media.youtubeId} title={`${project.title} demo`} />
+              )}
               <p>{project.description}</p>
               {project.media?.images && project.media.images.length > 0 && (
                 <ProjectCarousel label={`${project.title} screenshots`} images={project.media.images} />
@@ -294,9 +297,6 @@ export default function Home() {
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
-              {project.media?.youtubeId && (
-                <YouTubeFacade id={project.media.youtubeId} title={`${project.title} demo`} />
-              )}
               <p className="tech">{project.technologies.join(" · ")}</p>
               {(project.github ||
                 (project.link !== project.github &&

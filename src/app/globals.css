@@ -328,3 +328,4 @@ html, body {
 .video-play:hover .video-icon { border-color: rgba(255, 230, 140, 0.7); }
 .video-link { margin-top: 8px; font-size: 14px; }
 .video-link a { color: #f4f1ea; text-decoration: underline; text-underline-offset: 3px; }
+.video + p { margin-top: 14px; }
