@@ -329,3 +329,17 @@ html, body {
 .video-link { margin-top: 8px; font-size: 14px; }
 .video-link a { color: #f4f1ea; text-decoration: underline; text-underline-offset: 3px; }
 .video + p { margin-top: 14px; }
+
+/* Blog links on the homepage */
+.writing-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.writing-list li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+.writing-list a { color: #f4f1ea; font-family: Georgia, "Times New Roman", serif; font-size: 20px; text-decoration: underline; text-decoration-color: rgba(255, 233, 160, 0.5); text-underline-offset: 4px; }
+.writing-list a:hover { color: #ffe9a0; }
+.writing-list time { color: #8aa0b8; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+#writing .all-posts { margin-top: 20px; }
+#writing .all-posts a { color: #f4f1ea; text-decoration: underline; text-underline-offset: 3px; }
+.project-posts { margin-top: 18px; }
+.project-posts h4 { font-size: 14px; letter-spacing: 0.04em; color: #d5dde6; }
+.project-posts ul { margin-top: 6px; }
+.project-posts a { color: #f4f1ea; text-decoration: underline; text-underline-offset: 3px; }
+#projects article.post { scroll-margin-top: 16px; }

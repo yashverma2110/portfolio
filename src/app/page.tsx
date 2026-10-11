@@ -8,6 +8,7 @@ import YearsMark from "@/app/components/YearsMark";
 import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
+import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
 
 function companyName(company: string) {
   if (company.startsWith("Quizizz")) return "Quizizz (DBA Wayground)";
@@ -155,6 +156,7 @@ function slug(value: string) {
 export default function Home() {
   const years = getTotalYears();
   const impactGroups = collectImpact();
+  const latestPosts = getPostMetas().slice(0, 3);
   return (
     <main className="blog-page">
       <div className="math-grid" aria-hidden="true" />
@@ -173,6 +175,9 @@ export default function Home() {
             <a href="#stack">Stack</a>
             <a href="#contact">Contact</a>
             <a href="/editor">Editor</a>
+            {/* Plain links keep next/link out of the homepage bundle. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/blog">Blog</a>
           </nav>
         </header>
 
@@ -281,8 +286,10 @@ export default function Home() {
 
         <section id="projects" className="blog-section">
           <h2>Projects</h2>
-          {PROJECTS.map((project) => (
-            <article key={project.title} className="post">
+          {PROJECTS.map((project) => {
+            const projectPosts = getPostsByProject(projectSlug(project.title));
+            return (
+            <article key={project.title} id={projectAnchor(projectSlug(project.title))} className="post project">
               <h3>
                 <a href={project.link}>{project.title}</a>
               </h3>
@@ -318,9 +325,40 @@ export default function Home() {
                   {project.tweetLink && <a href={project.tweetLink}>X</a>}
                 </nav>
               )}
+              {projectPosts.length > 0 && (
+                <div className="project-posts">
+                  <h4>Posts about {project.title}</h4>
+                  <ul>
+                    {projectPosts.map((post) => (
+                      <li key={post.slug}>
+                        <a href={`/blog/${post.slug}`}>{post.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </article>
-          ))}
+            );
+          })}
         </section>
+
+        {latestPosts.length > 0 && (
+          <section id="writing" className="blog-section post">
+            <h2>Writing</h2>
+            <ul className="writing-list">
+              {latestPosts.map((post) => (
+                <li key={post.slug}>
+                  <a href={`/blog/${post.slug}`}>{post.title}</a>
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
+                </li>
+              ))}
+            </ul>
+            <p className="all-posts">
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+              <a href="/blog">All posts</a>
+            </p>
+          </section>
+        )}
 
         <section id="stack" className="blog-section post">
           <h2>Stack</h2>
