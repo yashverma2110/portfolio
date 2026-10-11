@@ -17,13 +17,13 @@ const geistMono = localFont({
 });
 
 const title = "Yash Verma | Software and Product Engineer";
-const description = `Software engineer with ${years} of full-time experience. I ship product features, help plan the roadmap, and build the analytics, page speed, and infrastructure behind them. Open to software, product, backend, and frontend roles.`;
+const description = `I build products and the systems behind them. ${years} shipping features, shaping roadmaps, and owning the analytics, page speed, and infrastructure. Open to product, full-stack, backend, and frontend roles.`;
 const image = "https://itsyashverma.com/og-image.png";
 
 export const metadata: Metadata = {
   title,
   description,
-  keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full stack, react, next.js, node.js, typescript, golang, aws",
+  keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full-stack engineer, full stack, react, next.js, node.js, typescript, golang, aws",
   metadataBase: new URL("https://itsyashverma.com"),
   alternates: {
     canonical: "/",
