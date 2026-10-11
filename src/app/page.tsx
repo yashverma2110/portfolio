@@ -175,7 +175,7 @@ export default function Home() {
           <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
           <p>
-            I am a software engineer with <YearsMark startDate="August 2021" initial={years} /> of full-time experience. I ship product features and help plan the roadmap, and I build the analytics, page speed, and infrastructure that keep them running in production. I am open to software engineer, product engineer, backend engineer, and frontend engineer roles. I would love to contribute across all of them.
+            I build products and the systems behind them. <YearsMark startDate="August 2021" initial={years} /> shipping features, shaping roadmaps, and owning the analytics, page speed, and infrastructure that keep things running in production. Comfortable anywhere in the stack, and looking for my next product, full-stack, backend, or frontend role.
           </p>
         </header>
         <div className="chips-sentinel" aria-hidden="true" />
