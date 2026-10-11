@@ -27,7 +27,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://itsyashverma.com"),
   alternates: {
     canonical: "/",
-    types: { "application/rss+xml": [{ url: "/blog/rss.xml", title: "Yash Verma's blog" }] },
+    types: {
+      "application/rss+xml": [{ url: "/blog/rss.xml", title: "Yash Verma's blog" }],
+      "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
+    },
   },
   openGraph: {
     type: "website",

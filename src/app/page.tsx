@@ -1,6 +1,7 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
+import { INTRO, companyName } from "@/app/config/profile";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
 import YearsMark from "@/app/components/YearsMark";
@@ -8,11 +9,6 @@ import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
 import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
-
-function companyName(company: string) {
-  if (company.startsWith("Quizizz")) return "Quizizz (DBA Wayground)";
-  return company;
-}
 
 type PillCategory = "Product" | "Performance" | "Productivity" | "Cost and reliability";
 type Impact = { id: string; sectionId: string; label: string; text: string; category: PillCategory };
@@ -175,7 +171,7 @@ export default function Home() {
           <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
           <p>
-            I build products and the systems behind them. <YearsMark startDate="August 2021" initial={years} /> shipping features, shaping roadmaps, and owning the analytics, page speed, and infrastructure that keep things running in production. Comfortable anywhere in the stack, and looking for my next product, full-stack, backend, or frontend role.
+            {`${INTRO.lead} `}<YearsMark startDate="August 2021" initial={years} />{` ${INTRO.rest}`}
           </p>
         </header>
         <div className="chips-sentinel" aria-hidden="true" />
