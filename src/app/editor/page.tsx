@@ -6,7 +6,6 @@ import "./editor.css";
 const title = "Markdown editor | Yash Verma";
 const description =
   "A free, private Markdown editor that runs in your browser. Write, preview, compare changes, and export to Markdown, HTML, or PDF.";
-const image = "https://itsyashverma.com/og-image.png";
 
 export const metadata: Metadata = {
   title,
@@ -19,9 +18,9 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "Yash Verma",
-    images: [{ url: image, width: 1200, height: 630, alt: "Yash Verma", type: "image/png" }],
   },
-  twitter: { card: "summary_large_image", title, description, images: [image] },
+  // Link preview images come from opengraph-image.tsx and twitter-image.tsx in this folder.
+  twitter: { card: "summary_large_image", title, description, creator: "@we_chat_tech" },
 };
 
 export const viewport: Viewport = {
