@@ -3,7 +3,7 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
-import { PROFILE, companyName, educationText, introText } from "@/app/config/profile";
+import { POSITIONING, PROFILE, companyName, educationText, introText } from "@/app/config/profile";
 import { AWS_SERVICES, TECH_STACK } from "@/app/components/TechStackGrid";
 import { getTotalYears } from "@/app/utils/experienceUtils";
 import { SITE_URL, formatDate, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
@@ -47,6 +47,8 @@ function header() {
     `# ${PROFILE.name}`,
     "",
     `> ${introText(years)}`,
+    "",
+    `Role: ${sentence(POSITIONING.eyebrow)}`,
     "",
     facts.join(" "),
     "",

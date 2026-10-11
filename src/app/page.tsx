@@ -1,7 +1,7 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
-import { INTRO, companyName } from "@/app/config/profile";
+import { INTRO, POSITIONING, companyName } from "@/app/config/profile";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
 import YearsMark from "@/app/components/YearsMark";
@@ -150,6 +150,7 @@ function slug(value: string) {
 
 export default function Home() {
   const years = getTotalYears();
+  const [eyebrowRole, eyebrowAreas] = POSITIONING.eyebrow.split(" · ");
   const impactGroups = collectImpact();
   const latestPosts = getPostMetas().slice(0, 3);
   return (
@@ -168,7 +169,11 @@ export default function Home() {
           </nav>
         </div>
         <header className="blog-header">
-          <p className="eyebrow">Software engineer</p>
+          <p className="eyebrow">
+            {/* Two parts so phones break at the dot, not inside "Full-stack". */}
+            {eyebrowRole}
+            {eyebrowAreas && <>{" · "}<span className="eyebrow-part">{eyebrowAreas}</span></>}
+          </p>
           <h1>Yash Verma</h1>
           <p>
             {`${INTRO.lead} `}<YearsMark startDate="August 2021" initial={years} />{` ${INTRO.rest}`}

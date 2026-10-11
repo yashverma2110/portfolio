@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { getTotalYears } from "./utils/experienceUtils";
+import { POSITIONING } from "./config/profile";
 
 const years = getTotalYears();
 
@@ -16,9 +17,9 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const title = "Yash Verma | Software and Product Engineer";
+// Pages set their own full title ("<page> | Yash Verma"), so there is no title template.
+const title = POSITIONING.title;
 const description = `I build products and the systems behind them. ${years} shipping features, shaping roadmaps, and owning the analytics, page speed, and infrastructure. Open to product, full-stack, backend, and frontend roles.`;
-const image = "https://itsyashverma.com/og-image.png";
 
 export const metadata: Metadata = {
   title,
@@ -39,22 +40,13 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "Yash Verma",
-    images: [
-      {
-        url: image,
-        width: 1200,
-        height: 630,
-        alt: "Yash Verma, software and product engineer",
-        type: "image/png",
-      },
-    ],
+    // The card comes from opengraph-image.tsx / twitter-image.tsx in this folder.
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
     creator: "@we_chat_tech",
-    images: [image],
   },
   robots: {
     index: true,
