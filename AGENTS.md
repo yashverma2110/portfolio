@@ -27,11 +27,15 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 
 ## Where things live
 
-- Copy: `src/app/config/*` (experience, projects, contact). Edit copy there, not in components.
+- Copy: `src/app/config/*` (experience, projects, contact, profile). Edit copy there, not in components.
+  The homepage intro lives in `INTRO` in `src/app/config/profile.ts` (with location, education, and
+  "open to" lines). The homepage and the llms.txt routes both read it.
 - Homepage: `src/app/page.tsx`. Blog: `src/app/blog/`, `src/app/lib/blog.ts`, `src/app/lib/markdown.ts`.
 - Posts: `content/blog/<slug>.md` (see `content/blog/README.md`).
 - Link preview cards: `src/app/lib/og.tsx` plus `opengraph-image.tsx` / `twitter-image.tsx` per route.
 - Static assets: `public/` (project screenshots in `public/projects/<slug>/`).
+- Sitemap and robots config: `next-sitemap.config.js`. It allows all crawlers, lists the AI crawlers by name
+  (all `Allow: /`), and strips next-sitemap's Yandex-only `Host:` line.
 
 ## SEO rules
 
@@ -43,6 +47,23 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
   - a check that it shows up in the generated sitemap (`npm run build`, then read `public/sitemap-0.xml`).
 - Do not hard-code `/og-image.png` in a route that has its own card. Only the homepage uses it.
 - Keep the homepage's First Load JS flat. Prefer plain `<a>` over `next/link` on the homepage.
+
+## Homepage header
+
+- A top bar (Yash Verma on the left, Blog and Editor on the right), then sticky section chips. The chip
+  for the current section is highlighted. There is no Back to top button.
+- Jump targets need `scroll-margin-top` for the sticky bar (about 68px, `--jump-offset` in `globals.css`).
+  Add new anchor targets to that rule. `ViewportHighlight` subtracts the bar height when it scrolls.
+
+## llms.txt
+
+- `/llms.txt` and `/llms-full.txt` (https://llmstxt.org) are static route handlers built from config and
+  published posts (`src/app/lib/llms.ts`, `src/app/llms.txt/route.ts`, `src/app/llms-full.txt/route.ts`).
+  A change to experience, projects, contact, the intro, or a new post updates them on the next build.
+- Never hand-edit or add a static llms file in `public/`.
+- When you add a new page type or tool route, add it to the generator.
+- Keep it factual: copy from config only, no invented metrics or claims. Never link a private repo.
+- Keep `/llms.txt` under about 6 KB. Both files are excluded from the sitemap.
 
 ## Writing style
 
@@ -80,6 +101,12 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 - Never link a private repo. CodeSloth's repo is private: link the demo video and privacy policy only.
 - `/editor` is client-only and private. Documents stay in the browser's localStorage. Do not add uploads,
   analytics, or a backend to it.
+
+## Pending decisions (ask Yash)
+
+- Primary domain: Vercel redirects the apex to www, but the code (canonicals, sitemap, llms.txt) uses the
+  apex `https://itsyashverma.com`. Recommendation: make the apex primary in Vercel.
+- `/og-image.png` still lists the old roles. Waiting on Yash before it changes.
 
 ## PR workflow
 

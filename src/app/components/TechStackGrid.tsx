@@ -1,24 +1,28 @@
-export default function TechStackGrid() {
-  const categories = [
-    {
-      name: "Languages",
-      items: ["JavaScript", "TypeScript", "Python", "Golang", "C++"],
-    },
-    {
-      name: "Frameworks",
-      items: ["React", "Vue", "Next.js", "Nuxt", "Tailwind CSS"],
-    },
-    {
-      name: "Databases",
-      items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Elasticsearch", "ChromaDB"],
-    },
-    {
-      name: "Infrastructure",
-      items: ["Docker", "Kubernetes", "Terraform", "Kafka", "Jenkins"],
-    },
-  ];
+// Exported so the llms-full.txt route lists the same stack.
+export const TECH_STACK = [
+  {
+    name: "Languages",
+    items: ["JavaScript", "TypeScript", "Python", "Golang", "C++"],
+  },
+  {
+    name: "Frameworks",
+    items: ["React", "Vue", "Next.js", "Nuxt", "Tailwind CSS"],
+  },
+  {
+    name: "Databases",
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Elasticsearch", "ChromaDB"],
+  },
+  {
+    name: "Infrastructure",
+    items: ["Docker", "Kubernetes", "Terraform", "Kafka", "Jenkins"],
+  },
+];
 
-  const awsServices = ["EKS", "ECS", "Lambda", "ALB", "Route 53", "CodeDeploy", "S3", "Athena", "RDS", "ElastiCache", "CloudFront", "SQS", "MSK"];
+export const AWS_SERVICES = ["EKS", "ECS", "Lambda", "ALB", "Route 53", "CodeDeploy", "S3", "Athena", "RDS", "ElastiCache", "CloudFront", "SQS", "MSK"];
+
+export default function TechStackGrid() {
+  const categories = TECH_STACK;
+  const awsServices = AWS_SERVICES;
 
   return (
     <div className="flex flex-col gap-8 md:gap-12 w-full overflow-hidden">

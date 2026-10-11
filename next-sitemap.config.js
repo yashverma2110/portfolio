@@ -45,12 +45,40 @@ function blogLastmods() {
   return map;
 }
 
+const AI_CRAWLERS = [
+  "GPTBot",
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
+  "PerplexityBot",
+];
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || "https://itsyashverma.com",
   generateRobotsTxt: true,
   sitemapSize: 5000,
-  exclude: ["/blog/rss.xml", "*/opengraph-image*", "*/twitter-image*", "/opengraph-image*", "/twitter-image*"],
+  exclude: [
+    "/blog/rss.xml",
+    "/llms.txt",
+    "/llms-full.txt",
+    "*/opengraph-image*",
+    "*/twitter-image*",
+    "/opengraph-image*",
+    "/twitter-image*",
+  ],
+  robotsTxtOptions: {
+    // Everyone may crawl everything, including /llms.txt. The AI crawlers are listed by name so the
+    // intent is explicit.
+    policies: [
+      { userAgent: "*", allow: "/" },
+      ...AI_CRAWLERS.map((userAgent) => ({ userAgent, allow: "/" })),
+    ],
+    // next-sitemap always adds a Yandex-only "Host:" line. Drop it.
+    transformRobotsTxt: async (_config, robotsTxt) => robotsTxt.replace(/# Host\nHost: .*\n\n?/, ""),
+  },
   transform: async (config, loc) => {
     const lastmods = blogLastmods();
     return {
