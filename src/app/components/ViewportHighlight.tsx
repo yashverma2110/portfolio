@@ -4,15 +4,36 @@ import { useEffect } from "react";
 
 const SELECTOR = ".duty, #projects article.post, #stack, #contact";
 
+const CHIP_SECTIONS = ["experience", "projects", "stack", "contact"];
+
+function barHeight() {
+  return document.querySelector<HTMLElement>(".chips-bar")?.getBoundingClientRect().height ?? 0;
+}
+
+function scrollBehavior(): ScrollBehavior {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+}
+
 function scrollToSection(section: HTMLElement) {
-  const top = section.getBoundingClientRect().top + window.scrollY - 16;
-  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  const top = section.getBoundingClientRect().top + window.scrollY - barHeight() - 16;
+  window.scrollTo({ top: Math.max(0, top), behavior: scrollBehavior() });
 }
 
 export default function ViewportHighlight() {
   useEffect(() => {
     const root = (document.scrollingElement as HTMLElement | null) ?? document.documentElement;
     if (!root) return;
+
+    const chips = Array.from(document.querySelectorAll<HTMLAnchorElement>(".chips-bar a.chip"));
+    const bar = document.querySelector<HTMLElement>(".chips-bar");
+    const sentinel = document.querySelector<HTMLElement>(".chips-sentinel");
+    const stuckObserver =
+      bar && sentinel
+        ? new IntersectionObserver(([entry]) => {
+            bar.classList.toggle("is-stuck", !entry.isIntersecting && entry.boundingClientRect.top < 0);
+          })
+        : null;
+    if (sentinel) stuckObserver?.observe(sentinel);
 
     let frame = 0;
     const update = () => {
@@ -36,6 +57,20 @@ export default function ViewportHighlight() {
       }
 
       for (const node of nodes) node.classList.toggle("in-view", node === best);
+
+      // Chip for the section at the focus line. None above Experience; Contact at the very bottom.
+      const atBottom = window.innerHeight + window.scrollY >= root.scrollHeight - 2;
+      const lineY = Math.max(window.innerHeight * 0.35, barHeight() + 24);
+      let current = "";
+      for (const id of CHIP_SECTIONS) {
+        const section = document.getElementById(id);
+        if (section && section.getBoundingClientRect().top <= lineY) current = id;
+      }
+      if (atBottom && current) current = CHIP_SECTIONS[CHIP_SECTIONS.length - 1];
+      for (const chip of chips) {
+        if (chip.hash === `#${current}`) chip.setAttribute("aria-current", "true");
+        else chip.removeAttribute("aria-current");
+      }
     };
 
     const markMetric = (metricId: string | null) => {
@@ -45,6 +80,15 @@ export default function ViewportHighlight() {
     };
 
     const onPillClick = (event: Event) => {
+      const chip = (event.target as Element | null)?.closest<HTMLAnchorElement>(".chips-bar a.chip");
+      if (chip) {
+        const target = document.getElementById(chip.hash.slice(1));
+        if (!target) return;
+        event.preventDefault();
+        history.replaceState(null, "", chip.hash);
+        target.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+        return;
+      }
       const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a.pill");
       if (!link) return;
       const sectionId = link.getAttribute("href")?.slice(1);
@@ -68,6 +112,7 @@ export default function ViewportHighlight() {
     window.addEventListener("resize", onScroll);
     return () => {
       cancelAnimationFrame(frame);
+      stuckObserver?.disconnect();
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("click", onPillClick);
       window.removeEventListener("resize", onScroll);

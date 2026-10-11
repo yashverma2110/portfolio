@@ -3,7 +3,6 @@ import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
-import ScrollToTop from "@/app/components/ScrollToTop";
 import YearsMark from "@/app/components/YearsMark";
 import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
@@ -158,28 +157,36 @@ export default function Home() {
   const impactGroups = collectImpact();
   const latestPosts = getPostMetas().slice(0, 3);
   return (
-    <main className="blog-page">
+    <main className="blog-page home">
       <div className="math-grid" aria-hidden="true" />
       <ViewportHighlight />
-      <ScrollToTop />
       <div className="blog-wrap">
+        {/* Plain links keep next/link out of the homepage bundle. */}
+        <div className="topbar">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a className="topbar-name" href="/">Yash Verma</a>
+          <nav aria-label="Site">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/blog">Blog</a>
+            <a href="/editor">Editor</a>
+          </nav>
+        </div>
         <header className="blog-header">
           <p className="eyebrow">Software engineer</p>
           <h1>Yash Verma</h1>
           <p>
             I am a software engineer with <YearsMark startDate="August 2021" initial={years} /> of full-time experience. I ship product features and help plan the roadmap, and I build the analytics, page speed, and infrastructure that keep them running in production. I am open to software engineer, product engineer, backend engineer, and frontend engineer roles. I would love to contribute across all of them.
           </p>
-          <nav aria-label="Page">
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#stack">Stack</a>
-            <a href="#contact">Contact</a>
-            <a href="/editor">Editor</a>
-            {/* Plain links keep next/link out of the homepage bundle. */}
-            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/blog">Blog</a>
-          </nav>
         </header>
+        <div className="chips-sentinel" aria-hidden="true" />
+        <nav className="chips-bar" aria-label="Sections">
+          <div className="chips">
+            <a className="chip" href="#experience">Experience</a>
+            <a className="chip" href="#projects">Projects</a>
+            <a className="chip" href="#stack">Stack</a>
+            <a className="chip" href="#contact">Contact</a>
+          </div>
+        </nav>
 
         <section id="experience" className="blog-section">
           <h2>Experience</h2>
