@@ -25,7 +25,10 @@ export const metadata: Metadata = {
   description,
   keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full stack, react, next.js, node.js, typescript, golang, aws",
   metadataBase: new URL("https://itsyashverma.com"),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": [{ url: "/blog/rss.xml", title: "Yash Verma's blog" }] },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

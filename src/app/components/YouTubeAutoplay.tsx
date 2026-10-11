@@ -5,11 +5,13 @@ import { useEffect, useRef, useState } from "react";
 type Props = {
   id: string;
   title: string;
+  /** Show the "Watch the demo on YouTube" link under the player. */
+  showLink?: boolean;
 };
 
 const ORIGIN = "https://www.youtube-nocookie.com";
 
-export default function YouTubeAutoplay({ id, title }: Props) {
+export default function YouTubeAutoplay({ id, title, showLink = true }: Props) {
   const boxRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const mountedRef = useRef(false);
@@ -76,9 +78,11 @@ export default function YouTubeAutoplay({ id, title }: Props) {
           </button>
         )}
       </div>
-      <p className="video-link">
-        <a href={`https://www.youtube.com/watch?v=${id}`}>Watch the demo on YouTube</a>
-      </p>
+      {showLink && (
+        <p className="video-link">
+          <a href={`https://www.youtube.com/watch?v=${id}`}>Watch the demo on YouTube</a>
+        </p>
+      )}
     </div>
   );
 }
