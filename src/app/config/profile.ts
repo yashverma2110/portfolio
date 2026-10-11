@@ -4,8 +4,20 @@ export const PROFILE = {
   name: "Yash Verma",
   location: "Bangalore, India",
   openTo: "Open to remote roles and roles outside India.",
-  education: "IIIT Una (Indian Institute of Information Technology, Una)",
+  education: {
+    degree: "B.Tech",
+    field: "Computer Science and Engineering",
+    school: "IIIT Una",
+    schoolFull: "Indian Institute of Information Technology, Una",
+    start: "2018",
+    end: "2022",
+  },
 };
+
+export function educationText() {
+  const { degree, field, school, schoolFull, start, end } = PROFILE.education;
+  return `${degree} in ${field}, ${school} (${schoolFull}), ${start} to ${end}`;
+}
 
 /** The intro is split around the years figure, which the homepage renders with <YearsMark />. */
 export const INTRO = {

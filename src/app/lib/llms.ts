@@ -3,7 +3,7 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
-import { PROFILE, companyName, introText } from "@/app/config/profile";
+import { PROFILE, companyName, educationText, introText } from "@/app/config/profile";
 import { AWS_SERVICES, TECH_STACK } from "@/app/components/TechStackGrid";
 import { getTotalYears } from "@/app/utils/experienceUtils";
 import { SITE_URL, formatDate, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
@@ -40,7 +40,7 @@ function header() {
     current
       ? `He works at ${companyName(current.company)} as a ${current.role} (since ${current.startDate}).`
       : undefined,
-    `Education: ${PROFILE.education}.`,
+    `Education: ${educationText()}.`,
     `Email: ${CONTACT.email}. Website: ${SITE_URL}`,
   ].filter(Boolean);
   return [
