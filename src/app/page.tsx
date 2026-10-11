@@ -5,6 +5,8 @@ import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import YearsMark from "@/app/components/YearsMark";
+import ProjectCarousel from "@/app/components/ProjectCarousel";
+import YouTubeFacade from "@/app/components/YouTubeFacade";
 import { getTotalYears } from "./utils/experienceUtils";
 
 function companyName(company: string) {
@@ -284,22 +286,34 @@ export default function Home() {
                 <a href={project.link}>{project.title}</a>
               </h3>
               <p>{project.description}</p>
+              {project.media?.images && project.media.images.length > 0 && (
+                <ProjectCarousel label={`${project.title} screenshots`} images={project.media.images} />
+              )}
               <ul>
                 {project.features.map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
+              {project.media?.youtubeId && (
+                <YouTubeFacade id={project.media.youtubeId} title={`${project.title} demo`} />
+              )}
               <p className="tech">{project.technologies.join(" · ")}</p>
               {(project.github ||
                 (project.link !== project.github &&
                   project.link.startsWith("https://chromewebstore.google.com/")) ||
-                project.tweetLink) && (
+                project.tweetLink ||
+                project.media?.youtubeId ||
+                project.privacyPolicy) && (
                 <nav aria-label="Project links">
                   {project.github && <a href={project.github}>GitHub</a>}
                   {project.link !== project.github &&
                     project.link.startsWith("https://chromewebstore.google.com/") && (
                       <a href={project.link}>Chrome Web Store</a>
                     )}
+                  {project.media?.youtubeId && (
+                    <a href={`https://www.youtube.com/watch?v=${project.media.youtubeId}`}>Demo video</a>
+                  )}
+                  {project.privacyPolicy && <a href={project.privacyPolicy}>Privacy policy</a>}
                   {project.tweetLink && <a href={project.tweetLink}>X</a>}
                 </nav>
               )}
