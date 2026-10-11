@@ -82,6 +82,18 @@
 .mde-danger { color: #ffb4ae !important; }
 .mde-wide { width: 100%; margin-top: 12px; }
 .mde-menu-btn { padding: 0 12px; font-size: 18px; }
+.mde-upload-btn { padding: 0 12px; }
+.mde-upload-btn svg { flex: 0 0 auto; }
+.mde-btn-label { font-size: 14px; }
+.mde-alert { display: flex; align-items: flex-start; gap: 8px; padding: 6px 6px 6px 14px; border-bottom: 1px solid rgba(248, 81, 73, 0.4); background: rgba(248, 81, 73, 0.12); color: #ffd0cb; font-size: 14px; line-height: 1.4; }
+.mde-alert ul { flex: 1 1 auto; min-width: 0; margin: 0; padding: 12px 0; list-style: none; overflow-wrap: anywhere; }
+.mde-alert li + li { margin-top: 4px; }
+@media (max-width: 420px) {
+  .mde-topbar { gap: 6px; padding-right: 4px; }
+  .mde-upload-btn, .mde-menu-btn { padding: 0 9px; gap: 4px; }
+  .mde-title { min-width: 84px; }
+  .mde-status { flex-shrink: 1; max-width: 30%; }
+}
 .mde-menu-label { font-size: 14px; }
 
 /* Tabs: segmented control, sticky at the top of the app. */

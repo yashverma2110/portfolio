@@ -11,6 +11,7 @@ import { renderMarkdown } from "./lib/render";
 import { standaloneHtml } from "./lib/exportHtml";
 import { blogFrontmatter, parseFrontmatter } from "./lib/frontmatter";
 import { docStats, slugify, starterDoc, todayISO } from "./lib/text";
+import { looksBinary, normalizeNewlines, titleFromFile, UPLOAD_ACCEPT, uploadProblem } from "./lib/upload";
 import {
   codeBlock,
   continueList,
@@ -44,7 +45,6 @@ type SaveState = "saved" | "saving" | "error";
 type Compare = { kind: "version"; id: string } | { kind: "text"; label: string; text: string } | null;
 
 const WIDE_QUERY = "(min-width: 900px)";
-const MAX_FILE_BYTES = 5 * 1024 * 1024;
 const HISTORY_LIMIT = 200;
 
 function useDebounced<T>(value: T, ms: number): T {
@@ -135,6 +135,7 @@ export default function MarkdownEditor() {
   const [compareOpen, setCompareOpen] = useState(false);
   const [canShare, setCanShare] = useState<false | string>(false);
   const [dragging, setDragging] = useState(false);
+  const [uploadErrors, setUploadErrors] = useState<string[]>([]);
   const [printHtml, setPrintHtml] = useState<{ html: string; meta: ReturnType<typeof renderMarkdown>["meta"] } | null>(null);
   const [syncScroll, setSyncScroll] = useState(true);
 
@@ -529,14 +530,49 @@ export default function MarkdownEditor() {
     say("Document deleted.");
   };
 
-  const importFile = async (file: File) => {
-    if (!/\.(md|markdown|mdown|mkd|txt)$/i.test(file.name) && !/^text\//.test(file.type)) {
-      return say("Choose a .md, .markdown, or .txt file.");
+  // Each file opens as a new document; the last one becomes active.
+  const importFiles = async (list: FileList | File[]) => {
+    const files = Array.from(list);
+    if (!files.length) return;
+    const problems: string[] = [];
+    const created: Doc[] = [];
+    const names: string[] = [];
+    persist(docRef.current);
+    for (const file of files) {
+      const problem = uploadProblem(file);
+      if (problem) {
+        problems.push(problem);
+        continue;
+      }
+      let text: string;
+      try {
+        text = normalizeNewlines(await file.text());
+      } catch {
+        problems.push(`${file.name} could not be read.`);
+        continue;
+      }
+      if (looksBinary(text)) {
+        problems.push(`${file.name} is not a text file.`);
+        continue;
+      }
+      const d = freshDoc(text, titleFromFile(file.name, parseFrontmatter(text).data?.title));
+      if (!saveDoc(d)) {
+        problems.push(`${file.name} could not be saved: browser storage is full.`);
+        break;
+      }
+      created.push(d);
+      names.push(file.name);
     }
-    if (file.size > MAX_FILE_BYTES) return say("That file is larger than 5 MB.");
-    const text = await file.text();
-    const title = parseFrontmatter(text).data?.title;
-    createDoc(text, (typeof title === "string" && title) || file.name.replace(/\.[^.]+$/, "") || "Imported");
+    setUploadErrors(problems);
+    if (created.length) {
+      const last = created[created.length - 1];
+      setDocs(loadIndex().docs);
+      switchTo(last);
+      if (!wide) setView("write");
+      say(created.length === 1 ? `Uploaded ${names[0]}` : `Uploaded ${created.length} files`);
+    } else if (problems.length) {
+      say("Upload failed.");
+    }
   };
 
   const insertFrontmatter = () => {
@@ -642,11 +678,11 @@ export default function MarkdownEditor() {
         if (e.currentTarget === e.target) setDragging(false);
       }}
       onDrop={(e) => {
-        const f = e.dataTransfer.files?.[0];
-        if (!f) return;
+        const files = e.dataTransfer.files;
+        if (!files?.length) return;
         e.preventDefault();
         setDragging(false);
-        void importFile(f);
+        void importFiles(files);
       }}
     >
       <div className="mde-topbar">
@@ -671,6 +707,18 @@ export default function MarkdownEditor() {
         </span>
         <button
           type="button"
+          className="mde-btn mde-upload-btn"
+          aria-label="Upload Markdown file"
+          title="Upload Markdown file (.md, .markdown, .mdx, .txt)"
+          onClick={() => fileRef.current?.click()}
+        >
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />
+          </svg>
+          <span className="mde-btn-label">Upload</span>
+        </button>
+        <button
+          type="button"
           className="mde-btn mde-menu-btn"
           aria-haspopup="dialog"
           aria-expanded={menuOpen}
@@ -680,6 +728,19 @@ export default function MarkdownEditor() {
           <span className="mde-menu-label">Menu</span>
         </button>
       </div>
+
+      {uploadErrors.length > 0 && (
+        <div className="mde-alert" role="alert">
+          <ul>
+            {uploadErrors.map((m, i) => (
+              <li key={i}>{m}</li>
+            ))}
+          </ul>
+          <button type="button" className="mde-btn mde-icon-btn" aria-label="Dismiss" onClick={() => setUploadErrors([])}>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      )}
 
       <div className="mde-tabs" role="group" aria-label="View">
         {tabs.map((t) => (
@@ -801,14 +862,16 @@ export default function MarkdownEditor() {
       <input
         ref={fileRef}
         type="file"
-        accept=".md,.markdown,.mdown,.mkd,.txt,text/markdown,text/plain"
+        accept={UPLOAD_ACCEPT}
+        multiple
         className="sr-only"
         tabIndex={-1}
         aria-hidden="true"
+        data-upload-input
         onChange={(e) => {
-          const f = e.target.files?.[0];
+          const files = e.target.files ? Array.from(e.target.files) : [];
           e.target.value = "";
-          if (f) void importFile(f);
+          void importFiles(files);
         }}
       />
 

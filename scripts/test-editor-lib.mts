@@ -121,3 +121,18 @@ test("diff summary, collapse and side by side", () => {
   assert.ok(rows.some((r) => r.left?.text === "line 10" && r.right?.text === "line ten"));
   assert.deepEqual(summarize(lineDiff("same", "same\n")), { added: 0, removed: 0, unchanged: 1 });
 });
+
+import { uploadProblem, looksBinary, normalizeNewlines, titleFromFile } from "../src/app/components/editor/lib/upload.ts";
+
+test("upload validation and naming", () => {
+  assert.equal(uploadProblem({ name: "post.md", type: "", size: 10 }), null);
+  assert.equal(uploadProblem({ name: "notes.mdx", type: "", size: 10 }), null);
+  assert.equal(uploadProblem({ name: "readme", type: "text/plain", size: 10 }), null);
+  assert.match(uploadProblem({ name: "big.md", type: "text/markdown", size: 2 * 1024 * 1024 + 1 }) ?? "", /larger than 2 MB/);
+  assert.match(uploadProblem({ name: "photo.png", type: "image/png", size: 10 }) ?? "", /not a Markdown/);
+  assert.equal(looksBinary("a\u0000b"), true);
+  assert.equal(normalizeNewlines("\uFEFFa\r\nb\rc\n"), "a\nb\nc\n");
+  assert.equal(titleFromFile("my-post.md", "Real title"), "Real title");
+  assert.equal(titleFromFile("my-post.draft.md", undefined), "my-post.draft");
+  assert.equal(titleFromFile(".md", ""), "Untitled");
+});
