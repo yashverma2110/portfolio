@@ -31,6 +31,12 @@ export function educationText() {
   return `${degree} in ${field}, ${school} (${schoolFull}), ${start} to ${end}`;
 }
 
+/** Short form for the homepage Education section. */
+export function educationLine() {
+  const { degree, field, school, start, end } = PROFILE.education;
+  return `${degree} in ${field}, ${school}, ${start} to ${end}.`;
+}
+
 /** The intro is split around the years figure, which the homepage renders with <YearsMark />. */
 export const INTRO = {
   lead: "I build products and the systems behind them.",
