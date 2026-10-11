@@ -255,6 +255,7 @@ export default function Home() {
               <p className="kicker">{job.startDate} — {job.endDate}</p>
               <h3>{companyName(job.company)}</h3>
               <p className="role">{job.role}</p>
+              {job.summary && <p className="summary">{job.summary}</p>}
               {job.achievements && job.achievements.length > 0 && (
                 <div id={`work-${jobIndex}-achievements`} className="duty">
                   <ul>

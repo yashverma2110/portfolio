@@ -22,6 +22,11 @@ function sentence(text: string) {
   return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
 }
 
+/** Team lines ("I led a team of ...") from a duty description, for the short file. */
+function teamSentences(text: string) {
+  return text.split(/(?<=\.)\s+/).filter((part) => /^I (lead|led) a team\b/.test(part));
+}
+
 function projectLinks(project: IProject) {
   const links: string[] = [];
   if (project.github) links.push(`[GitHub](${project.github})`);
@@ -73,10 +78,11 @@ export function buildLlmsTxt() {
 
   out.push("## Experience", "");
   for (const job of EXPERIENCE) {
-    out.push(`- [${companyName(job.company)}](${SITE_URL}/#experience): ${job.role}, ${dates(job)}.`);
+    out.push(`- [${companyName(job.company)}](${SITE_URL}/#experience): ${job.role}, ${dates(job)}.${job.summary ? ` ${sentence(job.summary)}` : ""}`);
     for (const duty of job.responsibilities) {
-      if (duty.metrics.length === 0) continue;
-      out.push(`  - ${duty.title}: ${duty.metrics.map(sentence).join(" ")}`);
+      const lines = [...teamSentences(duty.description), ...duty.metrics.map(sentence)];
+      if (lines.length === 0) continue;
+      out.push(`  - ${duty.title}: ${lines.join(" ")}`);
     }
   }
   out.push("");
@@ -132,6 +138,7 @@ export function buildLlmsFullTxt() {
   out.push("## Experience", "");
   for (const job of EXPERIENCE) {
     out.push(`### ${companyName(job.company)}`, "", `${job.role}, ${dates(job)}.`, "");
+    if (job.summary) out.push(job.summary, "");
     if (job.achievements?.length) {
       out.push(...job.achievements.map((item) => `- ${item}`), "");
     }

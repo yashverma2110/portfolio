@@ -1,6 +1,8 @@
 interface IExperience {
   company: string;
   role: string;
+  /** One or two sentences under the role line (team size, what the team owns). */
+  summary?: string;
   startDate: string;
   endDate: string | "Current";
   responsibilities: IResponsibility[];
