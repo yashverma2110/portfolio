@@ -4,6 +4,7 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Quizizz Inc.",
     role: "Senior Software Development Engineer",
+    summary: "I lead a team of 5 engineers. The team owns search on Postgres and the Waygent analytics platform, and helped cut infrastructure cost.",
     startDate: "August 2021",
     endDate: "Current",
     current: true,
@@ -69,7 +70,7 @@ const EXPERIENCE: IExperience[] = [
       },
       {
         title: "Server-side rendering",
-        description: "I added server-side rendering with Nuxt and a design system. Organic traffic increased after this work.",
+        description: "I added server-side rendering with Nuxt and a design system. Organic traffic increased after this work. I led a team of 2 engineers on the Nuxt SSR and SSG service.",
         metrics: ["User registration from organic traffic increased by 15%."],
         technologies: ["Vue", "Nuxt", "Tailwind"]
       },

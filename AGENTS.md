@@ -30,9 +30,18 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 - Copy: `src/app/config/*` (experience, projects, contact, profile). Edit copy there, not in components.
   The homepage intro lives in `INTRO` in `src/app/config/profile.ts` (with location, education, and
   "open to" lines). The homepage and the llms.txt routes both read it.
+- Positioning is senior, not staff (Yash's call). The browser title, the homepage eyebrow, and the home card
+  text live in `POSITIONING` in `profile.ts`. Change them there, not in `layout.tsx` or `page.tsx`.
+- Role summaries (team size, what the team owns) go in the optional `summary` field of a job in
+  `experience.ts`. Do not edit metric text: the impact pills parse it (`labelsFor()` in `page.tsx`).
 - Homepage: `src/app/page.tsx`. Blog: `src/app/blog/`, `src/app/lib/blog.ts`, `src/app/lib/markdown.ts`.
 - Posts: `content/blog/<slug>.md` (see `content/blog/README.md`).
 - Link preview cards: `src/app/lib/og.tsx` plus `opengraph-image.tsx` / `twitter-image.tsx` per route.
+  The homepage card is generated too (`src/app/opengraph-image.tsx`). `public/og-image.png` is no longer
+  referenced; it stays in `public/` only so old shares keep working.
+- Structured data: the Person (`https://itsyashverma.com/#person`) and WebSite (`#website`) JSON-LD live on
+  the homepage (`personJsonLd()` in `page.tsx`, built from config). Blog posts reference the author and
+  publisher by that `@id`. Do not add a second Person entity elsewhere.
 - Static assets: `public/` (project screenshots in `public/projects/<slug>/`).
 - Sitemap and robots config: `next-sitemap.config.js`. It allows all crawlers, lists the AI crawlers by name
   (all `Allow: /`), and strips next-sitemap's Yandex-only `Host:` line.
@@ -45,13 +54,15 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
   - its own `opengraph-image.tsx` and `twitter-image.tsx` (use `ogImage()` from `src/app/lib/og.tsx`),
   - metadata with title, description, and a canonical URL (`alternates.canonical`),
   - a check that it shows up in the generated sitemap (`npm run build`, then read `public/sitemap-0.xml`).
-- Do not hard-code `/og-image.png` in a route that has its own card. Only the homepage uses it.
+- Do not hard-code `/og-image.png` anywhere. Every route, the homepage included, has a generated card.
 - Keep the homepage's First Load JS flat. Prefer plain `<a>` over `next/link` on the homepage.
 
 ## Homepage header
 
 - A top bar (Yash Verma on the left, Blog and Editor on the right), then sticky section chips. The chip
   for the current section is highlighted. There is no Back to top button.
+- Four chips only (Experience, Projects, Stack, Contact). Education sits between Stack and Contact with no
+  chip: Stack stays highlighted through it, and Contact highlights at the bottom of the page.
 - Jump targets need `scroll-margin-top` for the sticky bar (about 68px, `--jump-offset` in `globals.css`).
   Add new anchor targets to that rule. `ViewportHighlight` subtracts the bar height when it scrolls.
 
@@ -106,7 +117,6 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 
 - Primary domain: Vercel redirects the apex to www, but the code (canonicals, sitemap, llms.txt) uses the
   apex `https://itsyashverma.com`. Recommendation: make the apex primary in Vercel.
-- `/og-image.png` still lists the old roles. Waiting on Yash before it changes.
 
 ## PR workflow
 

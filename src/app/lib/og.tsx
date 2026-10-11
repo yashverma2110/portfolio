@@ -1,5 +1,5 @@
 // Link preview cards (Open Graph + Twitter) rendered with next/og at build time.
-// Same look as public/og-image.png: dark #0e1116, faint math grid, serif title, yellow subtitle.
+// Dark #0e1116, faint math grid, serif title, yellow subtitle.
 import fs from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
@@ -26,9 +26,9 @@ function clip(text: string, max: number) {
   return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
 }
 
-export type OgCard = { title: string; subtitle?: string; footer?: string };
+export type OgCard = { title: string; subtitle?: string; body?: string; footer?: string };
 
-export async function ogImage({ title, subtitle, footer }: OgCard) {
+export async function ogImage({ title, subtitle, body, footer }: OgCard) {
   const shortTitle = clip(title, 110);
   return new ImageResponse(
     (
@@ -63,6 +63,11 @@ export async function ogImage({ title, subtitle, footer }: OgCard) {
         {subtitle && (
           <div style={{ display: "flex", marginTop: 32, fontSize: 36, lineHeight: 1.35, color: "#ffe9a0", maxWidth: 1000 }}>
             {clip(subtitle, 140)}
+          </div>
+        )}
+        {body && (
+          <div style={{ display: "flex", marginTop: 20, fontSize: 32, lineHeight: 1.4, color: "#d5dde6", maxWidth: 1000 }}>
+            {clip(body, 140)}
           </div>
         )}
         <div style={{ display: "flex", flexDirection: "column", marginTop: 56, fontSize: 28, lineHeight: 1.4, color: "#8aa0b8" }}>

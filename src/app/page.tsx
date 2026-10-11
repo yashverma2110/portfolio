@@ -1,14 +1,15 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
-import { INTRO, companyName } from "@/app/config/profile";
+import { INTRO, POSITIONING, PROFILE, companyName, educationLine } from "@/app/config/profile";
+import { AWS_SERVICES, TECH_STACK } from "@/app/components/TechStackGrid";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
 import YearsMark from "@/app/components/YearsMark";
 import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
-import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
+import { SITE_URL, formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
 
 type PillCategory = "Product" | "Performance" | "Productivity" | "Cost and reliability";
 type Impact = { id: string; sectionId: string; label: string; text: string; category: PillCategory };
@@ -148,14 +149,55 @@ function slug(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
+// Person and WebSite entities. Blog posts reference the person by its @id.
+function personJsonLd() {
+  const current = EXPERIENCE.find((job) => job.current) ?? EXPERIENCE[0];
+  // A subset of the Stack section, plus the areas from the intro.
+  const picks = ["JavaScript", "TypeScript", "Python", "Golang", "React", "Next.js", "Vue", "Nuxt", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Kafka"];
+  const stack = TECH_STACK.flatMap((category) => category.items).filter((item) => picks.includes(item));
+  const knowsAbout = [...stack, ...(AWS_SERVICES.length > 0 ? ["AWS"] : []), "Analytics", "Web performance", "Infrastructure"];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: PROFILE.name,
+        url: SITE_URL,
+        image: `${SITE_URL}/opengraph-image`,
+        jobTitle: POSITIONING.jobTitle,
+        worksFor: { "@type": "Organization", name: companyName(current.company) },
+        homeLocation: { "@type": "Place", name: PROFILE.location },
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: PROFILE.education.schoolFull,
+          alternateName: PROFILE.education.school,
+        },
+        knowsAbout,
+        sameAs: [CONTACT.github, CONTACT.linkedin, CONTACT.twitter, CONTACT.medium],
+        email: `mailto:${CONTACT.email}`,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: PROFILE.name,
+        publisher: { "@id": `${SITE_URL}/#person` },
+      },
+    ],
+  };
+}
+
 export default function Home() {
   const years = getTotalYears();
+  const [eyebrowRole, eyebrowAreas] = POSITIONING.eyebrow.split(" · ");
   const impactGroups = collectImpact();
   const latestPosts = getPostMetas().slice(0, 3);
   return (
     <main className="blog-page home">
       <div className="math-grid" aria-hidden="true" />
       <ViewportHighlight />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()).replace(/</g, "\\u003c") }} />
       <div className="blog-wrap">
         {/* Plain links keep next/link out of the homepage bundle. */}
         <div className="topbar">
@@ -168,7 +210,11 @@ export default function Home() {
           </nav>
         </div>
         <header className="blog-header">
-          <p className="eyebrow">Software engineer</p>
+          <p className="eyebrow">
+            {/* Two parts so phones break at the dot, not inside "Full-stack". */}
+            {eyebrowRole}
+            {eyebrowAreas && <>{" · "}<span className="eyebrow-part">{eyebrowAreas}</span></>}
+          </p>
           <h1>Yash Verma</h1>
           <p>
             {`${INTRO.lead} `}<YearsMark startDate="August 2021" initial={years} />{` ${INTRO.rest}`}
@@ -250,6 +296,7 @@ export default function Home() {
               <p className="kicker">{job.startDate} — {job.endDate}</p>
               <h3>{companyName(job.company)}</h3>
               <p className="role">{job.role}</p>
+              {job.summary && <p className="summary">{job.summary}</p>}
               {job.achievements && job.achievements.length > 0 && (
                 <div id={`work-${jobIndex}-achievements`} className="duty">
                   <ul>
@@ -366,6 +413,11 @@ export default function Home() {
         <section id="stack" className="blog-section post">
           <h2>Stack</h2>
           <TechStackGrid />
+        </section>
+
+        <section id="education" className="blog-section post">
+          <h2>Education</h2>
+          <p>{educationLine()}</p>
         </section>
 
         <section id="contact" className="blog-section post">

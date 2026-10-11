@@ -74,8 +74,9 @@ export default async function PostPage({ params }: Props) {
         description: post.description,
         datePublished: post.date,
         dateModified: post.updated ?? post.date,
-        author: { "@type": "Person", name: "Yash Verma", url: SITE_URL },
-        publisher: { "@type": "Person", name: "Yash Verma", url: SITE_URL },
+        // The Person entity lives in the homepage JSON-LD.
+        author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: "Yash Verma", url: SITE_URL },
+        publisher: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: "Yash Verma", url: SITE_URL },
         keywords: post.tags.join(", "),
         image: post.cover ? [cardUrl(post.slug), `${SITE_URL}${post.cover}`] : cardUrl(post.slug),
         url,

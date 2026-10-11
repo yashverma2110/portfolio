@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const SELECTOR = ".duty, #projects article.post, #stack, #contact";
+const SELECTOR = ".duty, #projects article.post, #stack, #education, #contact";
 
 const CHIP_SECTIONS = ["experience", "projects", "stack", "contact"];
 
@@ -59,6 +59,7 @@ export default function ViewportHighlight() {
       for (const node of nodes) node.classList.toggle("in-view", node === best);
 
       // Chip for the section at the focus line. None above Experience; Contact at the very bottom.
+      // Education has no chip, so Stack stays current until Contact reaches the line.
       const atBottom = window.innerHeight + window.scrollY >= root.scrollHeight - 2;
       const lineY = Math.max(window.innerHeight * 0.35, barHeight() + 24);
       let current = "";

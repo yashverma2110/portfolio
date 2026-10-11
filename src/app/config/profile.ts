@@ -14,9 +14,27 @@ export const PROFILE = {
   },
 };
 
+/** Positioning is senior (not staff), per Yash. The layout title, homepage eyebrow, card, and llms.txt read these. */
+export const POSITIONING = {
+  title: "Yash Verma | Senior Full-Stack Engineer",
+  eyebrow: "Senior software engineer · Full-stack, backend, and analytics",
+  jobTitle: "Senior Software Engineer",
+  card: {
+    headline: "Senior full-stack engineer",
+    openTo: "Open to product, full-stack, backend, and frontend roles.",
+    alt: "Yash Verma, senior full-stack engineer",
+  },
+};
+
 export function educationText() {
   const { degree, field, school, schoolFull, start, end } = PROFILE.education;
   return `${degree} in ${field}, ${school} (${schoolFull}), ${start} to ${end}`;
+}
+
+/** Short form for the homepage Education section. */
+export function educationLine() {
+  const { degree, field, school, start, end } = PROFILE.education;
+  return `${degree} in ${field}, ${school}, ${start} to ${end}.`;
 }
 
 /** The intro is split around the years figure, which the homepage renders with <YearsMark />. */

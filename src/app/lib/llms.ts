@@ -3,7 +3,7 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
 import PROJECTS from "@/app/config/projects";
-import { PROFILE, companyName, educationText, introText } from "@/app/config/profile";
+import { POSITIONING, PROFILE, companyName, educationText, introText } from "@/app/config/profile";
 import { AWS_SERVICES, TECH_STACK } from "@/app/components/TechStackGrid";
 import { getTotalYears } from "@/app/utils/experienceUtils";
 import { SITE_URL, formatDate, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
@@ -20,6 +20,11 @@ function dates(job: IExperience) {
 function sentence(text: string) {
   const trimmed = text.trim();
   return /[.!?]$/.test(trimmed) ? trimmed : `${trimmed}.`;
+}
+
+/** Team lines ("I led a team of ...") from a duty description, for the short file. */
+function teamSentences(text: string) {
+  return text.split(/(?<=\.)\s+/).filter((part) => /^I (lead|led) a team\b/.test(part));
 }
 
 function projectLinks(project: IProject) {
@@ -48,6 +53,8 @@ function header() {
     "",
     `> ${introText(years)}`,
     "",
+    `Role: ${sentence(POSITIONING.eyebrow)}`,
+    "",
     facts.join(" "),
     "",
     `The years figure counts full-time work only, from ${current?.startDate ?? "his first full-time role"}. Internships are listed separately.`,
@@ -71,10 +78,11 @@ export function buildLlmsTxt() {
 
   out.push("## Experience", "");
   for (const job of EXPERIENCE) {
-    out.push(`- [${companyName(job.company)}](${SITE_URL}/#experience): ${job.role}, ${dates(job)}.`);
+    out.push(`- [${companyName(job.company)}](${SITE_URL}/#experience): ${job.role}, ${dates(job)}.${job.summary ? ` ${sentence(job.summary)}` : ""}`);
     for (const duty of job.responsibilities) {
-      if (duty.metrics.length === 0) continue;
-      out.push(`  - ${duty.title}: ${duty.metrics.map(sentence).join(" ")}`);
+      const lines = [...teamSentences(duty.description), ...duty.metrics.map(sentence)];
+      if (lines.length === 0) continue;
+      out.push(`  - ${duty.title}: ${lines.join(" ")}`);
     }
   }
   out.push("");
@@ -130,6 +138,7 @@ export function buildLlmsFullTxt() {
   out.push("## Experience", "");
   for (const job of EXPERIENCE) {
     out.push(`### ${companyName(job.company)}`, "", `${job.role}, ${dates(job)}.`, "");
+    if (job.summary) out.push(job.summary, "");
     if (job.achievements?.length) {
       out.push(...job.achievements.map((item) => `- ${item}`), "");
     }
