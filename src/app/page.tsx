@@ -198,7 +198,7 @@ export default function Home() {
       <div className="math-grid" aria-hidden="true" />
       <ViewportHighlight />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()).replace(/</g, "\\u003c") }} />
-      <div className="blog-wrap">
+      <div className="blog-wrap home-hero">
         {/* Plain links keep next/link out of the homepage bundle. */}
         <div className="topbar">
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
@@ -221,14 +221,17 @@ export default function Home() {
           </p>
         </header>
         <div className="chips-sentinel" aria-hidden="true" />
-        <nav className="chips-bar" aria-label="Sections">
-          <div className="chips">
-            <a className="chip" href="#experience">Experience</a>
-            <a className="chip" href="#projects">Projects</a>
-            <a className="chip" href="#stack">Stack</a>
-            <a className="chip" href="#contact">Contact</a>
-          </div>
-        </nav>
+      </div>
+      {/* The bar sits outside the column so its background spans the page at width: 100% (never 100vw). */}
+      <nav className="chips-bar" aria-label="Sections">
+        <div className="chips">
+          <a className="chip" href="#experience">Experience</a>
+          <a className="chip" href="#projects">Projects</a>
+          <a className="chip" href="#stack">Stack</a>
+          <a className="chip" href="#contact">Contact</a>
+        </div>
+      </nav>
+      <div className="blog-wrap">
 
         <section id="experience" className="blog-section">
           <h2>Experience</h2>
