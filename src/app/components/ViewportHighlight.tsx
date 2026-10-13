@@ -37,16 +37,18 @@ export default function ViewportHighlight() {
 
     let frame = 0;
     const update = () => {
-      const rootRect = root.getBoundingClientRect();
-      const focusY = rootRect.top + rootRect.height * 0.35;
-      const nodes = Array.from(root.querySelectorAll<HTMLElement>(SELECTOR));
+      // Use the viewport, not the scrolling element (that is the whole page). The sticky bar covers the top.
+      const viewTop = barHeight();
+      const viewBottom = window.innerHeight;
+      const focusY = Math.max(window.innerHeight * 0.35, viewTop + 24);
+      const nodes = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
       let best: HTMLElement | null = null;
       let bestScore = Number.POSITIVE_INFINITY;
 
       for (const node of nodes) {
         const rect = node.getBoundingClientRect();
-        const visibleTop = Math.max(rect.top, rootRect.top);
-        const visibleBottom = Math.min(rect.bottom, rootRect.bottom);
+        const visibleTop = Math.max(rect.top, viewTop);
+        const visibleBottom = Math.min(rect.bottom, viewBottom);
         if (visibleBottom - visibleTop < 8) continue;
         const containsFocus = rect.top <= focusY && rect.bottom >= focusY;
         const score = containsFocus ? 0 : Math.min(Math.abs(rect.top - focusY), Math.abs(rect.bottom - focusY));
