@@ -92,6 +92,8 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 - No nested scroll containers. They break wheel scrolling on desktop. Let the page scroll; tables and
   code blocks may scroll sideways only.
 - Check mobile at 390px: no horizontal overflow.
+- Never use `100vw` for widths: it includes the scrollbar and overflows on desktop. Use `width: 100%` of a
+  full-width parent. Before shipping, check `scrollWidth == clientWidth` at 1024 to 1920px (with a classic scrollbar too).
 
 ## Publishing a blog post
 
