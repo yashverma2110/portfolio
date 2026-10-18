@@ -9,7 +9,9 @@ import YearsMark from "@/app/components/YearsMark";
 import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
+import type { Metadata } from "next";
 import { SITE_URL } from "./config/site";
+import { HOME_DESCRIPTION, HOME_TITLE } from "./config/home-meta";
 import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
 
 type PillCategory = "Product" | "Performance" | "Productivity" | "Cost and reliability";
@@ -188,6 +190,24 @@ function personJsonLd() {
     ],
   };
 }
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": [{ url: "/blog/rss.xml", title: "Yash Verma's blog" }],
+      "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    siteName: "Yash Verma",
+  },
+};
 
 export default function Home() {
   const years = getTotalYears();
