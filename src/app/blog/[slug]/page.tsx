@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import PostBody from "@/app/components/blog/PostBody";
 import { PostMetaLine, TagLinks } from "@/app/components/blog/PostList";
 import PROJECTS from "@/app/config/projects";
-import { SITE_URL, coverSize, getPost, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
+import { SITE_URL } from "@/app/config/site";
+import { coverSize, getPost, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
 import { rssAlternate } from "../seo";
 
 export const dynamicParams = false;

@@ -3,7 +3,6 @@ import path from "node:path";
 import matter from "gray-matter";
 import PROJECTS from "@/app/config/projects";
 
-export const SITE_URL = "https://itsyashverma.com";
 export const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
 export type PostMeta = {

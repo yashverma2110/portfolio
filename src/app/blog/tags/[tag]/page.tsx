@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostList from "@/app/components/blog/PostList";
-import { SITE_URL, getPostsByTag, getTags } from "@/app/lib/blog";
+import { SITE_URL } from "@/app/config/site";
+import { getPostsByTag, getTags } from "@/app/lib/blog";
 import { rssAlternate } from "../../seo";
 
 export const dynamicParams = false;

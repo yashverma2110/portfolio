@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostList from "@/app/components/blog/PostList";
-import { SITE_URL, getPostMetas, getTags } from "@/app/lib/blog";
+import { SITE_URL } from "@/app/config/site";
+import { getPostMetas, getTags } from "@/app/lib/blog";
 import { rssAlternate } from "./seo";
 
 const title = "Blog | Yash Verma";

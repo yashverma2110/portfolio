@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { getTotalYears } from "./utils/experienceUtils";
 import { POSITIONING } from "./config/profile";
+import { SITE_URL } from "./config/site";
 
 const years = getTotalYears();
 
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   title,
   description,
   keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full-stack engineer, full stack, react, next.js, node.js, typescript, golang, aws",
-  metadataBase: new URL("https://itsyashverma.com"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
     types: {

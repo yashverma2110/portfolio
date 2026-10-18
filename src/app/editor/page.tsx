@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import EditorLoader from "@/app/components/editor/EditorLoader";
 import "./editor.css";
+import { SITE_URL } from "@/app/config/site";
 
 const title = "Markdown editor | Yash Verma";
 const description =
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://itsyashverma.com/editor",
+    url: `${SITE_URL}/editor`,
     title,
     description,
     siteName: "Yash Verma",
