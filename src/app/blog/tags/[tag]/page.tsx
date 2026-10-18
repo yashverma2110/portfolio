@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostList from "@/app/components/blog/PostList";
 import { SITE_URL } from "@/app/config/site";
-import { getPostsByTag, getTags } from "@/app/lib/blog";
+import { getPostsByTag, getTags, isTagIndexable } from "@/app/lib/blog";
 import { rssAlternate } from "../../seo";
 
 export const dynamicParams = false;
@@ -24,6 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: `/blog/tags/${tag.slug}`, types: rssAlternate },
+    // Thin tag pages stay out of the index; their links are still followed.
+    robots: isTagIndexable(tag) ? undefined : { index: false, follow: true },
     openGraph: { type: "website", url: `${SITE_URL}/blog/tags/${tag.slug}`, title, description, siteName: "Yash Verma" },
     twitter: { card: "summary_large_image", title, description, creator: "@we_chat_tech" },
   };
