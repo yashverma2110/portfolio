@@ -15,12 +15,14 @@ Notes for agents working on Yash Verma's portfolio (https://www.itsyashverma.com
 
 ```sh
 /tmp/node24/bin/npm ci
-/tmp/node24/bin/npx next build      # app build only
-/tmp/node24/bin/npm run build       # same as next build
+/tmp/node24/bin/npm run build       # = next build (also what Vercel runs)
 /tmp/node24/bin/npm run test:editor # editor library tests
 /tmp/node24/bin/npx next start -p 3100
 ```
 
+- The build command is plain `next build`. There is no postbuild step and no next-sitemap: `/sitemap.xml` and
+  `/robots.txt` are app routes built with the rest of the site. Do not add a sitemap generator to the build
+  script, and leave the Vercel build command on its default (`npm run build`). There is no vercel.json.
 - Never add `public/sitemap*.xml` or `public/robots.txt` (gitignored). A static file there would shadow the
   `/sitemap.xml` and `/robots.txt` routes.
 - Run the build before you open a PR. Lint errors fail the build.
