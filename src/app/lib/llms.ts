@@ -6,7 +6,8 @@ import PROJECTS from "@/app/config/projects";
 import { POSITIONING, PROFILE, companyName, educationText, introText } from "@/app/config/profile";
 import { AWS_SERVICES, TECH_STACK } from "@/app/components/TechStackGrid";
 import { getTotalYears } from "@/app/utils/experienceUtils";
-import { SITE_URL, formatDate, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
+import { SITE_URL } from "@/app/config/site";
+import { formatDate, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
 import type { IExperience } from "@/app/types/experience";
 import type { IProject } from "@/app/types/projects";
 

@@ -1,12 +1,12 @@
 # Blog posts
 
 Every `.md` or `.mdx` file in this folder (except this README) is a post. The file name is the URL:
-`content/blog/my-post.md` becomes `https://itsyashverma.com/blog/my-post`. Use lowercase letters,
+`content/blog/my-post.md` becomes `https://www.itsyashverma.com/blog/my-post`. Use lowercase letters,
 numbers, and hyphens only.
 
 ## Add a post
 
-1. Write it in the [editor](https://itsyashverma.com/editor). Its blog template fills in the frontmatter.
+1. Write it in the [editor](https://www.itsyashverma.com/editor). Its blog template fills in the frontmatter.
 2. Save the Markdown as `content/blog/<slug>.md`.
 3. Put images under `public/blog/<slug>/` (or reuse ones in `public/`) and link them with absolute paths,
    e.g. `![Alt text](/blog/my-post/diagram.png)`.

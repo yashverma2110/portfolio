@@ -1,4 +1,5 @@
-import { SITE_URL, getPostMetas } from "@/app/lib/blog";
+import { SITE_URL } from "@/app/config/site";
+import { getPostMetas } from "@/app/lib/blog";
 
 export const dynamic = "force-static";
 

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { getTotalYears } from "./utils/experienceUtils";
-import { POSITIONING } from "./config/profile";
-
-const years = getTotalYears();
+import { HOME_DESCRIPTION as description, HOME_TITLE as title } from "./config/home-meta";
+import { SITE_URL } from "./config/site";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,16 +16,13 @@ const geistMono = localFont({
 });
 
 // Pages set their own full title ("<page> | Yash Verma"), so there is no title template.
-const title = POSITIONING.title;
-const description = `I build products and the systems behind them. ${years} shipping features, shaping roadmaps, and owning the analytics, page speed, and infrastructure. Open to product, full-stack, backend, and frontend roles.`;
-
+// No canonical or og:url here: they would leak to every child page. Each page sets its own.
 export const metadata: Metadata = {
   title,
   description,
   keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full-stack engineer, full stack, react, next.js, node.js, typescript, golang, aws",
-  metadataBase: new URL("https://itsyashverma.com"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: "/",
     types: {
       "application/rss+xml": [{ url: "/blog/rss.xml", title: "Yash Verma's blog" }],
       "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
@@ -36,7 +31,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://itsyashverma.com",
     title,
     description,
     siteName: "Yash Verma",

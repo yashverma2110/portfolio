@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
+Notes for agents working on Yash Verma's portfolio (https://www.itsyashverma.com).
 
 ## Stack
 
@@ -9,20 +9,22 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
   On the shared box, system Node is 20; use `/tmp/node24/bin/node`, `/tmp/node24/bin/npm`, `/tmp/node24/bin/npx`.
 - Blog: Markdown files rendered at build time with `marked` + `highlight.js` (the same stack as `/editor`)
   and `gray-matter` for frontmatter. Do not add a second Markdown stack (MDX, remark, shiki).
-- Sitemap and robots: `next-sitemap` (`next-sitemap.config.js`) runs after `next build`.
+- Sitemap and robots: `src/app/sitemap.ts` and `src/app/robots.ts` (Next metadata routes). No next-sitemap.
 
 ## Commands
 
 ```sh
 /tmp/node24/bin/npm ci
-/tmp/node24/bin/npx next build      # app build only
-/tmp/node24/bin/npm run build       # build + sitemap/robots
+/tmp/node24/bin/npm run build       # = next build (also what Vercel runs)
 /tmp/node24/bin/npm run test:editor # editor library tests
 /tmp/node24/bin/npx next start -p 3100
 ```
 
-- Never commit `public/sitemap*.xml` or `public/robots.txt`. They are generated on every build. Delete them
-  after a local build.
+- The build command is plain `next build`. There is no postbuild step and no next-sitemap: `/sitemap.xml` and
+  `/robots.txt` are app routes built with the rest of the site. Do not add a sitemap generator to the build
+  script, and leave the Vercel build command on its default (`npm run build`). There is no vercel.json.
+- Never add `public/sitemap*.xml` or `public/robots.txt` (gitignored). A static file there would shadow the
+  `/sitemap.xml` and `/robots.txt` routes.
 - Run the build before you open a PR. Lint errors fail the build.
 
 ## Where things live
@@ -39,12 +41,12 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 - Link preview cards: `src/app/lib/og.tsx` plus `opengraph-image.tsx` / `twitter-image.tsx` per route.
   The homepage card is generated too (`src/app/opengraph-image.tsx`). `public/og-image.png` is no longer
   referenced; it stays in `public/` only so old shares keep working.
-- Structured data: the Person (`https://itsyashverma.com/#person`) and WebSite (`#website`) JSON-LD live on
+- Structured data: the Person (`https://www.itsyashverma.com/#person`) and WebSite (`#website`) JSON-LD live on
   the homepage (`personJsonLd()` in `page.tsx`, built from config). Blog posts reference the author and
   publisher by that `@id`. Do not add a second Person entity elsewhere.
 - Static assets: `public/` (project screenshots in `public/projects/<slug>/`).
-- Sitemap and robots config: `next-sitemap.config.js`. It allows all crawlers, lists the AI crawlers by name
-  (all `Allow: /`), and strips next-sitemap's Yandex-only `Host:` line.
+- Sitemap: `src/app/sitemap.ts`. Robots: `src/app/robots.ts`. It allows all crawlers, lists the AI crawlers
+  by name (all `Allow: /`), points to the one sitemap, and has no `Host:` line.
 
 ## SEO rules
 
@@ -53,7 +55,8 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 - Every new route or page type must ship:
   - its own `opengraph-image.tsx` and `twitter-image.tsx` (use `ogImage()` from `src/app/lib/og.tsx`),
   - metadata with title, description, and a canonical URL (`alternates.canonical`),
-  - a check that it shows up in the generated sitemap (`npm run build`, then read `public/sitemap-0.xml`).
+  - a self-referencing canonical set in that page's own metadata,
+  - an entry in `src/app/sitemap.ts` if it should be indexed (check `/sitemap.xml` after `next start`).
 - Do not hard-code `/og-image.png` anywhere. Every route, the homepage included, has a generated card.
 - Keep the homepage's First Load JS flat. Prefer plain `<a>` over `next/link` on the homepage.
 
@@ -115,10 +118,20 @@ Notes for agents working on Yash Verma's portfolio (https://itsyashverma.com).
 - `/editor` is client-only and private. Documents stay in the browser's localStorage. Do not add uploads,
   analytics, or a backend to it.
 
-## Pending decisions (ask Yash)
+## Site URL and indexing
 
-- Primary domain: Vercel redirects the apex to www, but the code (canonicals, sitemap, llms.txt) uses the
-  apex `https://itsyashverma.com`. Recommendation: make the apex primary in Vercel.
+- www is the primary domain: `https://www.itsyashverma.com` (Vercel redirects the bare domain to www).
+- One source: `SITE_URL` in `src/app/config/site.ts`. Canonicals (via `metadataBase`), Open Graph, JSON-LD,
+  RSS, the sitemap, robots.txt, and llms.txt all read it. Never hard-code the domain anywhere else.
+- No trailing slash on URLs (Vercel serves paths without one).
+- Every page sets its own canonical (`alternates.canonical`) and `openGraph.url`. The root layout sets
+  neither, because a layout's canonical leaks to every child page that does not override it.
+- Tag pages with fewer than `MIN_POSTS_TO_INDEX_TAG` (3) posts are `noindex, follow` and left out of the
+  sitemap (`isTagIndexable()` in `src/app/lib/blog.ts`).
+- Sitemap lastmod is always a real content date, never the build time: a post uses `updated`, else `date`;
+  `/blog` uses the newest post; the homepage uses the last git commit touching `src/app/config` or
+  `src/app/page.tsx` (omitted if git history is missing at build). `/editor` has no lastmod. No changefreq
+  or priority. Drafts are never listed.
 
 ## PR workflow
 

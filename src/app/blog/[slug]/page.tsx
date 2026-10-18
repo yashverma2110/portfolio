@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import PostBody from "@/app/components/blog/PostBody";
 import { PostMetaLine, TagLinks } from "@/app/components/blog/PostList";
 import PROJECTS from "@/app/config/projects";
-import { SITE_URL, coverSize, getPost, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
+import { SITE_URL } from "@/app/config/site";
+import { coverSize, getPost, getPosts, projectAnchor, projectSlug } from "@/app/lib/blog";
 import { rssAlternate } from "../seo";
 
 export const dynamicParams = false;
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: post.tags,
     authors: [{ name: "Yash Verma", url: SITE_URL }],
     alternates: { canonical: `/blog/${post.slug}`, types: rssAlternate },
-    robots: post.draft ? { index: false, follow: false } : undefined,
+    // An explicit undefined would drop the root robots/googlebot tags, so only set it for drafts.
+    ...(post.draft ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "article",
       url,

@@ -3,7 +3,6 @@ import path from "node:path";
 import matter from "gray-matter";
 import PROJECTS from "@/app/config/projects";
 
-export const SITE_URL = "https://itsyashverma.com";
 export const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
 export type PostMeta = {
@@ -182,6 +181,13 @@ export function getTags(): Tag[] {
     }
   }
   return [...tags.values()].sort((a, b) => b.count - a.count || a.slug.localeCompare(b.slug));
+}
+
+/** Tag pages with fewer posts than this are noindex (follow) and left out of the sitemap. */
+export const MIN_POSTS_TO_INDEX_TAG = 3;
+
+export function isTagIndexable(tag: Tag) {
+  return tag.count >= MIN_POSTS_TO_INDEX_TAG;
 }
 
 export function getPostsByTag(slug: string): PostMeta[] {

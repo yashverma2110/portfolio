@@ -9,7 +9,10 @@ import YearsMark from "@/app/components/YearsMark";
 import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
-import { SITE_URL, formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
+import type { Metadata } from "next";
+import { SITE_URL } from "./config/site";
+import { HOME_DESCRIPTION, HOME_TITLE } from "./config/home-meta";
+import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
 
 type PillCategory = "Product" | "Performance" | "Productivity" | "Cost and reliability";
 type Impact = { id: string; sectionId: string; label: string; text: string; category: PillCategory };
@@ -188,6 +191,24 @@ function personJsonLd() {
   };
 }
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": [{ url: "/blog/rss.xml", title: "Yash Verma's blog" }],
+      "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    siteName: "Yash Verma",
+  },
+};
+
 export default function Home() {
   const years = getTotalYears();
   const [eyebrowRole, eyebrowAreas] = POSITIONING.eyebrow.split(" · ");
@@ -249,10 +270,10 @@ export default function Home() {
                     return [{
                       "@type": "BreadcrumbList",
                       itemListElement: [
-                        { "@type": "ListItem", position: 1, name: "Yash Verma", item: "https://itsyashverma.com/" },
-                        { "@type": "ListItem", position: 2, name: "Experience", item: "https://itsyashverma.com/#experience" },
-                        { "@type": "ListItem", position: 3, name: group.company, item: `https://itsyashverma.com/#${companyId}` },
-                        { "@type": "ListItem", position: 4, name: category, item: `https://itsyashverma.com/#${categoryId}` },
+                        { "@type": "ListItem", position: 1, name: "Yash Verma", item: `${SITE_URL}/` },
+                        { "@type": "ListItem", position: 2, name: "Experience", item: `${SITE_URL}/#experience` },
+                        { "@type": "ListItem", position: 3, name: group.company, item: `${SITE_URL}/#${companyId}` },
+                        { "@type": "ListItem", position: 4, name: category, item: `${SITE_URL}/#${categoryId}` },
                       ],
                     }];
                   })
@@ -274,7 +295,7 @@ export default function Home() {
                     <div key={category} id={categoryId} className="impact-group">
                       <nav className="crumbs" aria-label="Breadcrumb">
                         <ol>
-                          <li><a href="https://itsyashverma.com/">Yash Verma</a></li>
+                          <li><a href={`${SITE_URL}/`}>Yash Verma</a></li>
                           <li><a href="#experience">Experience</a></li>
                           <li><a href={`#${companyId}`}>{group.company}</a></li>
                           <li aria-current="page">{category}</li>
