@@ -33,7 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: post.tags,
     authors: [{ name: "Yash Verma", url: SITE_URL }],
     alternates: { canonical: `/blog/${post.slug}`, types: rssAlternate },
-    robots: post.draft ? { index: false, follow: false } : undefined,
+    // An explicit undefined would drop the root robots/googlebot tags, so only set it for drafts.
+    ...(post.draft ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "article",
       url,
