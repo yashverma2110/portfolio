@@ -1,7 +1,9 @@
 import CONTACT from "@/app/config/contact";
 import EXPERIENCE from "@/app/config/experience";
+import { QUIZIZZ_COMPANY } from "@/app/config/impact";
 import PROJECTS from "@/app/config/projects";
 import { INTRO, POSITIONING, PROFILE, companyName, educationLine } from "@/app/config/profile";
+import QuizizzImpact from "@/app/components/QuizizzImpact";
 import { AWS_SERVICES, TECH_STACK } from "@/app/components/TechStackGrid";
 import TechStackGrid from "@/app/components/TechStackGrid";
 import ViewportHighlight from "@/app/components/ViewportHighlight";
@@ -13,106 +15,15 @@ import type { Metadata } from "next";
 import { SITE_URL } from "./config/site";
 import { HOME_DESCRIPTION, HOME_TITLE } from "./config/home-meta";
 import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
+import { labelsFor, PILL_CATEGORIES, PILL_COPY, type PillCategory } from "./lib/metrics";
 
-type PillCategory = "Product" | "Performance" | "Productivity" | "Cost and reliability";
 type Impact = { id: string; sectionId: string; label: string; text: string; category: PillCategory };
 type ImpactGroup = { company: string; items: Impact[] };
 
-const PILL_CATEGORIES: PillCategory[] = ["Product", "Performance", "Productivity", "Cost and reliability"];
-
-const PILL_COPY: Record<string, { label: string; category: PillCategory }> = {
-  "10%+ weekly active teachers": { label: "10%+ weekly active teachers", category: "Product" },
-  "5% registrations": { label: "5% more registrations", category: "Product" },
-  "2% registration funnels": { label: "2% more registration completions", category: "Product" },
-  "0.5% game creation rate": { label: "0.5% more games created", category: "Product" },
-  "1% new user activation": { label: "1% more new users activated", category: "Product" },
-  "2.3% lesson adoption": { label: "2.3% more lesson use", category: "Product" },
-  "56% platform content": { label: "56% of content from Google Drive", category: "Product" },
-  "1.2% search success rate": { label: "1.2% more successful searches", category: "Product" },
-  "300k peak rate": { label: "300k requests a minute", category: "Performance" },
-  "99.99% service level": { label: "99.99% uptime", category: "Performance" },
-  "12% time to first byte": { label: "12% faster first byte", category: "Performance" },
-  "31% largest contentful paint": { label: "31% faster largest paint", category: "Performance" },
-  "63% less page load time at p75": { label: "63% faster page load", category: "Performance" },
-  "23% search response at p99": { label: "23% faster search", category: "Performance" },
-  "60% website performance": { label: "60% faster site", category: "Performance" },
-  "40% lighthouse score": { label: "40% higher Lighthouse score", category: "Performance" },
-  "2 weeks → 1 week": { label: "A/B releases from 2 weeks to 1 week", category: "Productivity" },
-  "15% less build time": { label: "15% faster builds", category: "Productivity" },
-  "50% less build time": { label: "50% faster builds", category: "Productivity" },
-  "500k+ rows": { label: "500k+ rows ingested", category: "Productivity" },
-  "10% less AWS cost": { label: "10% lower AWS cost", category: "Cost and reliability" },
-  "83% less P0 incidents": { label: "83% fewer P0s", category: "Cost and reliability" },
-  "15% less data loss": { label: "15% less data lost", category: "Cost and reliability" },
-  "98% less bug reports": { label: "98% fewer bug reports", category: "Cost and reliability" },
-  "$270k saved": { label: "$270k saved on search", category: "Cost and reliability" },
-  "$100k saved": { label: "$100k less data transfer", category: "Cost and reliability" },
-  "$120k saved": { label: "$120k saved on BigQuery", category: "Cost and reliability" },
-};
-
-function topicOf(value: string) {
-  const topic = value.replace(/^(The|A|An)\s+/i, "").trim();
-  return topic.replace(/^([A-Z])([a-z])/, (_, first: string, second: string) => first.toLowerCase() + second);
-}
-
-function labelsFor(text: string) {
-  const labels: string[] = [];
-  for (const sentence of text.split(/(?<=\.)\s+/)) {
-    const more = sentence.match(/^(?:The |A |An )?(.+?) increased by more than ([\d,.]+)%/i);
-    if (more) {
-      labels.push(`${more[2].replace(/,/g, "")}%+ ${topicOf(more[1])}`);
-      continue;
-    }
-    const increased = sentence.match(/^(?:The |A |An )?(.+?) increased by ([\d,.]+)%/i);
-    if (increased) {
-      labels.push(`${increased[2]}% ${topicOf(increased[1])}`);
-      continue;
-    }
-    const decreased = sentence.match(/^(?:The |A |An )?(.+?) decreased by ([\d,.]+)%/i);
-    if (decreased) {
-      labels.push(`${decreased[2]}% less ${topicOf(decreased[1])}`);
-      continue;
-    }
-    const improved = sentence.match(/^(?:The |A |An )?(.+?) improved by ([\d,.]+)%/i);
-    if (improved) {
-      labels.push(`${improved[2]}% ${topicOf(improved[1])}`);
-      continue;
-    }
-    const weeks = sentence.match(/from (\d+) weeks to (\d+) week/i);
-    if (weeks) {
-      labels.push(`${weeks[1]} weeks → ${weeks[2]} week`);
-      continue;
-    }
-    const peak = sentence.match(/was ([\d,.]+)k/i);
-    if (peak) {
-      labels.push(`${peak[1]}k peak rate`);
-      continue;
-    }
-    const level = sentence.match(/was ([\d.]+)%/i);
-    if (level) {
-      labels.push(`${level[1]}% service level`);
-      continue;
-    }
-    const rows = sentence.match(/more than ([\d,]+) rows/i);
-    if (rows) {
-      labels.push(`${Math.round(Number(rows[1].replace(/,/g, "")) / 1000)}k+ rows`);
-      continue;
-    }
-    const share = sentence.match(/^([\d.]+)% of (.+?) came/i);
-    if (share) {
-      labels.push(`${share[1]}% ${share[2]}`);
-      continue;
-    }
-    const saved = sentence.match(/saved \$([\d,.]+)k/i);
-    if (saved) {
-      labels.push(`$${saved[1]}k saved`);
-    }
-  }
-  return labels;
-}
-
 function collectImpact(): ImpactGroup[] {
   return EXPERIENCE.flatMap((job, jobIndex) => {
+    // Quizizz results render in the story layout. Other companies keep the pill list.
+    if (job.company === QUIZIZZ_COMPANY) return [];
     const items: Impact[] = [];
     job.achievements?.forEach((item, index) => {
       const id = `impact-${jobIndex}-a-${index}`;
@@ -148,10 +59,6 @@ function targetId(text: string, id: string) {
   return labelsFor(text).length > 0 ? id : undefined;
 }
 
-function slug(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
-
 // Person and WebSite entities. Blog posts reference the person by its @id.
 function personJsonLd() {
   const current = EXPERIENCE.find((job) => job.current) ?? EXPERIENCE[0];
@@ -169,6 +76,7 @@ function personJsonLd() {
         url: SITE_URL,
         image: `${SITE_URL}/opengraph-image`,
         jobTitle: POSITIONING.jobTitle,
+        ...(current.summary ? { description: current.summary } : {}),
         worksFor: { "@type": "Organization", name: companyName(current.company) },
         homeLocation: { "@type": "Place", name: PROFILE.location },
         alumniOf: {
@@ -261,60 +169,37 @@ export default function Home() {
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
-                "@graph": impactGroups.flatMap((group) =>
-                  PILL_CATEGORIES.flatMap((category) => {
-                    const items = group.items.filter((item) => item.category === category);
-                    if (items.length === 0) return [];
-                    const companyId = `impact-${slug(group.company)}`;
-                    const categoryId = `${companyId}-${slug(category)}`;
-                    return [{
-                      "@type": "BreadcrumbList",
-                      itemListElement: [
-                        { "@type": "ListItem", position: 1, name: "Yash Verma", item: `${SITE_URL}/` },
-                        { "@type": "ListItem", position: 2, name: "Experience", item: `${SITE_URL}/#experience` },
-                        { "@type": "ListItem", position: 3, name: group.company, item: `${SITE_URL}/#${companyId}` },
-                        { "@type": "ListItem", position: 4, name: category, item: `${SITE_URL}/#${categoryId}` },
-                      ],
-                    }];
-                  })
-                ),
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Yash Verma", item: `${SITE_URL}/` },
+                  { "@type": "ListItem", position: 2, name: "Experience", item: `${SITE_URL}/#experience` },
+                ],
               }),
             }}
           />
-          {impactGroups.map((group) => {
-            const companyId = `impact-${slug(group.company)}`;
-            return (
-              <section key={group.company} id={companyId} className="impact">
-                <h3>My impact at {group.company}</h3>
-                <p>Click a number.</p>
-                {PILL_CATEGORIES.map((category) => {
-                  const items = group.items.filter((item) => item.category === category);
-                  if (items.length === 0) return null;
-                  const categoryId = `${companyId}-${slug(category)}`;
-                  return (
-                    <div key={category} id={categoryId} className="impact-group">
-                      <nav className="crumbs" aria-label="Breadcrumb">
-                        <ol>
-                          <li><a href={`${SITE_URL}/`}>Yash Verma</a></li>
-                          <li><a href="#experience">Experience</a></li>
-                          <li><a href={`#${companyId}`}>{group.company}</a></li>
-                          <li aria-current="page">{category}</li>
-                        </ol>
-                      </nav>
-                      <h4>{category}</h4>
-                      <div className="pills">
-                        {items.map((item) => (
-                          <a key={`${item.id}-${item.label}`} className="pill" href={`#${item.sectionId}`} data-metric={item.id} title={item.text}>
-                            {item.label}
-                          </a>
-                        ))}
-                      </div>
+          <QuizizzImpact />
+          {impactGroups.map((group) => (
+            <section key={group.company} className="impact">
+              <h3>My impact at {group.company}</h3>
+              <p>Click a number.</p>
+              {PILL_CATEGORIES.map((category) => {
+                const items = group.items.filter((item) => item.category === category);
+                if (items.length === 0) return null;
+                return (
+                  <div key={category} className="impact-group">
+                    <h4>{category}</h4>
+                    <div className="pills">
+                      {items.map((item) => (
+                        <a key={`${item.id}-${item.label}`} className="pill" href={`#${item.sectionId}`} data-metric={item.id} title={item.text}>
+                          {item.label}
+                        </a>
+                      ))}
                     </div>
-                  );
-                })}
-              </section>
-            );
-          })}
+                  </div>
+                );
+              })}
+            </section>
+          ))}
           {EXPERIENCE.map((job, jobIndex) => (
             <article key={job.company} className="post">
               <p className="kicker">{job.startDate} — {job.endDate}</p>
