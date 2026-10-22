@@ -4,7 +4,7 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Quizizz Inc.",
     role: "Senior Software Development Engineer",
-    summary: "I lead a team of 5 engineers. The team owns search on Postgres and the Waygent analytics platform, and helped cut infrastructure cost.",
+    summary: "I lead a team of 5 engineers. The team owns search on Postgres, the Product Analytics platform, and Waygent, and helped cut infrastructure cost.",
     startDate: "August 2021",
     endDate: "Current",
     current: true,
@@ -34,8 +34,8 @@ const EXPERIENCE: IExperience[] = [
         technologies: ["BigQuery"]
       },
       {
-        title: "Data analysis platform",
-        description: "I built the Waygent analytics platform. It has a session explorer, standard A/B tests, and release-health checks.",
+        title: "Product Analytics platform",
+        description: "I built the Product Analytics platform. It has a session explorer, standard A/B tests, and release-health checks.",
         metrics: [
           "Registration funnels increased by 2%.",
           "The game creation rate increased by 0.5%.",
@@ -44,10 +44,15 @@ const EXPERIENCE: IExperience[] = [
         technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
       },
       {
-        title: "Analysis chat agent",
-        description: "I built a chat agent that answers analysis questions in normal language. The questions include daily active users, A/B test results, click rates, and impressions.",
-        metrics: [],
-        technologies: ["Python", "Agno", "BigQuery", "ChromaDB"]
+        title: "Waygent",
+        description: "I built Waygent, an analytics agent on Slack. It understands the data warehouse, the L0 tables, and the key metrics. Sales, GTM, and customer success teams ask it questions in Slack. It gets data from BigQuery, Outreach, HubSpot, and Braze. It runs analysis and shows how users use the product. It writes pre-call sales briefs and finds leads. It also builds decks, docs, and dashboards.",
+        metrics: [
+          "Data analysts could focus on product work.",
+          "Customer reach-out delays decreased by 60%.",
+          "Deal velocity improved by 30%.",
+          "Lead quality improved by 2x."
+        ],
+        technologies: ["Python", "Agno", "BigQuery", "ChromaDB", "Slack", "Outreach", "HubSpot", "Braze"]
       },
       {
         title: "Analytics pipeline",
