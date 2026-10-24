@@ -23,10 +23,17 @@ function stripUnsafeHtml(html: string) {
     .replace(/(href|src)\s*=\s*(["'])\s*javascript:[^"']*\2/gi, '$1="#"');
 }
 
+type Slugger = ((text: string) => string) & { reserve(id: string): string };
+
 /** GitHub-style heading ids: lowercase, punctuation dropped, spaces to hyphens, deduped with -1, -2... */
-export function createSlugger() {
+export function createSlugger(): Slugger {
   const seen = new Map<string, number>();
-  return (text: string) => {
+  const take = (base: string) => {
+    const count = seen.get(base) ?? 0;
+    seen.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count}`;
+  };
+  const slug = ((text: string) => {
     const base =
       text
         .toLowerCase()
@@ -34,10 +41,55 @@ export function createSlugger() {
         .replace(/<[^>]+>/g, "")
         .replace(/[^\p{L}\p{N}\s_-]/gu, "")
         .replace(/\s/g, "-") || "section";
-    const count = seen.get(base) ?? 0;
-    seen.set(base, count + 1);
-    return count === 0 ? base : `${base}-${count}`;
-  };
+    return take(base);
+  }) as Slugger;
+  // Claim an author-written id (from `<a id="...">`) so a later heading slug won't reuse it.
+  slug.reserve = (id: string) => take(id);
+  return slug;
+}
+
+// A paragraph that is only `<a id="name"></a>`. The id is the link target; the tag is not content.
+const EXPLICIT_ANCHOR = /^<a\s+id=(["'])([A-Za-z][\w:-]*)\1\s*>\s*<\/a>$/;
+
+function explicitAnchorId(token: Token): string | null {
+  if (token.type !== "paragraph") return null;
+  const paragraph = token as Tokens.Paragraph;
+  const match = paragraph.raw.trim().match(EXPLICIT_ANCHOR);
+  if (!match) return null;
+  // Marked splits `<a id="x"></a>` into an open tag and a close tag. Reject anything else in the paragraph.
+  const inline = paragraph.tokens.filter((t) => t.type !== "br" && !(t.type === "text" && !t.raw.trim()));
+  return inline.every((t) => t.type === "html") ? match[2] : null;
+}
+
+/**
+ * Posts mark sections with an empty `<a id>` on the line before a heading.
+ * Marked wraps that line in a paragraph, which shows up as a blank gap, and the
+ * heading's own id is a slug of its text, so the two don't match.
+ * Move the id onto the heading and drop the empty paragraph. An anchor that is
+ * not followed by a heading stays, but as a zero-height target instead of a paragraph.
+ */
+function attachExplicitAnchors(tokens: Token[], ids: WeakMap<Token, string>, reserve: (id: string) => string) {
+  for (let i = 0; i < tokens.length; i++) {
+    const id = explicitAnchorId(tokens[i]);
+    if (!id) continue;
+    const unique = reserve(id);
+    let next = i + 1;
+    while (next < tokens.length && tokens[next].type === "space") next++;
+    if (tokens[next]?.type === "heading") {
+      ids.set(tokens[next], unique);
+      tokens.splice(i, 1);
+      i--;
+      continue;
+    }
+    const html: Tokens.HTML = {
+      type: "html",
+      raw: tokens[i].raw,
+      pre: false,
+      block: true,
+      text: `<a id="${escapeHtml(unique)}" class="md-anchor"></a>\n`,
+    };
+    tokens[i] = html;
+  }
 }
 
 // Width and height for local images, so the browser can reserve space (PNG, GIF, JPEG).
@@ -94,17 +146,19 @@ function youtubeFor(token: Tokens.Paragraph): { id: string; title: string } | nu
   return { id: link.href.match(YOUTUBE_RE)![1], title: link.text && !/^https?:/.test(link.text) ? link.text : "YouTube video" };
 }
 
-function createMarked() {
+function createMarked(explicitIds: WeakMap<Token, string>) {
   const slug = createSlugger();
   const marked = new Marked({ gfm: true, breaks: false });
   marked.use({
     renderer: {
       // The page renders the frontmatter title as the only h1, so content headings shift down one level.
-      heading({ tokens, depth, text }: Tokens.Heading) {
+      // An explicit id from the preceding `<a id>` wins over the generated slug.
+      heading(token: Tokens.Heading) {
+        const { tokens, depth, text } = token;
         const level = Math.min(depth + 1, 6);
-        const id = slug(text.replace(/[*_`~]|\[([^\]]*)\]\([^)]*\)/g, "$1"));
+        const id = explicitIds.get(token) ?? slug(text.replace(/[*_`~]|\[([^\]]*)\]\([^)]*\)/g, "$1"));
         const inner = this.parser.parseInline(tokens);
-        return `<h${level} id="${id}">${inner}<a class="heading-anchor" href="#${id}" aria-hidden="true" tabindex="-1">#</a></h${level}>\n`;
+        return `<h${level} id="${escapeHtml(id)}">${inner}<a class="heading-anchor" href="#${escapeHtml(id)}" aria-hidden="true" tabindex="-1">#</a></h${level}>\n`;
       },
       code({ text, lang }: Tokens.Code) {
         const language = (lang || "").trim().split(/\s+/)[0].toLowerCase();
@@ -132,13 +186,15 @@ function createMarked() {
       },
     },
   });
-  return marked;
+  return { marked, slug };
 }
 
 /** Markdown body (no frontmatter) to HTML chunks, with YouTube players as separate segments. */
 export function renderPost(markdown: string): Segment[] {
-  const marked = createMarked();
+  const explicitIds = new WeakMap<Token, string>();
+  const { marked, slug } = createMarked(explicitIds);
   const tokens = marked.lexer(markdown);
+  attachExplicitAnchors(tokens, explicitIds, (id) => slug.reserve(id));
   const segments: Segment[] = [];
   let buffer: Token[] = [];
   const flush = () => {
