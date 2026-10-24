@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
+import { CLOUDFLARE_BEACON, CLOUDFLARE_BEACON_SRC } from "./config/analytics";
 import { HOME_DESCRIPTION as description, HOME_TITLE as title } from "./config/home-meta";
 import { SITE_URL } from "./config/site";
 
@@ -66,6 +68,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#000000] text-white selection:bg-blue-500/30`}
       >
         {children}
+        {CLOUDFLARE_BEACON ? (
+          // afterInteractive is the non-blocking equivalent of Cloudflare's type=module
+          // snippet. Leave type unset: Next preloads this URL as a classic script, and
+          // type="module" makes the browser download the beacon a second time.
+          <Script
+            src={CLOUDFLARE_BEACON_SRC}
+            strategy="afterInteractive"
+            data-cf-beacon={CLOUDFLARE_BEACON}
+          />
+        ) : null}
       </body>
     </html>
   );
