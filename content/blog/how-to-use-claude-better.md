@@ -1,5 +1,5 @@
 ---
-title: "Claude Tips: How to Use Claude and Claude Code Better"
+title: "How I Get the Best Out of Claude: 8 Habits and My Agent Workflow"
 date: 2026-10-24
 description: Claude tips for engineers, designers, and product managers. Eight gotchas to remember and how to use Claude Code better with the agent lifecycle I follow on every project.
 tags: [ai, claude, claude-code, claude-tips, ai-agents]
