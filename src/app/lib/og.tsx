@@ -18,7 +18,9 @@ function titleSize(title: string) {
   if (title.length <= 18) return 104;
   if (title.length <= 32) return 84;
   if (title.length <= 52) return 68;
-  if (title.length <= 80) return 56;
+  if (title.length <= 60) return 56;
+  // A title of this length (about 64 characters) leaves a one-word last line at 56px.
+  if (title.length <= 80) return 52;
   return 46;
 }
 
