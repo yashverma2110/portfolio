@@ -16,6 +16,21 @@
 .site-bar nav a { color: #c5ced8; text-decoration: none; }
 .site-bar nav a:hover, .site-home:hover { color: #ffe9a0; }
 
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
+.site-footer a { color: #8aa0b8; text-decoration: none; overflow-wrap: anywhere; }
+.site-footer a:hover { color: #ffe9a0; }
+
 .blog-page .blog-header h1 { line-height: 1.12; overflow-wrap: anywhere; }
 .blog-page .blog-header .kicker { margin-top: 14px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #8aa0b8; }
 
