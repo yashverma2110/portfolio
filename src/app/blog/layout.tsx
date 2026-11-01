@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CONTACT from "../config/contact";
 import "./blog.css";
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
@@ -18,6 +19,15 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </header>
         {children}
+        <footer className="site-footer">
+          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+          <nav aria-label="Profiles">
+            <a href={CONTACT.linkedin}>LinkedIn</a>
+            <a href={CONTACT.github}>GitHub</a>
+            <a href={CONTACT.twitter}>X</a>
+            <a href="/blog/rss.xml">RSS</a>
+          </nav>
+        </footer>
       </div>
     </main>
   );
