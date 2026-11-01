@@ -22,7 +22,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title,
   description,
-  keywords: "yash verma, software engineer, product engineer, backend engineer, frontend engineer, full-stack engineer, full stack, react, next.js, node.js, typescript, golang, aws",
+  keywords: "yash verma, senior backend engineer, ai engineer, llm engineer, llm agents, ai agents, data pipelines, postgres, kafka, bigquery, python, golang, typescript, aws",
   metadataBase: new URL(SITE_URL),
   alternates: {
     types: {

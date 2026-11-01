@@ -16,13 +16,13 @@ export const PROFILE = {
 
 /** Positioning is senior (not staff), per Yash. The layout title, homepage eyebrow, card, and llms.txt read these. */
 export const POSITIONING = {
-  title: "Yash Verma | Senior Full-Stack Engineer",
-  eyebrow: "Senior software engineer · Full-stack, backend, and analytics",
+  title: "Yash Verma | Senior Backend and AI Engineer",
+  eyebrow: "Senior software engineer · Backend, data, and LLM agents",
   jobTitle: "Senior Software Engineer",
   card: {
-    headline: "Senior full-stack engineer",
-    openTo: "Open to product, full-stack, backend, and frontend roles.",
-    alt: "Yash Verma, senior full-stack engineer",
+    headline: "Senior backend and AI engineer",
+    openTo: "Open to senior backend and AI roles at Series A startups.",
+    alt: "Yash Verma, senior backend and AI engineer",
   },
 };
 
@@ -39,8 +39,8 @@ export function educationLine() {
 
 /** The intro is split around the years figure, which the homepage renders with <YearsMark />. */
 export const INTRO = {
-  lead: "I build products and the systems behind them.",
-  rest: "shipping features, shaping roadmaps, and owning the analytics, page speed, and infrastructure that keep things running in production. Comfortable anywhere in the stack, and looking for my next product, full-stack, backend, or frontend role.",
+  lead: "I build backend systems and LLM agents that run in production.",
+  rest: "building data pipelines, search, and AI agents, and cutting the infrastructure cost behind them. I lead a small team and own work from the first design to on-call. Looking for a senior backend or AI engineering role at a Series A startup.",
 };
 
 export function introText(years: string) {

@@ -4,7 +4,7 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Quizizz Inc.",
     role: "Senior Software Development Engineer",
-    summary: "I lead a team of 5 engineers. The team owns search on Postgres, the Product Analytics platform, and Waygent, and helped cut infrastructure cost.",
+    summary: "I lead a team of 5 engineers. The team owns Waygent, search on Postgres, and the Product Analytics platform, and helped cut infrastructure cost.",
     startDate: "August 2021",
     endDate: "Current",
     current: true,
@@ -15,34 +15,6 @@ const EXPERIENCE: IExperience[] = [
       "I added canary deployments, application performance monitoring, real user monitoring, and analytics, which made the system more stable."
     ],
     responsibilities: [
-      {
-        title: "Search on Postgres",
-        description: "I moved search from OpenSearch to Postgres full-text search with pagination, and used Kafka and Debezium CDC to keep it current.",
-        metrics: ["This change saved $270k."],
-        technologies: ["Postgres", "Kafka", "Debezium", "OpenSearch"]
-      },
-      {
-        title: "Less data transfer",
-        description: "I cut data transfer with zstd and gzip compression and role-based projections.",
-        metrics: ["This change saved $100k."],
-        technologies: ["zstd", "gzip"]
-      },
-      {
-        title: "BigQuery streaming",
-        description: "I switched to the BigQuery streaming API and tuned batch sizes and compression, which cut both pods and data transfer.",
-        metrics: ["This change saved $120k."],
-        technologies: ["BigQuery"]
-      },
-      {
-        title: "Product Analytics platform",
-        description: "I built the Product Analytics platform, with a session explorer, standard A/B tests, and release-health checks.",
-        metrics: [
-          "Registration funnels increased by 2%.",
-          "The game creation rate increased by 0.5%.",
-          "A/B test release time decreased from 2 weeks to 1 week."
-        ],
-        technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
-      },
       {
         title: "Waygent",
         description: "I built Waygent, an analytics agent that lives in Slack. It knows the data warehouse, the L0 tables, and the key metrics, and pulls from BigQuery, Outreach, HubSpot, and Braze. Sales, GTM, and customer success teams ask it questions directly: it runs the analysis, shows how customers use the product, writes pre-call sales briefs, finds leads, and builds decks, docs, and dashboards.",
@@ -55,6 +27,12 @@ const EXPERIENCE: IExperience[] = [
         technologies: ["Python", "Agno", "BigQuery", "ChromaDB", "Slack", "Outreach", "HubSpot", "Braze"]
       },
       {
+        title: "Search on Postgres",
+        description: "I moved search from OpenSearch to Postgres full-text search with pagination, and used Kafka and Debezium CDC to keep it current.",
+        metrics: ["This change saved $270k."],
+        technologies: ["Postgres", "Kafka", "Debezium", "OpenSearch"]
+      },
+      {
         title: "Analytics pipeline",
         description: "I built the event pipeline on the beacon API, Golang, and Kinesis, sized for high request rates.",
         metrics: [
@@ -62,6 +40,44 @@ const EXPERIENCE: IExperience[] = [
           "The service level was 99.99%."
         ],
         technologies: ["Golang", "Kinesis", "Firehose", "SQS", "BigQuery"]
+      },
+      {
+        title: "BigQuery streaming",
+        description: "I switched to the BigQuery streaming API and tuned batch sizes and compression, which cut both pods and data transfer.",
+        metrics: ["This change saved $120k."],
+        technologies: ["BigQuery"]
+      },
+      {
+        title: "Less data transfer",
+        description: "I cut data transfer with zstd and gzip compression and role-based projections.",
+        metrics: ["This change saved $100k."],
+        technologies: ["zstd", "gzip"]
+      },
+      {
+        title: "Product Analytics platform",
+        description: "I built the Product Analytics platform, with a session explorer, standard A/B tests, and release-health checks.",
+        metrics: [
+          "Registration funnels increased by 2%.",
+          "The game creation rate increased by 0.5%.",
+          "A/B test release time decreased from 2 weeks to 1 week."
+        ],
+        technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
+      },
+      {
+        title: "Data ingestion pipeline",
+        description: "I built a Temporal pipeline to ingest standards data.",
+        metrics: ["The pipeline processed more than 500,000 rows."],
+        technologies: ["Temporal"]
+      },
+      {
+        title: "AI features",
+        description: "I added AI features, like slide generation, which raised lesson use.",
+        metrics: ["Lesson adoption increased by 2.3%."]
+      },
+      {
+        title: "Google Drive import",
+        description: "I added Google Drive import, which feeds media into the AI features.",
+        metrics: ["56% of platform content came from this integration."]
       },
       {
         title: "Analytics client",
@@ -125,22 +141,6 @@ const EXPERIENCE: IExperience[] = [
         title: "Quiz and lesson editor",
         description: "I rebuilt the quiz and lesson editors on Pub/Sub and Zod, rich-text features included, and made them faster and more reliable.",
         metrics: ["Bug reports decreased by 98%."]
-      },
-      {
-        title: "AI features",
-        description: "I added AI features, like slide generation, which raised lesson use.",
-        metrics: ["Lesson adoption increased by 2.3%."]
-      },
-      {
-        title: "Data ingestion pipeline",
-        description: "I built a Temporal pipeline to ingest standards data.",
-        metrics: ["The pipeline processed more than 500,000 rows."],
-        technologies: ["Temporal"]
-      },
-      {
-        title: "Google Drive import",
-        description: "I added Google Drive import, which feeds media into the AI features.",
-        metrics: ["56% of platform content came from this integration."]
       },
       {
         title: "Search results",

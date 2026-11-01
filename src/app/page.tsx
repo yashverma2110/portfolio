@@ -91,7 +91,7 @@ function personJsonLd() {
   // A subset of the Stack section, plus the areas from the intro.
   const picks = ["JavaScript", "TypeScript", "Python", "Golang", "React", "Next.js", "Vue", "Nuxt", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Kafka"];
   const stack = TECH_STACK.flatMap((category) => category.items).filter((item) => picks.includes(item));
-  const knowsAbout = [...stack, ...(AWS_SERVICES.length > 0 ? ["AWS"] : []), "Analytics", "Web performance", "Infrastructure"];
+  const knowsAbout = [...stack, ...(AWS_SERVICES.length > 0 ? ["AWS"] : []), "LLM agents", "Data pipelines", "Search", "Infrastructure"];
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -166,7 +166,7 @@ export default function Home() {
         </div>
         <header className="blog-header">
           <p className="eyebrow">
-            {/* Two parts so phones break at the dot, not inside "Full-stack". */}
+            {/* Two parts so phones break at the dot, not inside "Backend". */}
             {eyebrowRole}
             {eyebrowAreas && <>{" · "}<span className="eyebrow-part">{eyebrowAreas}</span></>}
           </p>
