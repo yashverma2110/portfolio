@@ -12,6 +12,7 @@ import ProjectCarousel from "@/app/components/ProjectCarousel";
 import YouTubeAutoplay from "@/app/components/YouTubeAutoplay";
 import { getTotalYears } from "./utils/experienceUtils";
 import type { Metadata } from "next";
+import type { IExperience } from "./types/experience";
 import { SITE_URL } from "./config/site";
 import { HOME_DESCRIPTION, HOME_TITLE } from "./config/home-meta";
 import { formatDate, getPostMetas, getPostsByProject, projectAnchor, projectSlug } from "./lib/blog";
@@ -57,6 +58,31 @@ function collectImpact(): ImpactGroup[] {
 
 function targetId(text: string, id: string) {
   return labelsFor(text).length > 0 ? id : undefined;
+}
+
+function duties(job: IExperience, jobIndex: number) {
+  return job.responsibilities.map((item, dutyIndex) => (
+    <div key={item.title} id={`work-${jobIndex}-${dutyIndex}`} className="duty">
+      <h4>{item.title}</h4>
+      <p>{item.description}</p>
+      {item.metrics.length > 0 && (
+        <ul>
+          {item.metrics.map((metric, index) => (
+            <li
+              key={metric}
+              id={targetId(metric, `impact-${jobIndex}-${dutyIndex}-m-${index}`)}
+              className={targetId(metric, "x") ? "metric" : undefined}
+            >
+              {metric}
+            </li>
+          ))}
+        </ul>
+      )}
+      {item.technologies && item.technologies.length > 0 && (
+        <p className="tech">{item.technologies.join(" · ")}</p>
+      )}
+    </div>
+  ));
 }
 
 // Person and WebSite entities. Blog posts reference the person by its @id.
@@ -217,28 +243,15 @@ export default function Home() {
                   </ul>
                 </div>
               )}
-              {job.responsibilities.map((item, dutyIndex) => (
-                <div key={item.title} id={`work-${jobIndex}-${dutyIndex}`} className="duty">
-                  <h4>{item.title}</h4>
-                  <p>{item.description}</p>
-                  {item.metrics.length > 0 && (
-                    <ul>
-                      {item.metrics.map((metric, index) => (
-                        <li
-                          key={metric}
-                          id={targetId(metric, `impact-${jobIndex}-${dutyIndex}-m-${index}`)}
-                          className={targetId(metric, "x") ? "metric" : undefined}
-                        >
-                          {metric}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {item.technologies && item.technologies.length > 0 && (
-                    <p className="tech">{item.technologies.join(" · ")}</p>
-                  )}
-                </div>
-              ))}
+              {job.company === QUIZIZZ_COMPANY ? (
+                // The stories above already tell this role. The full list stays in the HTML, folded.
+                <details className="role-details">
+                  <summary>All {job.responsibilities.length} projects at {companyName(job.company)}</summary>
+                  {duties(job, jobIndex)}
+                </details>
+              ) : (
+                duties(job, jobIndex)
+              )}
             </article>
           ))}
         </section>
