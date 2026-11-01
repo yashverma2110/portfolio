@@ -4,7 +4,7 @@ const EXPERIENCE: IExperience[] = [
   {
     company: "Quizizz Inc.",
     role: "Senior Software Development Engineer",
-    summary: "I lead a team of 5 engineers. The team owns search on Postgres, the Product Analytics platform, and Waygent, and helped cut infrastructure cost.",
+    summary: "I lead a team of 5 engineers. The team owns Waygent, search on Postgres, and the Product Analytics platform, and helped cut infrastructure cost.",
     startDate: "August 2021",
     endDate: "Current",
     current: true,
@@ -15,34 +15,6 @@ const EXPERIENCE: IExperience[] = [
       "I added canary deployments, application performance monitoring, real user monitoring, and analytics. The system became more stable."
     ],
     responsibilities: [
-      {
-        title: "Search on Postgres",
-        description: "I moved the OpenSearch indexes to Postgres. Search uses full text search and pagination. Kafka and Debezium CDC keep the data current.",
-        metrics: ["This change saved $270k."],
-        technologies: ["Postgres", "Kafka", "Debezium", "OpenSearch"]
-      },
-      {
-        title: "Less data transfer",
-        description: "I reduced data transfer with zstd and gzip compression. I also added role-based projections.",
-        metrics: ["This change saved $100k."],
-        technologies: ["zstd", "gzip"]
-      },
-      {
-        title: "BigQuery streaming",
-        description: "I enabled the BigQuery streaming API. Better batch sizes and compression reduced the number of pods and the data transfer.",
-        metrics: ["This change saved $120k."],
-        technologies: ["BigQuery"]
-      },
-      {
-        title: "Product Analytics platform",
-        description: "I built the Product Analytics platform. It has a session explorer, standard A/B tests, and release-health checks.",
-        metrics: [
-          "Registration funnels increased by 2%.",
-          "The game creation rate increased by 0.5%.",
-          "A/B test release time decreased from 2 weeks to 1 week."
-        ],
-        technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
-      },
       {
         title: "Waygent",
         description: "I built Waygent, an analytics agent on Slack. It understands the data warehouse, the L0 tables, and the key metrics. Sales, GTM, and customer success teams ask it questions in Slack. It gets data from BigQuery, Outreach, HubSpot, and Braze. It runs analysis and shows how users use the product. It writes pre-call sales briefs and finds leads. It also builds decks, docs, and dashboards.",
@@ -55,6 +27,12 @@ const EXPERIENCE: IExperience[] = [
         technologies: ["Python", "Agno", "BigQuery", "ChromaDB", "Slack", "Outreach", "HubSpot", "Braze"]
       },
       {
+        title: "Search on Postgres",
+        description: "I moved the OpenSearch indexes to Postgres. Search uses full text search and pagination. Kafka and Debezium CDC keep the data current.",
+        metrics: ["This change saved $270k."],
+        technologies: ["Postgres", "Kafka", "Debezium", "OpenSearch"]
+      },
+      {
         title: "Analytics pipeline",
         description: "I built an analytics pipeline with the beacon API, Golang, and Kinesis. The pipeline accepts a high request rate.",
         metrics: [
@@ -62,6 +40,44 @@ const EXPERIENCE: IExperience[] = [
           "The service level was 99.99%."
         ],
         technologies: ["Golang", "Kinesis", "Firehose", "SQS", "BigQuery"]
+      },
+      {
+        title: "BigQuery streaming",
+        description: "I enabled the BigQuery streaming API. Better batch sizes and compression reduced the number of pods and the data transfer.",
+        metrics: ["This change saved $120k."],
+        technologies: ["BigQuery"]
+      },
+      {
+        title: "Less data transfer",
+        description: "I reduced data transfer with zstd and gzip compression. I also added role-based projections.",
+        metrics: ["This change saved $100k."],
+        technologies: ["zstd", "gzip"]
+      },
+      {
+        title: "Product Analytics platform",
+        description: "I built the Product Analytics platform. It has a session explorer, standard A/B tests, and release-health checks.",
+        metrics: [
+          "Registration funnels increased by 2%.",
+          "The game creation rate increased by 0.5%.",
+          "A/B test release time decreased from 2 weeks to 1 week."
+        ],
+        technologies: ["Next.js", "React", "Golang", "BigQuery", "Kinesis", "Firehose"]
+      },
+      {
+        title: "Data ingestion pipeline",
+        description: "I built a data pipeline with Temporal. The pipeline ingests unique standards data.",
+        metrics: ["The pipeline processed more than 500,000 rows."],
+        technologies: ["Temporal"]
+      },
+      {
+        title: "AI features",
+        description: "I added AI features. One feature generates slides. Lesson use increased after these features.",
+        metrics: ["Lesson adoption increased by 2.3%."]
+      },
+      {
+        title: "Google Drive import",
+        description: "I added Google Drive import. The AI features use the imported media.",
+        metrics: ["56% of platform content came from this integration."]
       },
       {
         title: "Analytics client",
@@ -135,22 +151,6 @@ const EXPERIENCE: IExperience[] = [
         title: "Quiz and lesson editor",
         description: "I built a new quiz editor and a new lesson editor with Pub/Sub and Zod. The editors became faster and more reliable.",
         metrics: ["Bug reports decreased by 98%."]
-      },
-      {
-        title: "AI features",
-        description: "I added AI features. One feature generates slides. Lesson use increased after these features.",
-        metrics: ["Lesson adoption increased by 2.3%."]
-      },
-      {
-        title: "Data ingestion pipeline",
-        description: "I built a data pipeline with Temporal. The pipeline ingests unique standards data.",
-        metrics: ["The pipeline processed more than 500,000 rows."],
-        technologies: ["Temporal"]
-      },
-      {
-        title: "Google Drive import",
-        description: "I added Google Drive import. The AI features use the imported media.",
-        metrics: ["56% of platform content came from this integration."]
       },
       {
         title: "Subscription control",
