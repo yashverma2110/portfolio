@@ -21,7 +21,7 @@ export const POSITIONING = {
   jobTitle: "Senior Software Engineer",
   card: {
     headline: "Senior backend and AI engineer",
-    openTo: "Open to senior backend and AI roles at Series A startups.",
+    openTo: "Open to senior backend and AI roles.",
     alt: "Yash Verma, senior backend and AI engineer",
   },
 };
@@ -40,7 +40,7 @@ export function educationLine() {
 /** The intro is split around the years figure, which the homepage renders with <YearsMark />. */
 export const INTRO = {
   lead: "I build backend systems and LLM agents that run in production.",
-  rest: "building data pipelines, search, and AI agents, and cutting the infrastructure cost behind them. I lead a small team and own work from the first design to on-call. Looking for a senior backend or AI engineering role at a Series A startup.",
+  rest: "building data pipelines, search, and AI agents, and cutting the infrastructure cost behind them. I lead a small team and own work from the first design to on-call. Looking for a senior backend or AI engineering role.",
 };
 
 export function introText(years: string) {
